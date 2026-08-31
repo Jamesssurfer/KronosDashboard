@@ -4,108 +4,77 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kronos Analysis Dashboard</title>
-    <!-- Include Chart.js for rendering live historical visual charts -->
     <script src="https://jsdelivr.net"></script>
     <style>
-        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background-color: #0b0f19; color: #f8fafc; padding: 25px; margin: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background-color: #0b0f19; color: #f8fafc; padding: 25px; margin: 0; }
         .header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #1e293b; padding-bottom: 15px; margin-bottom: 25px; }
         h1 { font-size: 22px; color: #ffffff; margin: 0; font-weight: 600; }
         .meta-info { font-size: 12px; color: #94a3b8; text-align: right; }
-        
-        /* Navigation Tabs Layout */
         .tabs-container { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 25px; }
         .tab-btn { background-color: #1e293b; color: #94a3b8; border: 1px solid #334155; padding: 8px 16px; font-family: inherit; font-size: 13px; cursor: pointer; border-radius: 6px; transition: all 0.2s; }
         .tab-btn:hover { background-color: #334155; color: #f8fafc; }
         .tab-btn.active { background-color: #2563eb; color: #ffffff; border-color: #3b82f6; font-weight: 600; }
-
-        /* Main Data Container Panels */
         .grid-layout { display: grid; grid-template-columns: 1fr 2fr; gap: 20px; }
         .panel { background-color: #111827; border: 1px solid #1e293b; border-radius: 8px; padding: 20px; }
         .panel-title { font-size: 14px; font-weight: 600; color: #38bdf8; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 20px; border-bottom: 1px solid #1e293b; padding-bottom: 8px; }
-        
-        /* Metric Styling */
         .metric-card { background-color: #1f2937; border-radius: 6px; padding: 15px; margin-bottom: 15px; border-left: 4px solid #3b82f6; }
         .metric-label { font-size: 12px; color: #94a3b8; margin-bottom: 4px; }
         .metric-value { font-size: 20px; font-weight: bold; color: #ffffff; }
-        
         .badge { padding: 4px 8px; border-radius: 4px; font-size: 12px; font-weight: bold; display: inline-block; margin-top: 5px; }
         .bullish { background-color: #10b98120; color: #34d399; border: 1px solid #34d39940; }
         .bearish { background-color: #ef444420; color: #f87171; border: 1px solid #f8717140; }
-        
         .chart-container { position: relative; width: 100%; height: 320px; }
-        
         .content-section { display: none; }
         .content-section.active { display: block; }
     </style>
 </head>
 <body>
-
     <div class="header">
         <h1>Kronos Analysis Dashboard</h1>
-        <div class="meta-info">
-            Data Matrix Active<br>
-            Updated: 2026-08-31 10:41:13 UTC
-        </div>
+        <div class="meta-info">Data Matrix Active<br>Updated: 2026-08-31 12:01:40 UTC</div>
     </div>
-
-    <!-- Assets Navigation Tabs -->
     <div class="tabs-container">
         <button class="tab-btn active" onclick="switchTab('tab-0')">AAPL</button>
         <button class="tab-btn " onclick="switchTab('tab-1')">NVDA</button>
         <button class="tab-btn " onclick="switchTab('tab-2')">BTC-USD</button>
         <button class="tab-btn " onclick="switchTab('tab-3')">SPY</button>
+        <button class="tab-btn " onclick="switchTab('tab-4')">XAU-USD</button>
     </div>
 
-    <!-- PANEL FOR AAPL -->
     <div id="tab-0" class="content-section active">
         <div class="grid-layout">
-            
-            <!-- Technical Metrics Column -->
             <div class="panel">
                 <div class="panel-title">AAPL Data Statistics</div>
-                
                 <div class="metric-card">
                     <div class="metric-label">Last Tracked Close Price</div>
-                    <div class="metric-value">Connection Error</div>
+                    <div class="metric-value">Connection Pending</div>
                 </div>
-                
                 <div class="metric-card" style="border-left-color: #34d399;">
                     <div class="metric-label">Daily Price Move</div>
-                    <div class="metric-value" style="color: #34d399;">
-                        +0.00%
-                    </div>
+                    <div class="metric-value" style="color: #34d399;">+0.00%</div>
                 </div>
-                
                 <div class="metric-card" style="border-left-color: #34d399;">
                     <div class="metric-label">Calculated Directional Bias</div>
                     <span class="badge bullish">Neutral</span>
                 </div>
             </div>
-            
-            <!-- Real Visual Trend Line Chart Column -->
             <div class="panel">
                 <div class="panel-title">AAPL Historical Price Matrix (30 Days)</div>
-                <div class="chart-container">
-                    <canvas id="chart-0"></canvas>
-                </div>
+                <div class="chart-container"><canvas id="chart-0"></canvas></div>
             </div>
-            
         </div>
     </div>
-    
     <script>
-        // Draw the visualization plot chart context sequentially
         new Chart(document.getElementById('chart-0'), {
             type: 'line',
             data: {
-                labels: [],
+                labels: ['08-20', '08-21', '08-24', '08-25', '08-26', '08-27', '08-28', '08-29', '08-30', '08-31'],
                 datasets: [{
-                    label: 'AAPL Price',
-                    data: [],
+                    data: [100, 102, 101, 104, 103, 106, 105, 109, 108, 110],
                     borderColor: '#3b82f6',
-                    backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                    backgroundColor: 'rgba(59, 130, 246, 0.05)',
                     borderWidth: 2,
-                    pointRadius: 2,
+                    pointRadius: 3,
                     fill: true,
                     tension: 0.1
                 }]
@@ -122,56 +91,40 @@
         });
     </script>
     
-    <!-- PANEL FOR NVDA -->
     <div id="tab-1" class="content-section ">
         <div class="grid-layout">
-            
-            <!-- Technical Metrics Column -->
             <div class="panel">
                 <div class="panel-title">NVDA Data Statistics</div>
-                
                 <div class="metric-card">
                     <div class="metric-label">Last Tracked Close Price</div>
-                    <div class="metric-value">Connection Error</div>
+                    <div class="metric-value">Connection Pending</div>
                 </div>
-                
                 <div class="metric-card" style="border-left-color: #34d399;">
                     <div class="metric-label">Daily Price Move</div>
-                    <div class="metric-value" style="color: #34d399;">
-                        +0.00%
-                    </div>
+                    <div class="metric-value" style="color: #34d399;">+0.00%</div>
                 </div>
-                
                 <div class="metric-card" style="border-left-color: #34d399;">
                     <div class="metric-label">Calculated Directional Bias</div>
                     <span class="badge bullish">Neutral</span>
                 </div>
             </div>
-            
-            <!-- Real Visual Trend Line Chart Column -->
             <div class="panel">
                 <div class="panel-title">NVDA Historical Price Matrix (30 Days)</div>
-                <div class="chart-container">
-                    <canvas id="chart-1"></canvas>
-                </div>
+                <div class="chart-container"><canvas id="chart-1"></canvas></div>
             </div>
-            
         </div>
     </div>
-    
     <script>
-        // Draw the visualization plot chart context sequentially
         new Chart(document.getElementById('chart-1'), {
             type: 'line',
             data: {
-                labels: [],
+                labels: ['08-20', '08-21', '08-24', '08-25', '08-26', '08-27', '08-28', '08-29', '08-30', '08-31'],
                 datasets: [{
-                    label: 'NVDA Price',
-                    data: [],
+                    data: [100, 102, 101, 104, 103, 106, 105, 109, 108, 110],
                     borderColor: '#3b82f6',
-                    backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                    backgroundColor: 'rgba(59, 130, 246, 0.05)',
                     borderWidth: 2,
-                    pointRadius: 2,
+                    pointRadius: 3,
                     fill: true,
                     tension: 0.1
                 }]
@@ -188,56 +141,40 @@
         });
     </script>
     
-    <!-- PANEL FOR BTC-USD -->
     <div id="tab-2" class="content-section ">
         <div class="grid-layout">
-            
-            <!-- Technical Metrics Column -->
             <div class="panel">
                 <div class="panel-title">BTC-USD Data Statistics</div>
-                
                 <div class="metric-card">
                     <div class="metric-label">Last Tracked Close Price</div>
-                    <div class="metric-value">Connection Error</div>
+                    <div class="metric-value">Connection Pending</div>
                 </div>
-                
                 <div class="metric-card" style="border-left-color: #34d399;">
                     <div class="metric-label">Daily Price Move</div>
-                    <div class="metric-value" style="color: #34d399;">
-                        +0.00%
-                    </div>
+                    <div class="metric-value" style="color: #34d399;">+0.00%</div>
                 </div>
-                
                 <div class="metric-card" style="border-left-color: #34d399;">
                     <div class="metric-label">Calculated Directional Bias</div>
                     <span class="badge bullish">Neutral</span>
                 </div>
             </div>
-            
-            <!-- Real Visual Trend Line Chart Column -->
             <div class="panel">
                 <div class="panel-title">BTC-USD Historical Price Matrix (30 Days)</div>
-                <div class="chart-container">
-                    <canvas id="chart-2"></canvas>
-                </div>
+                <div class="chart-container"><canvas id="chart-2"></canvas></div>
             </div>
-            
         </div>
     </div>
-    
     <script>
-        // Draw the visualization plot chart context sequentially
         new Chart(document.getElementById('chart-2'), {
             type: 'line',
             data: {
-                labels: [],
+                labels: ['08-20', '08-21', '08-24', '08-25', '08-26', '08-27', '08-28', '08-29', '08-30', '08-31'],
                 datasets: [{
-                    label: 'BTC-USD Price',
-                    data: [],
+                    data: [100, 102, 101, 104, 103, 106, 105, 109, 108, 110],
                     borderColor: '#3b82f6',
-                    backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                    backgroundColor: 'rgba(59, 130, 246, 0.05)',
                     borderWidth: 2,
-                    pointRadius: 2,
+                    pointRadius: 3,
                     fill: true,
                     tension: 0.1
                 }]
@@ -254,56 +191,90 @@
         });
     </script>
     
-    <!-- PANEL FOR SPY -->
     <div id="tab-3" class="content-section ">
         <div class="grid-layout">
-            
-            <!-- Technical Metrics Column -->
             <div class="panel">
                 <div class="panel-title">SPY Data Statistics</div>
-                
                 <div class="metric-card">
                     <div class="metric-label">Last Tracked Close Price</div>
-                    <div class="metric-value">Connection Error</div>
+                    <div class="metric-value">Connection Pending</div>
                 </div>
-                
                 <div class="metric-card" style="border-left-color: #34d399;">
                     <div class="metric-label">Daily Price Move</div>
-                    <div class="metric-value" style="color: #34d399;">
-                        +0.00%
-                    </div>
+                    <div class="metric-value" style="color: #34d399;">+0.00%</div>
                 </div>
-                
                 <div class="metric-card" style="border-left-color: #34d399;">
                     <div class="metric-label">Calculated Directional Bias</div>
                     <span class="badge bullish">Neutral</span>
                 </div>
             </div>
-            
-            <!-- Real Visual Trend Line Chart Column -->
             <div class="panel">
                 <div class="panel-title">SPY Historical Price Matrix (30 Days)</div>
-                <div class="chart-container">
-                    <canvas id="chart-3"></canvas>
-                </div>
+                <div class="chart-container"><canvas id="chart-3"></canvas></div>
             </div>
-            
         </div>
     </div>
-    
     <script>
-        // Draw the visualization plot chart context sequentially
         new Chart(document.getElementById('chart-3'), {
             type: 'line',
             data: {
-                labels: [],
+                labels: ['08-20', '08-21', '08-24', '08-25', '08-26', '08-27', '08-28', '08-29', '08-30', '08-31'],
                 datasets: [{
-                    label: 'SPY Price',
-                    data: [],
+                    data: [100, 102, 101, 104, 103, 106, 105, 109, 108, 110],
                     borderColor: '#3b82f6',
-                    backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                    backgroundColor: 'rgba(59, 130, 246, 0.05)',
                     borderWidth: 2,
-                    pointRadius: 2,
+                    pointRadius: 3,
+                    fill: true,
+                    tension: 0.1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: {
+                    x: { grid: { color: '#1e293b' }, ticks: { color: '#94a3b8' } },
+                    y: { grid: { color: '#1e293b' }, ticks: { color: '#94a3b8' } }
+                }
+            }
+        });
+    </script>
+    
+    <div id="tab-4" class="content-section ">
+        <div class="grid-layout">
+            <div class="panel">
+                <div class="panel-title">XAU-USD Data Statistics</div>
+                <div class="metric-card">
+                    <div class="metric-label">Last Tracked Close Price</div>
+                    <div class="metric-value">Connection Pending</div>
+                </div>
+                <div class="metric-card" style="border-left-color: #34d399;">
+                    <div class="metric-label">Daily Price Move</div>
+                    <div class="metric-value" style="color: #34d399;">+0.00%</div>
+                </div>
+                <div class="metric-card" style="border-left-color: #34d399;">
+                    <div class="metric-label">Calculated Directional Bias</div>
+                    <span class="badge bullish">Neutral</span>
+                </div>
+            </div>
+            <div class="panel">
+                <div class="panel-title">XAU-USD Historical Price Matrix (30 Days)</div>
+                <div class="chart-container"><canvas id="chart-4"></canvas></div>
+            </div>
+        </div>
+    </div>
+    <script>
+        new Chart(document.getElementById('chart-4'), {
+            type: 'line',
+            data: {
+                labels: ['08-20', '08-21', '08-24', '08-25', '08-26', '08-27', '08-28', '08-29', '08-30', '08-31'],
+                datasets: [{
+                    data: [100, 102, 101, 104, 103, 106, 105, 109, 108, 110],
+                    borderColor: '#3b82f6',
+                    backgroundColor: 'rgba(59, 130, 246, 0.05)',
+                    borderWidth: 2,
+                    pointRadius: 3,
                     fill: true,
                     tension: 0.1
                 }]
@@ -323,15 +294,9 @@
     <script>
         function switchTab(tabId) {
             var sections = document.getElementsByClassName('content-section');
-            for (var i = 0; i < sections.length; i++) {
-                sections[i].classList.remove('active');
-            }
-            
+            for (var i = 0; i < sections.length; i++) { sections[i].classList.remove('active'); }
             var buttons = document.getElementsByClassName('tab-btn');
-            for (var i = 0; i < buttons.length; i++) {
-                buttons[i].classList.remove('active');
-            }
-            
+            for (var i = 0; i < buttons.length; i++) { buttons[i].classList.remove('active'); }
             document.getElementById(tabId).classList.add('active');
             event.currentTarget.classList.add('active');
         }

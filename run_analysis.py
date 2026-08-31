@@ -165,7 +165,7 @@ html_content += """
 """
 
 # Save out compiled file layout
-with open("notion_index.html", "w", encoding="utf-8") as f:
+with open("index.html", "w", encoding="utf-8") as f:
     f.write(html_content)
 
 print("Dashboard compiled successfully.")

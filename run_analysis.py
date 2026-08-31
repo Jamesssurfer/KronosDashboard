@@ -11,7 +11,7 @@ try:
     with open("tracked_assets.txt", "r") as f:
         tickers = [line.strip() for line in f if line.strip()]
 except FileNotFoundError:
-    tickers = ["AAPL", "NVDA", "BTC-USD", "SPY"]
+    tickers = ["AAPL", "NVDA", "BTC-USD", "SPY", "XAU-USD"]
 
 # 2. Build Dashboard Layout Header
 html_content = f"""<!DOCTYPE html>
@@ -39,6 +39,7 @@ html_content = f"""<!DOCTYPE html>
         .badge {{ padding: 4px 8px; border-radius: 4px; font-size: 12px; font-weight: bold; display: inline-block; margin-top: 5px; }}
         .bullish {{ background-color: #10b98120; color: #34d399; border: 1px solid #34d39940; }}
         .bearish {{ background-color: #ef444420; color: #f87171; border: 1px solid #f8717140; }}
+        .neutral {{ background-color: #64748b20; color: #94a3b8; border: 1px solid #94a3b840; }}
         .chart-container {{ position: relative; width: 100%; height: 320px; }}
         .content-section {{ display: none; }}
         .content-section.active {{ display: block; }}
@@ -57,46 +58,65 @@ for index, ticker in enumerate(tickers):
     html_content += f'        <button class="tab-btn {active_class}" onclick="switchTab(\'tab-{index}\')">{ticker}</button>\n'
 html_content += "    </div>\n"
 
-# 3. Pull from standard JSON API gateway securely
+# 3. Pull data structures cleanly using official API functions
 for index, ticker in enumerate(tickers):
     active_section = "active" if index == 0 else ""
-    current_price, price_change_pct, direction_bias, bias_style = "N/A", 0.0, "Neutral", "bullish"
+    current_price, price_change_pct, direction_bias, bias_style = "Loading...", 0.0, "Neutral", "neutral"
     historical_closes, historical_dates = [], []
     
-    clean_ticker = ticker.replace("-USD", "") # Normalize format for AlphaVantage crypto
-    url = f"https://alphavantage.co{clean_ticker}&apikey={API_KEY}"
-    
+    # Map special assets to Alpha Vantage syntax rules
+    if ticker == "XAU-USD":
+        url = f"https://alphavantage.co{API_KEY}"
+    elif "BTC" in ticker:
+        url = f"https://alphavantage.co{API_KEY}"
+    else:
+        url = f"https://alphavantage.co{ticker}&apikey={API_KEY}"
+        
     try:
         req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
         with urllib.request.urlopen(req) as response:
             data = json.loads(response.read().decode())
             
-        time_series = data.get("Time Series (Daily)", {})
-        if time_series:
-            # Sort chronologically, grab the trailing 30 records
-            sorted_dates = sorted(time_series.keys())[-30:]
+        # Parse standard Equities
+        if "Time Series (Daily)" in data:
+            time_series = data["Time Series (Daily)"]
+            sorted_dates = sorted(time_series.keys())[-20:]
             historical_closes = [float(time_series[d]["4. close"]) for d in sorted_dates]
-            historical_dates = [d[5:] for d in sorted_dates] # Shorten format to MM-DD
+            historical_dates = [d[5:] for d in sorted_dates]
             
-            closes = historical_closes
-            current_price = f"${closes[-1]:.2f}"
-            price_change_pct = ((closes[-1] - closes[-2]) / closes[-2]) * 100
+        # Parse Crypto entries
+        elif "Time Series (Digital Currency Daily)" in data:
+            time_series = data["Time Series (Digital Currency Daily)"]
+            sorted_dates = sorted(time_series.keys())[-20:]
+            historical_closes = [float(time_series[d]["4a. close (USD)"]) for d in sorted_dates]
+            historical_dates = [d[5:] for d in sorted_dates]
             
-            # 5-day vs 20-day trend matrix parser
-            if sum(closes[-5:]) / 5 > sum(closes[-20:]) / 20:
-                direction_bias, bias_style = "Bullish Data Trend", "bullish"
-            else:
-                direction_bias, bias_style = "Bearish Data Trend", "bearish"
-        else:
-            # Global Fallback Engine if API rate-limits hit during testing
-            current_price = "API Connection Live"
-    except Exception:
-        current_price = "Connection Pending"
+        # Parse Commodity metrics (Gold)
+        elif "data" in data:
+            gold_data = data["data"][:20]
+            gold_data.reverse() # Sort oldest to newest
+            historical_closes = [float(item["value"]) for item in gold_data if item["value"] != "."]
+            historical_dates = [item["date"][5:] for item in gold_data if item["value"] != "."]
 
-    # Default fallback data structure array protection if values are empty
+        # Calculate metrics if arrays compiled successfully
+        if historical_closes:
+            current_price = f"${historical_closes[-1]:,.2f}"
+            price_change_pct = ((historical_closes[-1] - historical_closes[-2]) / historical_closes[-2]) * 100
+            
+            # Simple trend analytics emulation
+            if historical_closes[-1] > (sum(historical_closes) / len(historical_closes)):
+                direction_bias, bias_style = "Bullish Trend", "bullish"
+            else:
+                direction_bias, bias_style = "Bearish Trend", "bearish"
+                
+    except Exception as e:
+        pass
+
+    # Safe fallback interface generation to avoid empty string render errors
     if not historical_closes:
-        historical_closes = [100, 102, 101, 104, 103, 106, 105, 109, 108, 110]
+        historical_closes = [100, 102, 101, 103, 105, 104, 106, 108, 107, 110]
         historical_dates = ["08-20", "08-21", "08-24", "08-25", "08-26", "08-27", "08-28", "08-29", "08-30", "08-31"]
+        current_price = "No Response Data"
 
     html_content += f"""
     <div id="tab-{index}" class="content-section {active_section}">
@@ -111,13 +131,13 @@ for index, ticker in enumerate(tickers):
                     <div class="metric-label">Daily Price Move</div>
                     <div class="metric-value" style="color: {'#34d399' if price_change_pct >= 0 else '#f87171'};">{price_change_pct:+.2f}%</div>
                 </div>
-                <div class="metric-card" style="border-left-color: {'#34d399' if bias_style == 'bullish' else '#f87171'};">
+                <div class="metric-card" style="border-left-color: {'#34d399' if bias_style == 'bullish' else '#f87171' if bias_style == 'bearish' else '#94a3b8'};">
                     <div class="metric-label">Calculated Directional Bias</div>
                     <span class="badge {bias_style}">{direction_bias}</span>
                 </div>
             </div>
             <div class="panel">
-                <div class="panel-title">{ticker} Historical Price Matrix (30 Days)</div>
+                <div class="panel-title">{ticker} Historical Price Matrix</div>
                 <div class="chart-container"><canvas id="chart-{index}"></canvas></div>
             </div>
         </div>
@@ -163,7 +183,3 @@ html_content += """
     </script>
 </body>
 </html>
-"""
-
-with open("index.html", "w", encoding="utf-8") as f:
-    f.write(html_content)

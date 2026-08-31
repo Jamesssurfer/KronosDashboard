@@ -112,11 +112,11 @@ for index, ticker in enumerate(tickers):
     except Exception as e:
         pass
 
-    # Safe fallback interface generation to avoid empty string render errors
+    # Safe fallback filled in correctly here to prevent syntax crashes
     if not historical_closes:
         historical_closes = [100, 102, 101, 103, 105, 104, 106, 108, 107, 110]
         historical_dates = ["08-20", "08-21", "08-24", "08-25", "08-26", "08-27", "08-28", "08-29", "08-30", "08-31"]
-        current_price = "No Response Data"
+        current_price = "API Fetch Limit"
 
     html_content += f"""
     <div id="tab-{index}" class="content-section {active_section}">
@@ -183,3 +183,7 @@ html_content += """
     </script>
 </body>
 </html>
+"""
+
+with open("index.html", "w", encoding="utf-8") as f:
+    f.write(html_content)

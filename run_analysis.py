@@ -1,6 +1,7 @@
 import os
 import urllib.request
 import json
+import time  # Imported to handle the rate-limit delay
 from datetime import datetime
 
 # Paste your free Alpha Vantage key here
@@ -60,11 +61,16 @@ html_content += "    </div>\n"
 
 # 3. Pull data structures cleanly using official API functions
 for index, ticker in enumerate(tickers):
+    # Add a 12-second sleep delay before every request EXCEPT the first one.
+    # This paces the 5 assets across 60 seconds to satisfy the 5 requests/min rule.
+    if index > 0:
+        print(f"Pacing API requests. Waiting 12 seconds before fetching {ticker}...")
+        time.sleep(12)
+
     active_section = "active" if index == 0 else ""
     current_price, price_change_pct, direction_bias, bias_style = "Loading...", 0.0, "Neutral", "neutral"
     historical_closes, historical_dates = [], []
     
-    # Map special assets to Alpha Vantage syntax rules
     if ticker == "XAU-USD":
         url = f"https://alphavantage.co{API_KEY}"
     elif "BTC" in ticker:
@@ -77,45 +83,39 @@ for index, ticker in enumerate(tickers):
         with urllib.request.urlopen(req) as response:
             data = json.loads(response.read().decode())
             
-        # Parse standard Equities
         if "Time Series (Daily)" in data:
             time_series = data["Time Series (Daily)"]
             sorted_dates = sorted(time_series.keys())[-20:]
             historical_closes = [float(time_series[d]["4. close"]) for d in sorted_dates]
             historical_dates = [d[5:] for d in sorted_dates]
             
-        # Parse Crypto entries
         elif "Time Series (Digital Currency Daily)" in data:
             time_series = data["Time Series (Digital Currency Daily)"]
             sorted_dates = sorted(time_series.keys())[-20:]
             historical_closes = [float(time_series[d]["4a. close (USD)"]) for d in sorted_dates]
             historical_dates = [d[5:] for d in sorted_dates]
             
-        # Parse Commodity metrics (Gold)
         elif "data" in data:
             gold_data = data["data"][:20]
-            gold_data.reverse() # Sort oldest to newest
+            gold_data.reverse()
             historical_closes = [float(item["value"]) for item in gold_data if item["value"] != "."]
             historical_dates = [item["date"][5:] for item in gold_data if item["value"] != "."]
 
-        # Calculate metrics if arrays compiled successfully
         if historical_closes:
             current_price = f"${historical_closes[-1]:,.2f}"
             price_change_pct = ((historical_closes[-1] - historical_closes[-2]) / historical_closes[-2]) * 100
             
-            # Simple trend analytics emulation
             if historical_closes[-1] > (sum(historical_closes) / len(historical_closes)):
                 direction_bias, bias_style = "Bullish Trend", "bullish"
             else:
                 direction_bias, bias_style = "Bearish Trend", "bearish"
                 
-    except Exception as e:
+    except Exception:
         pass
 
-    # Safe fallback filled in correctly here to prevent syntax crashes
     if not historical_closes:
-        historical_closes = [100, 102, 101, 103, 105, 104, 106, 108, 107, 110]
-        historical_dates = ["08-20", "08-21", "08-24", "08-25", "08-26", "08-27", "08-28", "08-29", "08-30", "08-31"]
+        historical_closes = [150, 152, 151, 153, 155, 154, 156, 158, 157, 160, 159, 161, 163, 162, 165, 167, 166, 168, 170, 169]
+        historical_dates = ["08-10", "08-11", "08-12", "08-13", "08-14", "08-17", "08-18", "08-19", "08-20", "08-21", "08-22", "08-23", "08-24", "08-25", "08-26", "08-27", "08-28", "08-29", "08-30", "08-31"]
         current_price = "API Fetch Limit"
 
     html_content += f"""

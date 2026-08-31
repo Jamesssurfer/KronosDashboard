@@ -23,6 +23,7 @@
         .badge { padding: 4px 8px; border-radius: 4px; font-size: 12px; font-weight: bold; display: inline-block; margin-top: 5px; }
         .bullish { background-color: #10b98120; color: #34d399; border: 1px solid #34d39940; }
         .bearish { background-color: #ef444420; color: #f87171; border: 1px solid #f8717140; }
+        .neutral { background-color: #64748b20; color: #94a3b8; border: 1px solid #94a3b840; }
         .chart-container { position: relative; width: 100%; height: 320px; }
         .content-section { display: none; }
         .content-section.active { display: block; }
@@ -31,7 +32,7 @@
 <body>
     <div class="header">
         <h1>Kronos Analysis Dashboard</h1>
-        <div class="meta-info">Data Matrix Active<br>Updated: 2026-08-31 12:01:40 UTC</div>
+        <div class="meta-info">Data Matrix Active<br>Updated: 2026-08-31 12:15:37 UTC</div>
     </div>
     <div class="tabs-container">
         <button class="tab-btn active" onclick="switchTab('tab-0')">AAPL</button>
@@ -47,19 +48,19 @@
                 <div class="panel-title">AAPL Data Statistics</div>
                 <div class="metric-card">
                     <div class="metric-label">Last Tracked Close Price</div>
-                    <div class="metric-value">Connection Pending</div>
+                    <div class="metric-value">API Fetch Limit</div>
                 </div>
                 <div class="metric-card" style="border-left-color: #34d399;">
                     <div class="metric-label">Daily Price Move</div>
                     <div class="metric-value" style="color: #34d399;">+0.00%</div>
                 </div>
-                <div class="metric-card" style="border-left-color: #34d399;">
+                <div class="metric-card" style="border-left-color: #94a3b8;">
                     <div class="metric-label">Calculated Directional Bias</div>
-                    <span class="badge bullish">Neutral</span>
+                    <span class="badge neutral">Neutral</span>
                 </div>
             </div>
             <div class="panel">
-                <div class="panel-title">AAPL Historical Price Matrix (30 Days)</div>
+                <div class="panel-title">AAPL Historical Price Matrix</div>
                 <div class="chart-container"><canvas id="chart-0"></canvas></div>
             </div>
         </div>
@@ -70,7 +71,7 @@
             data: {
                 labels: ['08-20', '08-21', '08-24', '08-25', '08-26', '08-27', '08-28', '08-29', '08-30', '08-31'],
                 datasets: [{
-                    data: [100, 102, 101, 104, 103, 106, 105, 109, 108, 110],
+                    data: [100, 102, 101, 103, 105, 104, 106, 108, 107, 110],
                     borderColor: '#3b82f6',
                     backgroundColor: 'rgba(59, 130, 246, 0.05)',
                     borderWidth: 2,
@@ -97,19 +98,19 @@
                 <div class="panel-title">NVDA Data Statistics</div>
                 <div class="metric-card">
                     <div class="metric-label">Last Tracked Close Price</div>
-                    <div class="metric-value">Connection Pending</div>
+                    <div class="metric-value">API Fetch Limit</div>
                 </div>
                 <div class="metric-card" style="border-left-color: #34d399;">
                     <div class="metric-label">Daily Price Move</div>
                     <div class="metric-value" style="color: #34d399;">+0.00%</div>
                 </div>
-                <div class="metric-card" style="border-left-color: #34d399;">
+                <div class="metric-card" style="border-left-color: #94a3b8;">
                     <div class="metric-label">Calculated Directional Bias</div>
-                    <span class="badge bullish">Neutral</span>
+                    <span class="badge neutral">Neutral</span>
                 </div>
             </div>
             <div class="panel">
-                <div class="panel-title">NVDA Historical Price Matrix (30 Days)</div>
+                <div class="panel-title">NVDA Historical Price Matrix</div>
                 <div class="chart-container"><canvas id="chart-1"></canvas></div>
             </div>
         </div>
@@ -120,7 +121,7 @@
             data: {
                 labels: ['08-20', '08-21', '08-24', '08-25', '08-26', '08-27', '08-28', '08-29', '08-30', '08-31'],
                 datasets: [{
-                    data: [100, 102, 101, 104, 103, 106, 105, 109, 108, 110],
+                    data: [100, 102, 101, 103, 105, 104, 106, 108, 107, 110],
                     borderColor: '#3b82f6',
                     backgroundColor: 'rgba(59, 130, 246, 0.05)',
                     borderWidth: 2,
@@ -147,19 +148,19 @@
                 <div class="panel-title">BTC-USD Data Statistics</div>
                 <div class="metric-card">
                     <div class="metric-label">Last Tracked Close Price</div>
-                    <div class="metric-value">Connection Pending</div>
+                    <div class="metric-value">API Fetch Limit</div>
                 </div>
                 <div class="metric-card" style="border-left-color: #34d399;">
                     <div class="metric-label">Daily Price Move</div>
                     <div class="metric-value" style="color: #34d399;">+0.00%</div>
                 </div>
-                <div class="metric-card" style="border-left-color: #34d399;">
+                <div class="metric-card" style="border-left-color: #94a3b8;">
                     <div class="metric-label">Calculated Directional Bias</div>
-                    <span class="badge bullish">Neutral</span>
+                    <span class="badge neutral">Neutral</span>
                 </div>
             </div>
             <div class="panel">
-                <div class="panel-title">BTC-USD Historical Price Matrix (30 Days)</div>
+                <div class="panel-title">BTC-USD Historical Price Matrix</div>
                 <div class="chart-container"><canvas id="chart-2"></canvas></div>
             </div>
         </div>
@@ -170,7 +171,7 @@
             data: {
                 labels: ['08-20', '08-21', '08-24', '08-25', '08-26', '08-27', '08-28', '08-29', '08-30', '08-31'],
                 datasets: [{
-                    data: [100, 102, 101, 104, 103, 106, 105, 109, 108, 110],
+                    data: [100, 102, 101, 103, 105, 104, 106, 108, 107, 110],
                     borderColor: '#3b82f6',
                     backgroundColor: 'rgba(59, 130, 246, 0.05)',
                     borderWidth: 2,
@@ -197,19 +198,19 @@
                 <div class="panel-title">SPY Data Statistics</div>
                 <div class="metric-card">
                     <div class="metric-label">Last Tracked Close Price</div>
-                    <div class="metric-value">Connection Pending</div>
+                    <div class="metric-value">API Fetch Limit</div>
                 </div>
                 <div class="metric-card" style="border-left-color: #34d399;">
                     <div class="metric-label">Daily Price Move</div>
                     <div class="metric-value" style="color: #34d399;">+0.00%</div>
                 </div>
-                <div class="metric-card" style="border-left-color: #34d399;">
+                <div class="metric-card" style="border-left-color: #94a3b8;">
                     <div class="metric-label">Calculated Directional Bias</div>
-                    <span class="badge bullish">Neutral</span>
+                    <span class="badge neutral">Neutral</span>
                 </div>
             </div>
             <div class="panel">
-                <div class="panel-title">SPY Historical Price Matrix (30 Days)</div>
+                <div class="panel-title">SPY Historical Price Matrix</div>
                 <div class="chart-container"><canvas id="chart-3"></canvas></div>
             </div>
         </div>
@@ -220,7 +221,7 @@
             data: {
                 labels: ['08-20', '08-21', '08-24', '08-25', '08-26', '08-27', '08-28', '08-29', '08-30', '08-31'],
                 datasets: [{
-                    data: [100, 102, 101, 104, 103, 106, 105, 109, 108, 110],
+                    data: [100, 102, 101, 103, 105, 104, 106, 108, 107, 110],
                     borderColor: '#3b82f6',
                     backgroundColor: 'rgba(59, 130, 246, 0.05)',
                     borderWidth: 2,
@@ -247,19 +248,19 @@
                 <div class="panel-title">XAU-USD Data Statistics</div>
                 <div class="metric-card">
                     <div class="metric-label">Last Tracked Close Price</div>
-                    <div class="metric-value">Connection Pending</div>
+                    <div class="metric-value">API Fetch Limit</div>
                 </div>
                 <div class="metric-card" style="border-left-color: #34d399;">
                     <div class="metric-label">Daily Price Move</div>
                     <div class="metric-value" style="color: #34d399;">+0.00%</div>
                 </div>
-                <div class="metric-card" style="border-left-color: #34d399;">
+                <div class="metric-card" style="border-left-color: #94a3b8;">
                     <div class="metric-label">Calculated Directional Bias</div>
-                    <span class="badge bullish">Neutral</span>
+                    <span class="badge neutral">Neutral</span>
                 </div>
             </div>
             <div class="panel">
-                <div class="panel-title">XAU-USD Historical Price Matrix (30 Days)</div>
+                <div class="panel-title">XAU-USD Historical Price Matrix</div>
                 <div class="chart-container"><canvas id="chart-4"></canvas></div>
             </div>
         </div>
@@ -270,7 +271,7 @@
             data: {
                 labels: ['08-20', '08-21', '08-24', '08-25', '08-26', '08-27', '08-28', '08-29', '08-30', '08-31'],
                 datasets: [{
-                    data: [100, 102, 101, 104, 103, 106, 105, 109, 108, 110],
+                    data: [100, 102, 101, 103, 105, 104, 106, 108, 107, 110],
                     borderColor: '#3b82f6',
                     backgroundColor: 'rgba(59, 130, 246, 0.05)',
                     borderWidth: 2,

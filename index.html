@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kronos Analysis Dashboard</title>
-    <script src="https://jsdelivr.net"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background-color: #0b0f19; color: #f8fafc; padding: 25px; margin: 0; }
         .header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #1e293b; padding-bottom: 15px; margin-bottom: 25px; }
@@ -27,19 +27,20 @@
         .chart-container { position: relative; width: 100%; height: 320px; }
         .content-section { display: none; }
         .content-section.active { display: block; }
+        .error-message { color: #f87171; font-size: 12px; margin-top: 5px; }
     </style>
 </head>
 <body>
     <div class="header">
         <h1>Kronos Analysis Dashboard</h1>
-        <div class="meta-info">Data Matrix Active<br>Updated: 2026-09-01 05:42:31 UTC</div>
+        <div class="meta-info">Data Matrix Active<br>Updated: 2026-09-01 17:43:45 UTC</div>
     </div>
     <div class="tabs-container">
-        <button class="tab-btn active" onclick="switchTab('tab-0')">AAPL</button>
-        <button class="tab-btn " onclick="switchTab('tab-1')">NVDA</button>
-        <button class="tab-btn " onclick="switchTab('tab-2')">BTC-USD</button>
-        <button class="tab-btn " onclick="switchTab('tab-3')">SPY</button>
-        <button class="tab-btn " onclick="switchTab('tab-4')">XAU-USD</button>
+        <button class="tab-btn active" onclick="switchTab('tab-0', this)">AAPL</button>
+        <button class="tab-btn " onclick="switchTab('tab-1', this)">NVDA</button>
+        <button class="tab-btn " onclick="switchTab('tab-2', this)">BTC-USD</button>
+        <button class="tab-btn " onclick="switchTab('tab-3', this)">SPY</button>
+        <button class="tab-btn " onclick="switchTab('tab-4', this)">XAU-USD</button>
     </div>
 
     <div id="tab-0" class="content-section active">
@@ -48,15 +49,16 @@
                 <div class="panel-title">AAPL Data Statistics</div>
                 <div class="metric-card">
                     <div class="metric-label">Last Tracked Close Price</div>
-                    <div class="metric-value">API Fetch Limit</div>
+                    <div class="metric-value">$316.85</div>
+                    
+                </div>
+                <div class="metric-card" style="border-left-color: #f87171;">
+                    <div class="metric-label">Daily Price Move</div>
+                    <div class="metric-value" style="color: #f87171;">-0.89%</div>
                 </div>
                 <div class="metric-card" style="border-left-color: #34d399;">
-                    <div class="metric-label">Daily Price Move</div>
-                    <div class="metric-value" style="color: #34d399;">+0.00%</div>
-                </div>
-                <div class="metric-card" style="border-left-color: #94a3b8;">
                     <div class="metric-label">Calculated Directional Bias</div>
-                    <span class="badge neutral">Neutral</span>
+                    <span class="badge bullish">Bullish Trend</span>
                 </div>
             </div>
             <div class="panel">
@@ -69,9 +71,10 @@
         new Chart(document.getElementById('chart-0'), {
             type: 'line',
             data: {
-                labels: ['08-10', '08-11', '08-12', '08-13', '08-14', '08-17', '08-18', '08-19', '08-20', '08-21', '08-22', '08-23', '08-24', '08-25', '08-26', '08-27', '08-28', '08-29', '08-30', '08-31'],
+                labels: ["07-21", "07-22", "07-23", "07-24", "07-27", "07-28", "07-29", "07-30", "07-31", "08-03", "08-04", "08-05", "08-06", "08-07", "08-10", "08-11", "08-12", "08-13", "08-14", "08-17", "08-18", "08-19", "08-20", "08-21", "08-24", "08-25", "08-26", "08-27", "08-28", "08-31"],
                 datasets: [{
-                    data: [150, 152, 151, 153, 155, 154, 156, 158, 157, 160, 159, 161, 163, 162, 165, 167, 166, 168, 170, 169],
+                    label: 'AAPL',
+                    data: [327.74, 325.89, 321.66, 333.02, 336.91, 340.08, 338.19, 333.43, 308.91, 303.42, 309.38, 311.0, 312.41, 313.33, 308.26, 304.91, 302.25, 305.26, 305.93, 305.59, 310.03, 316.83, 311.3, 309.35, 310.34, 309.9, 313.45, 314.58, 319.7, 316.85],
                     borderColor: '#3b82f6',
                     backgroundColor: 'rgba(59, 130, 246, 0.05)',
                     borderWidth: 2,
@@ -98,15 +101,16 @@
                 <div class="panel-title">NVDA Data Statistics</div>
                 <div class="metric-card">
                     <div class="metric-label">Last Tracked Close Price</div>
-                    <div class="metric-value">API Fetch Limit</div>
+                    <div class="metric-value">$220.78</div>
+                    
                 </div>
                 <div class="metric-card" style="border-left-color: #34d399;">
                     <div class="metric-label">Daily Price Move</div>
-                    <div class="metric-value" style="color: #34d399;">+0.00%</div>
+                    <div class="metric-value" style="color: #34d399;">+1.48%</div>
                 </div>
-                <div class="metric-card" style="border-left-color: #94a3b8;">
+                <div class="metric-card" style="border-left-color: #34d399;">
                     <div class="metric-label">Calculated Directional Bias</div>
-                    <span class="badge neutral">Neutral</span>
+                    <span class="badge bullish">Bullish Trend</span>
                 </div>
             </div>
             <div class="panel">
@@ -119,9 +123,10 @@
         new Chart(document.getElementById('chart-1'), {
             type: 'line',
             data: {
-                labels: ['08-10', '08-11', '08-12', '08-13', '08-14', '08-17', '08-18', '08-19', '08-20', '08-21', '08-22', '08-23', '08-24', '08-25', '08-26', '08-27', '08-28', '08-29', '08-30', '08-31'],
+                labels: ["07-21", "07-22", "07-23", "07-24", "07-27", "07-28", "07-29", "07-30", "07-31", "08-03", "08-04", "08-05", "08-06", "08-07", "08-10", "08-11", "08-12", "08-13", "08-14", "08-17", "08-18", "08-19", "08-20", "08-21", "08-24", "08-25", "08-26", "08-27", "08-28", "08-31"],
                 datasets: [{
-                    data: [150, 152, 151, 153, 155, 154, 156, 158, 157, 160, 159, 161, 163, 162, 165, 167, 166, 168, 170, 169],
+                    label: 'NVDA',
+                    data: [207.29, 212.06, 208.76, 206.84, 196.51, 197.01, 190.01, 195.04, 200.75, 206.64, 211.94, 219.22, 218.99, 223.96, 217.55, 217.5, 224.09, 225.3, 225.16, 225.01, 219.74, 217.56, 216.85, 214.72, 208.48, 213.05, 209.66, 227.98, 217.55, 220.78],
                     borderColor: '#3b82f6',
                     backgroundColor: 'rgba(59, 130, 246, 0.05)',
                     borderWidth: 2,
@@ -148,7 +153,8 @@
                 <div class="panel-title">BTC-USD Data Statistics</div>
                 <div class="metric-card">
                     <div class="metric-label">Last Tracked Close Price</div>
-                    <div class="metric-value">API Fetch Limit</div>
+                    <div class="metric-value">Error: Error: '4a. close (U</div>
+                    <div class="error-message">Error: '4a. close (USD)'</div>
                 </div>
                 <div class="metric-card" style="border-left-color: #34d399;">
                     <div class="metric-label">Daily Price Move</div>
@@ -169,8 +175,9 @@
         new Chart(document.getElementById('chart-2'), {
             type: 'line',
             data: {
-                labels: ['08-10', '08-11', '08-12', '08-13', '08-14', '08-17', '08-18', '08-19', '08-20', '08-21', '08-22', '08-23', '08-24', '08-25', '08-26', '08-27', '08-28', '08-29', '08-30', '08-31'],
+                labels: ["08-10", "08-11", "08-12", "08-13", "08-14", "08-17", "08-18", "08-19", "08-20", "08-21", "08-22", "08-23", "08-24", "08-25", "08-26", "08-27", "08-28", "08-29", "08-30", "08-31"],
                 datasets: [{
+                    label: 'BTC-USD',
                     data: [150, 152, 151, 153, 155, 154, 156, 158, 157, 160, 159, 161, 163, 162, 165, 167, 166, 168, 170, 169],
                     borderColor: '#3b82f6',
                     backgroundColor: 'rgba(59, 130, 246, 0.05)',
@@ -198,15 +205,16 @@
                 <div class="panel-title">SPY Data Statistics</div>
                 <div class="metric-card">
                     <div class="metric-label">Last Tracked Close Price</div>
-                    <div class="metric-value">API Fetch Limit</div>
+                    <div class="metric-value">$767.05</div>
+                    
                 </div>
-                <div class="metric-card" style="border-left-color: #34d399;">
+                <div class="metric-card" style="border-left-color: #f87171;">
                     <div class="metric-label">Daily Price Move</div>
-                    <div class="metric-value" style="color: #34d399;">+0.00%</div>
+                    <div class="metric-value" style="color: #f87171;">-0.30%</div>
                 </div>
-                <div class="metric-card" style="border-left-color: #94a3b8;">
+                <div class="metric-card" style="border-left-color: #f87171;">
                     <div class="metric-label">Calculated Directional Bias</div>
-                    <span class="badge neutral">Neutral</span>
+                    <span class="badge bearish">Bearish Trend</span>
                 </div>
             </div>
             <div class="panel">
@@ -219,9 +227,10 @@
         new Chart(document.getElementById('chart-3'), {
             type: 'line',
             data: {
-                labels: ['08-10', '08-11', '08-12', '08-13', '08-14', '08-17', '08-18', '08-19', '08-20', '08-21', '08-22', '08-23', '08-24', '08-25', '08-26', '08-27', '08-28', '08-29', '08-30', '08-31'],
+                labels: ["07-21", "07-22", "07-23", "07-24", "07-27", "07-28", "07-29", "07-30", "07-31", "08-03", "08-04", "08-05", "08-06", "08-07", "08-10", "08-11", "08-12", "08-13", "08-14", "08-17", "08-18", "08-19", "08-20", "08-21", "08-24", "08-25", "08-26", "08-27", "08-28", "08-31"],
                 datasets: [{
-                    data: [150, 152, 151, 153, 155, 154, 156, 158, 157, 160, 159, 161, 163, 162, 165, 167, 166, 168, 170, 169],
+                    label: 'SPY',
+                    data: [748.28, 747.41, 738.18, 738.93, 739.09, 740.86, 729.46, 741.69, 747.03, 757.67, 771.33, 769.79, 768.56, 773.26, 773.03, 770.56, 772.49, 777.88, 776.34, 772.67, 767.45, 769.06, 762.6, 765.72, 763.47, 765.91, 766.08, 771.1, 769.35, 767.05],
                     borderColor: '#3b82f6',
                     backgroundColor: 'rgba(59, 130, 246, 0.05)',
                     borderWidth: 2,
@@ -248,7 +257,8 @@
                 <div class="panel-title">XAU-USD Data Statistics</div>
                 <div class="metric-card">
                     <div class="metric-label">Last Tracked Close Price</div>
-                    <div class="metric-value">API Fetch Limit</div>
+                    <div class="metric-value">Error: Invalid API call. Pl</div>
+                    <div class="error-message">Invalid API call. Please retry or visit the documentation (https://www.alphavantage.co/documentation/) for CURRENCY_EXCHANGE_RATE.</div>
                 </div>
                 <div class="metric-card" style="border-left-color: #34d399;">
                     <div class="metric-label">Daily Price Move</div>
@@ -269,8 +279,9 @@
         new Chart(document.getElementById('chart-4'), {
             type: 'line',
             data: {
-                labels: ['08-10', '08-11', '08-12', '08-13', '08-14', '08-17', '08-18', '08-19', '08-20', '08-21', '08-22', '08-23', '08-24', '08-25', '08-26', '08-27', '08-28', '08-29', '08-30', '08-31'],
+                labels: ["08-10", "08-11", "08-12", "08-13", "08-14", "08-17", "08-18", "08-19", "08-20", "08-21", "08-22", "08-23", "08-24", "08-25", "08-26", "08-27", "08-28", "08-29", "08-30", "08-31"],
                 datasets: [{
+                    label: 'XAU-USD',
                     data: [150, 152, 151, 153, 155, 154, 156, 158, 157, 160, 159, 161, 163, 162, 165, 167, 166, 168, 170, 169],
                     borderColor: '#3b82f6',
                     backgroundColor: 'rgba(59, 130, 246, 0.05)',
@@ -293,13 +304,22 @@
     </script>
     
     <script>
-        function switchTab(tabId) {
+        function switchTab(tabId, btnElement) {
+            // Hide all sections
             var sections = document.getElementsByClassName('content-section');
-            for (var i = 0; i < sections.length; i++) { sections[i].classList.remove('active'); }
+            for (var i = 0; i < sections.length; i++) {
+                sections[i].classList.remove('active');
+            }
+            
+            // Remove active class from all buttons
             var buttons = document.getElementsByClassName('tab-btn');
-            for (var i = 0; i < buttons.length; i++) { buttons[i].classList.remove('active'); }
+            for (var i = 0; i < buttons.length; i++) {
+                buttons[i].classList.remove('active');
+            }
+            
+            // Show selected section and activate button
             document.getElementById(tabId).classList.add('active');
-            event.currentTarget.classList.add('active');
+            btnElement.classList.add('active');
         }
     </script>
 </body>

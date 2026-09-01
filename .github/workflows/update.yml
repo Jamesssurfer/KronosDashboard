@@ -1,6 +1,9 @@
 name: Trigger Dashboard Update
+
 on:
-  workflow_dispatch: # Allows you to run it manually by pushing a button
+  workflow_dispatch: # Manual trigger
+  schedule:
+    - cron: '0 */6 * * *'  # Run every 6 hours (optional)
 
 jobs:
   build:
@@ -9,15 +12,18 @@ jobs:
       contents: write
     steps:
       - uses: actions/checkout@v3
+      
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.10'
-      - name: Install Data Tools
-        run: pip install yfinance
-      - name: Compile Dashboard File
+      
+      - name: Run Analysis
+        env:
+          ALPHA_VANTAGE_KEY: ${{ secrets.ALPHA_VANTAGE_KEY }}
         run: python run_analysis.py
-      - name: Deploy Resulting HTML File
+      
+      - name: Deploy HTML File
         run: |
           git config --global user.name "GitHub Action Bot"
           git config --global user.email "actions@github.com"

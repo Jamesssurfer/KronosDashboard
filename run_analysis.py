@@ -1,11 +1,11 @@
 import os
 import urllib.request
 import json
-import time  # Imported to handle the rate-limit delay
+import time
 from datetime import datetime
 
 # Paste your free Alpha Vantage key here
-API_KEY = "UMZBMW136NPEAP1B"
+API_KEY = os.environ.get('ALPHA_VANTAGE_KEY', '')  # Better to use environment variable
 
 # 1. Read tickers from your asset list
 try:
@@ -21,7 +21,7 @@ html_content = f"""<!DOCTYPE html>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kronos Analysis Dashboard</title>
-    <script src="https://jsdelivr.net"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         body {{ font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background-color: #0b0f19; color: #f8fafc; padding: 25px; margin: 0; }}
         .header {{ display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #1e293b; padding-bottom: 15px; margin-bottom: 25px; }}
@@ -44,6 +44,7 @@ html_content = f"""<!DOCTYPE html>
         .chart-container {{ position: relative; width: 100%; height: 320px; }}
         .content-section {{ display: none; }}
         .content-section.active {{ display: block; }}
+        .error-message {{ color: #f87171; font-size: 12px; margin-top: 5px; }}
     </style>
 </head>
 <body>
@@ -56,68 +57,94 @@ html_content = f"""<!DOCTYPE html>
 
 for index, ticker in enumerate(tickers):
     active_class = "active" if index == 0 else ""
-    html_content += f'        <button class="tab-btn {active_class}" onclick="switchTab(\'tab-{index}\')">{ticker}</button>\n'
+    html_content += f'        <button class="tab-btn {active_class}" onclick="switchTab(\'tab-{index}\', this)">{ticker}</button>\n'
 html_content += "    </div>\n"
 
-# 3. Pull data structures cleanly using official API functions
+# 3. Fetch data for each ticker
 for index, ticker in enumerate(tickers):
-    # Add a 12-second sleep delay before every request EXCEPT the first one.
-    # This paces the 5 assets across 60 seconds to satisfy the 5 requests/min rule.
+    # Alpha Vantage free tier: 5 requests per minute, 500 per day
+    # Add delay between requests (except first)
     if index > 0:
-        print(f"Pacing API requests. Waiting 12 seconds before fetching {ticker}...")
+        print(f"Waiting 12 seconds before fetching {ticker}...")
         time.sleep(12)
-
-    active_section = "active" if index == 0 else ""
-    current_price, price_change_pct, direction_bias, bias_style = "Loading...", 0.0, "Neutral", "neutral"
-    historical_closes, historical_dates = [], []
     
-    if ticker == "XAU-USD":
-        url = f"https://alphavantage.co{API_KEY}"
-    elif "BTC" in ticker:
-        url = f"https://alphavantage.co{API_KEY}"
+    active_section = "active" if index == 0 else ""
+    current_price = "Loading..."
+    price_change_pct = 0.0
+    direction_bias = "Neutral"
+    bias_style = "neutral"
+    historical_closes = []
+    historical_dates = []
+    error_message = ""
+    
+    if not API_KEY:
+        error_message = "API key missing"
     else:
-        url = f"https://alphavantage.co{ticker}&apikey={API_KEY}"
+        # Build correct API URL based on asset type
+        if ticker == "XAU-USD":
+            # Gold spot price (using CURRENCY_EXCHANGE_RATE for XAU/USD)
+            url = f"https://www.alphavantage.co/query?function=CURRENCY_EXCHANGE_RATE&from_currency=XAU&to_currency=USD&apikey={API_KEY}"
+        elif "BTC" in ticker:
+            # Cryptocurrency
+            url = f"https://www.alphavantage.co/query?function=DIGITAL_CURRENCY_DAILY&symbol={ticker.split('-')[0]}&market=USD&apikey={API_KEY}"
+        else:
+            # Regular stocks
+            url = f"https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol={ticker}&apikey={API_KEY}"
         
-    try:
-        req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
-        with urllib.request.urlopen(req) as response:
-            data = json.loads(response.read().decode())
+        try:
+            req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
+            with urllib.request.urlopen(req) as response:
+                data = json.loads(response.read().decode())
             
-        if "Time Series (Daily)" in data:
-            time_series = data["Time Series (Daily)"]
-            sorted_dates = sorted(time_series.keys())[-20:]
-            historical_closes = [float(time_series[d]["4. close"]) for d in sorted_dates]
-            historical_dates = [d[5:] for d in sorted_dates]
+            # Check for error messages
+            if "Error Message" in data:
+                error_message = data["Error Message"]
+            elif "Note" in data:
+                error_message = "API rate limit reached"
+            elif "Time Series (Daily)" in data:
+                time_series = data["Time Series (Daily)"]
+                sorted_dates = sorted(time_series.keys())[-30:]  # Get last 30 days
+                historical_closes = [float(time_series[d]["4. close"]) for d in sorted_dates]
+                historical_dates = [d[5:] for d in sorted_dates]  # Format: MM-DD
             
-        elif "Time Series (Digital Currency Daily)" in data:
-            time_series = data["Time Series (Digital Currency Daily)"]
-            sorted_dates = sorted(time_series.keys())[-20:]
-            historical_closes = [float(time_series[d]["4a. close (USD)"]) for d in sorted_dates]
-            historical_dates = [d[5:] for d in sorted_dates]
+            elif "Time Series (Digital Currency Daily)" in data:
+                time_series = data["Time Series (Digital Currency Daily)"]
+                sorted_dates = sorted(time_series.keys())[-30:]
+                historical_closes = [float(time_series[d]["4a. close (USD)"]) for d in sorted_dates]
+                historical_dates = [d[5:] for d in sorted_dates]
             
-        elif "data" in data:
-            gold_data = data["data"][:20]
-            gold_data.reverse()
-            historical_closes = [float(item["value"]) for item in gold_data if item["value"] != "."]
-            historical_dates = [item["date"][5:] for item in gold_data if item["value"] != "."]
-
-        if historical_closes:
-            current_price = f"${historical_closes[-1]:,.2f}"
-            price_change_pct = ((historical_closes[-1] - historical_closes[-2]) / historical_closes[-2]) * 100
-            
-            if historical_closes[-1] > (sum(historical_closes) / len(historical_closes)):
-                direction_bias, bias_style = "Bullish Trend", "bullish"
-            else:
-                direction_bias, bias_style = "Bearish Trend", "bearish"
+            elif "Realtime Currency Exchange Rate" in data:
+                # For XAU/USD, we only get current rate, not historical
+                exchange_data = data["Realtime Currency Exchange Rate"]
+                current_rate = float(exchange_data["5. Exchange Rate"])
+                historical_closes = [current_rate]  # Only current price available
+                historical_dates = [datetime.now().strftime('%m-%d')]
                 
-    except Exception:
-        pass
-
-    if not historical_closes:
+        except Exception as e:
+            error_message = f"Error: {str(e)}"
+    
+    # Calculate metrics if we have data
+    if historical_closes and len(historical_closes) >= 2:
+        current_price = f"${historical_closes[-1]:,.2f}"
+        price_change_pct = ((historical_closes[-1] - historical_closes[-2]) / historical_closes[-2]) * 100
+        
+        # Calculate 20-day moving average for trend
+        ma20 = sum(historical_closes[-20:]) / min(20, len(historical_closes))
+        if historical_closes[-1] > ma20:
+            direction_bias = "Bullish Trend"
+            bias_style = "bullish"
+        else:
+            direction_bias = "Bearish Trend"
+            bias_style = "bearish"
+    else:
+        # Fallback data
         historical_closes = [150, 152, 151, 153, 155, 154, 156, 158, 157, 160, 159, 161, 163, 162, 165, 167, 166, 168, 170, 169]
         historical_dates = ["08-10", "08-11", "08-12", "08-13", "08-14", "08-17", "08-18", "08-19", "08-20", "08-21", "08-22", "08-23", "08-24", "08-25", "08-26", "08-27", "08-28", "08-29", "08-30", "08-31"]
-        current_price = "API Fetch Limit"
-
+        current_price = "API Fetch Failed"
+        if error_message:
+            current_price = f"Error: {error_message[:20]}"
+    
+    # Build the HTML content for this ticker
     html_content += f"""
     <div id="tab-{index}" class="content-section {active_section}">
         <div class="grid-layout">
@@ -126,6 +153,7 @@ for index, ticker in enumerate(tickers):
                 <div class="metric-card">
                     <div class="metric-label">Last Tracked Close Price</div>
                     <div class="metric-value">{current_price}</div>
+                    {f'<div class="error-message">{error_message}</div>' if error_message else ''}
                 </div>
                 <div class="metric-card" style="border-left-color: {'#34d399' if price_change_pct >= 0 else '#f87171'};">
                     <div class="metric-label">Daily Price Move</div>
@@ -146,9 +174,10 @@ for index, ticker in enumerate(tickers):
         new Chart(document.getElementById('chart-{index}'), {{
             type: 'line',
             data: {{
-                labels: {str(historical_dates)},
+                labels: {json.dumps(historical_dates)},
                 datasets: [{{
-                    data: {str(historical_closes)},
+                    label: '{ticker}',
+                    data: {json.dumps(historical_closes)},
                     borderColor: '#3b82f6',
                     backgroundColor: 'rgba(59, 130, 246, 0.05)',
                     borderWidth: 2,
@@ -170,20 +199,33 @@ for index, ticker in enumerate(tickers):
     </script>
     """
 
+# Add the tab switching script
 html_content += """
     <script>
-        function switchTab(tabId) {
+        function switchTab(tabId, btnElement) {
+            // Hide all sections
             var sections = document.getElementsByClassName('content-section');
-            for (var i = 0; i < sections.length; i++) { sections[i].classList.remove('active'); }
+            for (var i = 0; i < sections.length; i++) {
+                sections[i].classList.remove('active');
+            }
+            
+            // Remove active class from all buttons
             var buttons = document.getElementsByClassName('tab-btn');
-            for (var i = 0; i < buttons.length; i++) { buttons[i].classList.remove('active'); }
+            for (var i = 0; i < buttons.length; i++) {
+                buttons[i].classList.remove('active');
+            }
+            
+            // Show selected section and activate button
             document.getElementById(tabId).classList.add('active');
-            event.currentTarget.classList.add('active');
+            btnElement.classList.add('active');
         }
     </script>
 </body>
 </html>
 """
 
+# Write the HTML file
 with open("index.html", "w", encoding="utf-8") as f:
     f.write(html_content)
+
+print("Dashboard generated successfully!")

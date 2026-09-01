@@ -5,7 +5,7 @@ import time
 from datetime import datetime
 
 # Paste your free Alpha Vantage key here
-API_KEY = os.environ.get('ALPHA_VANTAGE_KEY', '')  # Better to use environment variable
+API_KEY = os.environ.get('ALPHA_VANTAGE_KEY', 'UMZBMW136NPEAP1B')  # Better to use environment variable
 
 # 1. Read tickers from your asset list
 try:

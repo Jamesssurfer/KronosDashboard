@@ -2,19 +2,38 @@ import os
 import urllib.request
 import json
 import time
-from datetime import datetime
+from datetime import datetime, timedelta
+import MetaTrader5 as mt5
 
-# Paste your free Alpha Vantage key here
-API_KEY = os.environ.get('ALPHA_VANTAGE_KEY', 'UMZBMW136NPEAP1B')  # Use environment variable
+# Alpha Vantage API Key
+API_KEY = os.environ.get('ALPHA_VANTAGE_KEY', 'UMZBMW136NPEAP1B')
 
 # 1. Read tickers from your asset list
 try:
     with open("tracked_assets.txt", "r") as f:
         tickers = [line.strip() for line in f if line.strip()]
 except FileNotFoundError:
-    tickers = ["AAPL", "NVDA", "BTC-USD", "SPY", "XAU-USD"]
+    tickers = ["AAPL", "NVDA", "BTC-USD", "SPY", "XAU-USD", "DXY","US Oil"]
 
-# 2. Build Dashboard Layout Header
+# Define which assets to fetch from MT5 vs Alpha Vantage
+MT5_SYMBOLS = {
+    "XAU-USD": "XAUUSD",
+    "BTC-USD": "BTCUSD",
+    "DXY": "USDIndex",  # Dollar Index (might need specific broker support)
+    "US Oil": "USOIL.S",
+}
+
+# 2. Initialize MT5 (if any MT5 symbols exist)
+mt5_initialized = False
+if any(ticker in MT5_SYMBOLS for ticker in tickers):
+    if not mt5.initialize():
+        print("MT5 initialization failed")
+        mt5_initialized = False
+    else:
+        mt5_initialized = True
+        print("MT5 initialized successfully")
+
+# 3. Build Dashboard Layout Header
 html_content = f"""<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -45,6 +64,7 @@ html_content = f"""<!DOCTYPE html>
         .content-section {{ display: none; }}
         .content-section.active {{ display: block; }}
         .error-message {{ color: #f87171; font-size: 12px; margin-top: 5px; }}
+        .data-source {{ font-size: 10px; color: #64748b; margin-top: 3px; }}
     </style>
 </head>
 <body>
@@ -60,14 +80,72 @@ for index, ticker in enumerate(tickers):
     html_content += f'        <button class="tab-btn {active_class}" onclick="switchTab(\'tab-{index}\', this)">{ticker}</button>\n'
 html_content += "    </div>\n"
 
-# 3. Fetch data for each ticker
-for index, ticker in enumerate(tickers):
-    # Alpha Vantage free tier: 5 requests per minute, 500 per day
-    # Add 12 second delay between requests (except first)
-    if index > 0:
-        print(f"Waiting 12 seconds before fetching {ticker}...")
-        time.sleep(12)
+# 4. Function to fetch MT5 data
+def fetch_mt5_data(symbol, timeframe=mt5.TIMEFRAME_D1, bars=30):
+    """Fetch historical data from MT5"""
+    if not mt5_initialized:
+        return [], [], "MT5 not initialized"
     
+    try:
+        # Get historical data
+        rates = mt5.copy_rates_from_pos(symbol, timeframe, 0, bars)
+        
+        if rates is None or len(rates) == 0:
+            return [], [], f"No MT5 data for {symbol}"
+        
+        # Extract close prices and dates
+        closes = [float(rate[4]) for rate in rates]  # Close price is index 4
+        dates = [datetime.fromtimestamp(rate[0]).strftime('%m-%d') for rate in rates]  # Time is index 0
+        
+        return closes, dates, ""
+        
+    except Exception as e:
+        return [], [], f"MT5 Error: {str(e)}"
+
+# 5. Function to fetch Alpha Vantage data
+def fetch_alpha_vantage_data(ticker):
+    """Fetch data from Alpha Vantage"""
+    if not API_KEY:
+        return [], [], "API key missing"
+    
+    # Build URL based on asset type
+    if "BTC" in ticker:
+        crypto_symbol = ticker.split('-')[0]
+        url = f"https://www.alphavantage.co/query?function=DIGITAL_CURRENCY_DAILY&symbol={crypto_symbol}&market=USD&apikey={API_KEY}"
+    else:
+        url = f"https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol={ticker}&apikey={API_KEY}"
+    
+    try:
+        req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
+        with urllib.request.urlopen(req) as response:
+            data = json.loads(response.read().decode())
+        
+        if "Time Series (Daily)" in data:
+            time_series = data["Time Series (Daily)"]
+            sorted_dates = sorted(time_series.keys())[-30:]
+            closes = [float(time_series[d]["4. close"]) for d in sorted_dates]
+            dates = [d[5:] for d in sorted_dates]
+            return closes, dates, ""
+        
+        elif "Time Series (Digital Currency Daily)" in data:
+            time_series = data["Time Series (Digital Currency Daily)"]
+            sorted_dates = sorted(time_series.keys())[-30:]
+            closes = [float(time_series[d]["4a. close (USD)"]) for d in sorted_dates]
+            dates = [d[5:] for d in sorted_dates]
+            return closes, dates, ""
+        
+        elif "Error Message" in data:
+            return [], [], data["Error Message"]
+        elif "Note" in data:
+            return [], [], "Rate limit reached"
+        else:
+            return [], [], f"Unexpected format: {list(data.keys())[:3]}"
+            
+    except Exception as e:
+        return [], [], f"Error: {str(e)}"
+
+# 6. Fetch data for each ticker
+for index, ticker in enumerate(tickers):
     active_section = "active" if index == 0 else ""
     current_price = "Loading..."
     price_change_pct = 0.0
@@ -76,60 +154,35 @@ for index, ticker in enumerate(tickers):
     historical_closes = []
     historical_dates = []
     error_message = ""
+    data_source = ""
     
-    if not API_KEY:
-        error_message = "API key missing"
+    # Determine data source
+    if ticker in MT5_SYMBOLS:
+        # Fetch from MT5
+        mt5_symbol = MT5_SYMBOLS[ticker]
+        print(f"Fetching {ticker} from MT5 (symbol: {mt5_symbol})...")
+        historical_closes, historical_dates, error_message = fetch_mt5_data(mt5_symbol)
+        data_source = "MT5"
+        
+        # If MT5 fails for BTC, try Alpha Vantage as fallback
+        if not historical_closes and "BTC" in ticker and API_KEY:
+            print(f"MT5 failed for {ticker}, trying Alpha Vantage...")
+            historical_closes, historical_dates, error_message = fetch_alpha_vantage_data(ticker)
+            data_source = "Alpha Vantage"
     else:
-        # Build correct API URL based on asset type
-        if ticker == "XAU-USD":
-            # Gold spot price with historical data using FX_DAILY
-            url = f"https://www.alphavantage.co/query?function=FX_DAILY&from_symbol=XAU&to_symbol=USD&apikey={API_KEY}"
-        elif "BTC" in ticker:
-            # Cryptocurrency - extract BTC from BTC-USD
-            crypto_symbol = ticker.split('-')[0]
-            url = f"https://www.alphavantage.co/query?function=DIGITAL_CURRENCY_DAILY&symbol={crypto_symbol}&market=USD&apikey={API_KEY}"
-        else:
-            # Regular stocks
-            url = f"https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol={ticker}&apikey={API_KEY}"
+        # Fetch from Alpha Vantage
+        print(f"Fetching {ticker} from Alpha Vantage...")
         
-        print(f"Fetching data for {ticker}...")
+        # Add delay for Alpha Vantage rate limiting
+        if index > 0:
+            # Count how many Alpha Vantage calls we've made
+            av_calls = sum(1 for t in tickers[:index] if t not in MT5_SYMBOLS)
+            if av_calls > 0:
+                print(f"Waiting 12 seconds for Alpha Vantage rate limit...")
+                time.sleep(12)
         
-        try:
-            req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
-            with urllib.request.urlopen(req) as response:
-                data = json.loads(response.read().decode())
-            
-            # Check for error messages
-            if "Error Message" in data:
-                error_message = data["Error Message"]
-            elif "Note" in data:
-                error_message = "API rate limit reached"
-            elif "Time Series (Daily)" in data:
-                time_series = data["Time Series (Daily)"]
-                sorted_dates = sorted(time_series.keys())[-30:]  # Last 30 days
-                historical_closes = [float(time_series[d]["4. close"]) for d in sorted_dates]
-                historical_dates = [d[5:] for d in sorted_dates]  # Format: MM-DD
-                print(f"✓ Got stock data for {ticker}")
-            
-            elif "Time Series (Digital Currency Daily)" in data:
-                time_series = data["Time Series (Digital Currency Daily)"]
-                sorted_dates = sorted(time_series.keys())[-30:]
-                historical_closes = [float(time_series[d]["4a. close (USD)"]) for d in sorted_dates]
-                historical_dates = [d[5:] for d in sorted_dates]
-                print(f"✓ Got crypto data for {ticker}")
-            
-            elif "Time Series FX (Daily)" in data:
-                time_series = data["Time Series FX (Daily)"]
-                sorted_dates = sorted(time_series.keys())[-30:]
-                historical_closes = [float(time_series[d]["4. close"]) for d in sorted_dates]
-                historical_dates = [d[5:] for d in sorted_dates]
-                print(f"✓ Got FX data for {ticker}")
-            
-            else:
-                error_message = f"Unexpected data format: {list(data.keys())[:3]}"
-                
-        except Exception as e:
-            error_message = f"Error: {str(e)}"
+        historical_closes, historical_dates, error_message = fetch_alpha_vantage_data(ticker)
+        data_source = "Alpha Vantage"
     
     # Calculate metrics if we have data
     if historical_closes and len(historical_closes) >= 2:
@@ -145,14 +198,12 @@ for index, ticker in enumerate(tickers):
             direction_bias = "Bearish Trend"
             bias_style = "bearish"
     else:
-        # Fallback data if API fails
-        historical_closes = [150, 152, 151, 153, 155, 154, 156, 158, 157, 160, 159, 161, 163, 162, 165, 167, 166, 168, 170, 169]
-        historical_dates = ["08-10", "08-11", "08-12", "08-13", "08-14", "08-17", "08-18", "08-19", "08-20", "08-21", "08-22", "08-23", "08-24", "08-25", "08-26", "08-27", "08-28", "08-29", "08-30", "08-31"]
-        current_price = "API Fetch Failed"
-        if error_message:
-            print(f"✗ Error for {ticker}: {error_message}")
+        # Fallback data
+        historical_closes = [150, 152, 151, 153, 155, 154, 156, 158, 157, 160]
+        historical_dates = ["08-10", "08-11", "08-12", "08-13", "08-14", "08-17", "08-18", "08-19", "08-20", "08-21"]
+        current_price = "Fetch Failed"
     
-    # Build the HTML content for this ticker
+    # Build HTML for this ticker
     html_content += f"""
     <div id="tab-{index}" class="content-section {active_section}">
         <div class="grid-layout">
@@ -161,6 +212,7 @@ for index, ticker in enumerate(tickers):
                 <div class="metric-card">
                     <div class="metric-label">Last Tracked Close Price</div>
                     <div class="metric-value">{current_price}</div>
+                    <div class="data-source">Source: {data_source}</div>
                     {f'<div class="error-message">{error_message}</div>' if error_message else ''}
                 </div>
                 <div class="metric-card" style="border-left-color: {'#34d399' if price_change_pct >= 0 else '#f87171'};">
@@ -207,23 +259,20 @@ for index, ticker in enumerate(tickers):
     </script>
     """
 
-# Add the tab switching script (FIXED)
+# Add tab switching script
 html_content += """
     <script>
         function switchTab(tabId, btnElement) {
-            // Hide all sections
             var sections = document.getElementsByClassName('content-section');
             for (var i = 0; i < sections.length; i++) {
                 sections[i].classList.remove('active');
             }
             
-            // Remove active class from all buttons
             var buttons = document.getElementsByClassName('tab-btn');
             for (var i = 0; i < buttons.length; i++) {
                 buttons[i].classList.remove('active');
             }
             
-            // Show selected section and activate button
             document.getElementById(tabId).classList.add('active');
             btnElement.classList.add('active');
         }
@@ -235,5 +284,9 @@ html_content += """
 # Write the HTML file
 with open("index.html", "w", encoding="utf-8") as f:
     f.write(html_content)
+
+# Shutdown MT5
+if mt5_initialized:
+    mt5.shutdown()
 
 print("✓ Dashboard generated successfully!")

@@ -5,7 +5,7 @@ import time
 from datetime import datetime
 
 # Paste your free Alpha Vantage key here
-API_KEY = os.environ.get('ALPHA_VANTAGE_KEY', 'UMZBMW136NPEAP1B')  # Better to use environment variable
+API_KEY = os.environ.get('ALPHA_VANTAGE_KEY', 'UMZBMW136NPEAP1B')  # Use environment variable
 
 # 1. Read tickers from your asset list
 try:
@@ -63,7 +63,7 @@ html_content += "    </div>\n"
 # 3. Fetch data for each ticker
 for index, ticker in enumerate(tickers):
     # Alpha Vantage free tier: 5 requests per minute, 500 per day
-    # Add delay between requests (except first)
+    # Add 12 second delay between requests (except first)
     if index > 0:
         print(f"Waiting 12 seconds before fetching {ticker}...")
         time.sleep(12)
@@ -82,14 +82,17 @@ for index, ticker in enumerate(tickers):
     else:
         # Build correct API URL based on asset type
         if ticker == "XAU-USD":
-            # Gold spot price (using CURRENCY_EXCHANGE_RATE for XAU/USD)
-            url = f"https://www.alphavantage.co/query?function=CURRENCY_EXCHANGE_RATE&from_currency=XAU&to_currency=USD&apikey={API_KEY}"
+            # Gold spot price with historical data using FX_DAILY
+            url = f"https://www.alphavantage.co/query?function=FX_DAILY&from_symbol=XAU&to_symbol=USD&apikey={API_KEY}"
         elif "BTC" in ticker:
-            # Cryptocurrency
-            url = f"https://www.alphavantage.co/query?function=DIGITAL_CURRENCY_DAILY&symbol={ticker.split('-')[0]}&market=USD&apikey={API_KEY}"
+            # Cryptocurrency - extract BTC from BTC-USD
+            crypto_symbol = ticker.split('-')[0]
+            url = f"https://www.alphavantage.co/query?function=DIGITAL_CURRENCY_DAILY&symbol={crypto_symbol}&market=USD&apikey={API_KEY}"
         else:
             # Regular stocks
             url = f"https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol={ticker}&apikey={API_KEY}"
+        
+        print(f"Fetching data for {ticker}...")
         
         try:
             req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
@@ -103,22 +106,27 @@ for index, ticker in enumerate(tickers):
                 error_message = "API rate limit reached"
             elif "Time Series (Daily)" in data:
                 time_series = data["Time Series (Daily)"]
-                sorted_dates = sorted(time_series.keys())[-30:]  # Get last 30 days
+                sorted_dates = sorted(time_series.keys())[-30:]  # Last 30 days
                 historical_closes = [float(time_series[d]["4. close"]) for d in sorted_dates]
                 historical_dates = [d[5:] for d in sorted_dates]  # Format: MM-DD
+                print(f"✓ Got stock data for {ticker}")
             
             elif "Time Series (Digital Currency Daily)" in data:
                 time_series = data["Time Series (Digital Currency Daily)"]
                 sorted_dates = sorted(time_series.keys())[-30:]
                 historical_closes = [float(time_series[d]["4a. close (USD)"]) for d in sorted_dates]
                 historical_dates = [d[5:] for d in sorted_dates]
+                print(f"✓ Got crypto data for {ticker}")
             
-            elif "Realtime Currency Exchange Rate" in data:
-                # For XAU/USD, we only get current rate, not historical
-                exchange_data = data["Realtime Currency Exchange Rate"]
-                current_rate = float(exchange_data["5. Exchange Rate"])
-                historical_closes = [current_rate]  # Only current price available
-                historical_dates = [datetime.now().strftime('%m-%d')]
+            elif "Time Series FX (Daily)" in data:
+                time_series = data["Time Series FX (Daily)"]
+                sorted_dates = sorted(time_series.keys())[-30:]
+                historical_closes = [float(time_series[d]["4. close"]) for d in sorted_dates]
+                historical_dates = [d[5:] for d in sorted_dates]
+                print(f"✓ Got FX data for {ticker}")
+            
+            else:
+                error_message = f"Unexpected data format: {list(data.keys())[:3]}"
                 
         except Exception as e:
             error_message = f"Error: {str(e)}"
@@ -137,12 +145,12 @@ for index, ticker in enumerate(tickers):
             direction_bias = "Bearish Trend"
             bias_style = "bearish"
     else:
-        # Fallback data
+        # Fallback data if API fails
         historical_closes = [150, 152, 151, 153, 155, 154, 156, 158, 157, 160, 159, 161, 163, 162, 165, 167, 166, 168, 170, 169]
         historical_dates = ["08-10", "08-11", "08-12", "08-13", "08-14", "08-17", "08-18", "08-19", "08-20", "08-21", "08-22", "08-23", "08-24", "08-25", "08-26", "08-27", "08-28", "08-29", "08-30", "08-31"]
         current_price = "API Fetch Failed"
         if error_message:
-            current_price = f"Error: {error_message[:20]}"
+            print(f"✗ Error for {ticker}: {error_message}")
     
     # Build the HTML content for this ticker
     html_content += f"""
@@ -199,7 +207,7 @@ for index, ticker in enumerate(tickers):
     </script>
     """
 
-# Add the tab switching script
+# Add the tab switching script (FIXED)
 html_content += """
     <script>
         function switchTab(tabId, btnElement) {
@@ -228,4 +236,4 @@ html_content += """
 with open("index.html", "w", encoding="utf-8") as f:
     f.write(html_content)
 
-print("Dashboard generated successfully!")
+print("✓ Dashboard generated successfully!")

@@ -1,9 +1,9 @@
 name: Trigger Dashboard Update
 
 on:
-  workflow_dispatch: # Manual trigger
+  workflow_dispatch:
   schedule:
-    - cron: '0 */6 * * *'  # Run every 6 hours (optional)
+    - cron: '0 */6 * * *'
 
 jobs:
   build:
@@ -18,12 +18,18 @@ jobs:
         with:
           python-version: '3.10'
       
-      - name: Run Analysis
+      - name: Install Dependencies
+        run: |
+          pip install MetaTrader5
+          # Note: MT5 might not work on GitHub Actions without a Windows server
+          # or Wine for Linux
+      
+      - name: Compile Dashboard File
         env:
           ALPHA_VANTAGE_KEY: ${{ secrets.ALPHA_VANTAGE_KEY }}
         run: python run_analysis.py
       
-      - name: Deploy HTML File
+      - name: Deploy Resulting HTML File
         run: |
           git config --global user.name "GitHub Action Bot"
           git config --global user.email "actions@github.com"

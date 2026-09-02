@@ -14,7 +14,7 @@
         .tab-btn { background-color: #1e293b; color: #94a3b8; border: 1px solid #334155; padding: 8px 16px; font-family: inherit; font-size: 13px; cursor: pointer; border-radius: 6px; transition: all 0.2s; }
         .tab-btn:hover { background-color: #334155; color: #f8fafc; }
         .tab-btn.active { background-color: #2563eb; color: #ffffff; border-color: #3b82f6; font-weight: 600; }
-        .grid-layout { display: grid; grid-template-columns: 1fr 2fr; gap: 20px; }
+        .grid-layout { display: grid; grid-template-columns: 1fr 2fr; gap: 20px; margin-bottom: 20px; }
         .panel { background-color: #111827; border: 1px solid #1e293b; border-radius: 8px; padding: 20px; }
         .panel-title { font-size: 14px; font-weight: 600; color: #38bdf8; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 20px; border-bottom: 1px solid #1e293b; padding-bottom: 8px; }
         .metric-card { background-color: #1f2937; border-radius: 6px; padding: 15px; margin-bottom: 15px; border-left: 4px solid #3b82f6; }
@@ -28,59 +28,133 @@
         .content-section { display: none; }
         .content-section.active { display: block; }
         .error-message { color: #f87171; font-size: 12px; margin-top: 5px; }
+        .data-source { font-size: 10px; color: #64748b; margin-top: 3px; }
+        .ohlc-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 15px; }
+        .ohlc-item { background-color: #1f2937; border-radius: 4px; padding: 10px; text-align: center; }
+        .ohlc-label { font-size: 10px; color: #94a3b8; margin-bottom: 4px; }
+        .ohlc-value { font-size: 14px; font-weight: 600; }
+        .full-width { grid-column: 1 / -1; }
     </style>
 </head>
 <body>
     <div class="header">
         <h1>Kronos Analysis Dashboard</h1>
-        <div class="meta-info">Data Matrix Active<br>Updated: 2026-09-01 17:58:33 UTC</div>
+        <div class="meta-info">OHLCV Data Matrix<br>Updated: 2026-09-02 19:59:00</div>
     </div>
     <div class="tabs-container">
         <button class="tab-btn active" onclick="switchTab('tab-0', this)">AAPL</button>
         <button class="tab-btn " onclick="switchTab('tab-1', this)">NVDA</button>
-        <button class="tab-btn " onclick="switchTab('tab-2', this)">BTC-USD</button>
-        <button class="tab-btn " onclick="switchTab('tab-3', this)">SPY</button>
+        <button class="tab-btn " onclick="switchTab('tab-2', this)">SPY</button>
+        <button class="tab-btn " onclick="switchTab('tab-3', this)">BTC-USD</button>
         <button class="tab-btn " onclick="switchTab('tab-4', this)">XAU-USD</button>
+        <button class="tab-btn " onclick="switchTab('tab-5', this)">DXY</button>
     </div>
 
     <div id="tab-0" class="content-section active">
         <div class="grid-layout">
             <div class="panel">
-                <div class="panel-title">AAPL Data Statistics</div>
+                <div class="panel-title">AAPL - Latest Session</div>
+
+                <div class="ohlc-grid">
+                    <div class="ohlc-item">
+                        <div class="ohlc-label">OPEN</div>
+                        <div class="ohlc-value" style="color: #60a5fa;">$316.98</div>
+                    </div>
+                    <div class="ohlc-item">
+                        <div class="ohlc-label">HIGH</div>
+                        <div class="ohlc-value" style="color: #34d399;">$327.30</div>
+                    </div>
+                    <div class="ohlc-item">
+                        <div class="ohlc-label">LOW</div>
+                        <div class="ohlc-value" style="color: #f87171;">$314.73</div>
+                    </div>
+                    <div class="ohlc-item">
+                        <div class="ohlc-label">CLOSE</div>
+                        <div class="ohlc-value" style="color: #fbbf24;">$325.13</div>
+                    </div>
+                </div>
+
                 <div class="metric-card">
-                    <div class="metric-label">Last Tracked Close Price</div>
-                    <div class="metric-value">$316.85</div>
-                    
-                </div>
-                <div class="metric-card" style="border-left-color: #f87171;">
                     <div class="metric-label">Daily Price Move</div>
-                    <div class="metric-value" style="color: #f87171;">-0.89%</div>
+                    <div class="metric-value" style="color: #34d399;">+2.61%</div>
                 </div>
+
+                <div class="metric-card">
+                    <div class="metric-label">Daily Range</div>
+                    <div class="metric-value">3.99%</div>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-label">Volume</div>
+                    <div class="metric-value">53,167,388</div>
+                    <div class="badge bullish">High Volume</div>
+                </div>
+
                 <div class="metric-card" style="border-left-color: #34d399;">
-                    <div class="metric-label">Calculated Directional Bias</div>
+                    <div class="metric-label">Directional Bias (20-Day MA)</div>
                     <span class="badge bullish">Bullish Trend</span>
                 </div>
+
+                <div class="data-source">Data Source: Alpha Vantage</div>
+                
             </div>
+
             <div class="panel">
-                <div class="panel-title">AAPL Historical Price Matrix</div>
+                <div class="panel-title">AAPL - Price & Volume Matrix</div>
                 <div class="chart-container"><canvas id="chart-0"></canvas></div>
+                <div class="chart-container" style="height: 150px; margin-top: 20px;"><canvas id="volume-chart-0"></canvas></div>
             </div>
         </div>
     </div>
+
     <script>
+        // Price Chart
         new Chart(document.getElementById('chart-0'), {
             type: 'line',
             data: {
-                labels: ["07-21", "07-22", "07-23", "07-24", "07-27", "07-28", "07-29", "07-30", "07-31", "08-03", "08-04", "08-05", "08-06", "08-07", "08-10", "08-11", "08-12", "08-13", "08-14", "08-17", "08-18", "08-19", "08-20", "08-21", "08-24", "08-25", "08-26", "08-27", "08-28", "08-31"],
+                labels: ["07-22", "07-23", "07-24", "07-27", "07-28", "07-29", "07-30", "07-31", "08-03", "08-04", "08-05", "08-06", "08-07", "08-10", "08-11", "08-12", "08-13", "08-14", "08-17", "08-18", "08-19", "08-20", "08-21", "08-24", "08-25", "08-26", "08-27", "08-28", "08-31", "09-01"],
                 datasets: [{
-                    label: 'AAPL',
-                    data: [327.74, 325.89, 321.66, 333.02, 336.91, 340.08, 338.19, 333.43, 308.91, 303.42, 309.38, 311.0, 312.41, 313.33, 308.26, 304.91, 302.25, 305.26, 305.93, 305.59, 310.03, 316.83, 311.3, 309.35, 310.34, 309.9, 313.45, 314.58, 319.7, 316.85],
+                    label: 'Close',
+                    data: [325.89, 321.66, 333.02, 336.91, 340.08, 338.19, 333.43, 308.91, 303.42, 309.38, 311.0, 312.41, 313.33, 308.26, 304.91, 302.25, 305.26, 305.93, 305.59, 310.03, 316.83, 311.3, 309.35, 310.34, 309.9, 313.45, 314.58, 319.7, 316.85, 325.13],
                     borderColor: '#3b82f6',
                     backgroundColor: 'rgba(59, 130, 246, 0.05)',
                     borderWidth: 2,
                     pointRadius: 3,
                     fill: true,
                     tension: 0.1
+                }, {
+                    label: 'Open',
+                    data: [327.87, 321.73, 321.79, 334.54, 340.03, 339.73, 333.1, 304.81, 309.58, 302.725, 309.36, 314.34, 311.45, 306.83, 307.75, 305.1, 304.21, 306.0, 306.21, 307.58, 310.14, 317.455, 312.05, 311.47, 310.79, 310.3, 310.545, 316.845, 319.6, 316.98],
+                    borderColor: '#60a5fa',
+                    borderWidth: 1,
+                    pointRadius: 0,
+                    fill: false,
+                    tension: 0.1,
+                    borderDash: [5, 5]
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: true, labels: { color: '#94a3b8' } } },
+                scales: {
+                    x: { grid: { color: '#1e293b' }, ticks: { color: '#94a3b8' } },
+                    y: { grid: { color: '#1e293b' }, ticks: { color: '#94a3b8' } }
+                }
+            }
+        });
+
+        // Volume Chart
+        new Chart(document.getElementById('volume-chart-0'), {
+            type: 'bar',
+            data: {
+                labels: ["07-22", "07-23", "07-24", "07-27", "07-28", "07-29", "07-30", "07-31", "08-03", "08-04", "08-05", "08-06", "08-07", "08-10", "08-11", "08-12", "08-13", "08-14", "08-17", "08-18", "08-19", "08-20", "08-21", "08-24", "08-25", "08-26", "08-27", "08-28", "08-31", "09-01"],
+                datasets: [{
+                    label: 'Volume',
+                    data: [38755929.0, 40840778.0, 47489415.0, 49604297.0, 51859042.0, 56090840.0, 74817792.0, 132489137.0, 75051951.0, 68000969.0, 49438763.0, 46139901.0, 34437191.0, 44812503.0, 37476746.0, 41657768.0, 40349289.0, 28229375.0, 38169263.0, 53424535.0, 50505646.0, 40959184.0, 46876815.0, 34673582.0, 25869807.0, 34024486.0, 32419233.0, 38649398.0, 41242724.0, 53167388.0],
+                    backgroundColor: 'rgba(59, 130, 246, 0.5)',
+                    borderColor: '#3b82f6',
+                    borderWidth: 1
                 }]
             },
             options: {
@@ -98,41 +172,108 @@
     <div id="tab-1" class="content-section ">
         <div class="grid-layout">
             <div class="panel">
-                <div class="panel-title">NVDA Data Statistics</div>
+                <div class="panel-title">NVDA - Latest Session</div>
+
+                <div class="ohlc-grid">
+                    <div class="ohlc-item">
+                        <div class="ohlc-label">OPEN</div>
+                        <div class="ohlc-value" style="color: #60a5fa;">$216.75</div>
+                    </div>
+                    <div class="ohlc-item">
+                        <div class="ohlc-label">HIGH</div>
+                        <div class="ohlc-value" style="color: #34d399;">$220.41</div>
+                    </div>
+                    <div class="ohlc-item">
+                        <div class="ohlc-label">LOW</div>
+                        <div class="ohlc-value" style="color: #f87171;">$215.10</div>
+                    </div>
+                    <div class="ohlc-item">
+                        <div class="ohlc-label">CLOSE</div>
+                        <div class="ohlc-value" style="color: #fbbf24;">$217.44</div>
+                    </div>
+                </div>
+
                 <div class="metric-card">
-                    <div class="metric-label">Last Tracked Close Price</div>
-                    <div class="metric-value">$220.78</div>
-                    
-                </div>
-                <div class="metric-card" style="border-left-color: #34d399;">
                     <div class="metric-label">Daily Price Move</div>
-                    <div class="metric-value" style="color: #34d399;">+1.48%</div>
+                    <div class="metric-value" style="color: #f87171;">-1.51%</div>
                 </div>
-                <div class="metric-card" style="border-left-color: #34d399;">
-                    <div class="metric-label">Calculated Directional Bias</div>
-                    <span class="badge bullish">Bullish Trend</span>
+
+                <div class="metric-card">
+                    <div class="metric-label">Daily Range</div>
+                    <div class="metric-value">2.47%</div>
                 </div>
+
+                <div class="metric-card">
+                    <div class="metric-label">Volume</div>
+                    <div class="metric-value">109,756,184</div>
+                    <div class="badge neutral">Normal Volume</div>
+                </div>
+
+                <div class="metric-card" style="border-left-color: #f87171;">
+                    <div class="metric-label">Directional Bias (20-Day MA)</div>
+                    <span class="badge bearish">Bearish Trend</span>
+                </div>
+
+                <div class="data-source">Data Source: Alpha Vantage</div>
+                
             </div>
+
             <div class="panel">
-                <div class="panel-title">NVDA Historical Price Matrix</div>
+                <div class="panel-title">NVDA - Price & Volume Matrix</div>
                 <div class="chart-container"><canvas id="chart-1"></canvas></div>
+                <div class="chart-container" style="height: 150px; margin-top: 20px;"><canvas id="volume-chart-1"></canvas></div>
             </div>
         </div>
     </div>
+
     <script>
+        // Price Chart
         new Chart(document.getElementById('chart-1'), {
             type: 'line',
             data: {
-                labels: ["07-21", "07-22", "07-23", "07-24", "07-27", "07-28", "07-29", "07-30", "07-31", "08-03", "08-04", "08-05", "08-06", "08-07", "08-10", "08-11", "08-12", "08-13", "08-14", "08-17", "08-18", "08-19", "08-20", "08-21", "08-24", "08-25", "08-26", "08-27", "08-28", "08-31"],
+                labels: ["07-22", "07-23", "07-24", "07-27", "07-28", "07-29", "07-30", "07-31", "08-03", "08-04", "08-05", "08-06", "08-07", "08-10", "08-11", "08-12", "08-13", "08-14", "08-17", "08-18", "08-19", "08-20", "08-21", "08-24", "08-25", "08-26", "08-27", "08-28", "08-31", "09-01"],
                 datasets: [{
-                    label: 'NVDA',
-                    data: [207.29, 212.06, 208.76, 206.84, 196.51, 197.01, 190.01, 195.04, 200.75, 206.64, 211.94, 219.22, 218.99, 223.96, 217.55, 217.5, 224.09, 225.3, 225.16, 225.01, 219.74, 217.56, 216.85, 214.72, 208.48, 213.05, 209.66, 227.98, 217.55, 220.78],
+                    label: 'Close',
+                    data: [212.06, 208.76, 206.84, 196.51, 197.01, 190.01, 195.04, 200.75, 206.64, 211.94, 219.22, 218.99, 223.96, 217.55, 217.5, 224.09, 225.3, 225.16, 225.01, 219.74, 217.56, 216.85, 214.72, 208.48, 213.05, 209.66, 227.98, 217.55, 220.78, 217.44],
                     borderColor: '#3b82f6',
                     backgroundColor: 'rgba(59, 130, 246, 0.05)',
                     borderWidth: 2,
                     pointRadius: 3,
                     fill: true,
                     tension: 0.1
+                }, {
+                    label: 'Open',
+                    data: [205.805, 209.455, 207.45, 208.2, 195.0, 195.845, 193.45, 198.4405, 197.69, 211.3, 216.86, 221.53, 221.54, 223.4, 222.17, 221.04, 225.055, 226.765, 225.98, 220.45, 221.67, 218.36, 218.42, 215.53, 211.025, 212.64, 222.86, 227.36, 218.87, 216.75],
+                    borderColor: '#60a5fa',
+                    borderWidth: 1,
+                    pointRadius: 0,
+                    fill: false,
+                    tension: 0.1,
+                    borderDash: [5, 5]
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: true, labels: { color: '#94a3b8' } } },
+                scales: {
+                    x: { grid: { color: '#1e293b' }, ticks: { color: '#94a3b8' } },
+                    y: { grid: { color: '#1e293b' }, ticks: { color: '#94a3b8' } }
+                }
+            }
+        });
+
+        // Volume Chart
+        new Chart(document.getElementById('volume-chart-1'), {
+            type: 'bar',
+            data: {
+                labels: ["07-22", "07-23", "07-24", "07-27", "07-28", "07-29", "07-30", "07-31", "08-03", "08-04", "08-05", "08-06", "08-07", "08-10", "08-11", "08-12", "08-13", "08-14", "08-17", "08-18", "08-19", "08-20", "08-21", "08-24", "08-25", "08-26", "08-27", "08-28", "08-31", "09-01"],
+                datasets: [{
+                    label: 'Volume',
+                    data: [137645596.0, 110505328.0, 114836805.0, 154353698.0, 134111494.0, 147680809.0, 129010151.0, 139961152.0, 128406883.0, 134921997.0, 158187403.0, 113940644.0, 105669440.0, 115846596.0, 101273148.0, 108783636.0, 98867226.0, 75680870.0, 93678685.0, 103128247.0, 96797314.0, 92457037.0, 98869300.0, 135187288.0, 122309019.0, 179900003.0, 298909822.0, 195116417.0, 124702660.0, 109756184.0],
+                    backgroundColor: 'rgba(59, 130, 246, 0.5)',
+                    borderColor: '#3b82f6',
+                    borderWidth: 1
                 }]
             },
             options: {
@@ -150,41 +291,108 @@
     <div id="tab-2" class="content-section ">
         <div class="grid-layout">
             <div class="panel">
-                <div class="panel-title">BTC-USD Data Statistics</div>
+                <div class="panel-title">SPY - Latest Session</div>
+
+                <div class="ohlc-grid">
+                    <div class="ohlc-item">
+                        <div class="ohlc-label">OPEN</div>
+                        <div class="ohlc-value" style="color: #60a5fa;">$762.01</div>
+                    </div>
+                    <div class="ohlc-item">
+                        <div class="ohlc-label">HIGH</div>
+                        <div class="ohlc-value" style="color: #34d399;">$764.67</div>
+                    </div>
+                    <div class="ohlc-item">
+                        <div class="ohlc-label">LOW</div>
+                        <div class="ohlc-value" style="color: #f87171;">$759.48</div>
+                    </div>
+                    <div class="ohlc-item">
+                        <div class="ohlc-label">CLOSE</div>
+                        <div class="ohlc-value" style="color: #fbbf24;">$761.78</div>
+                    </div>
+                </div>
+
                 <div class="metric-card">
-                    <div class="metric-label">Last Tracked Close Price</div>
-                    <div class="metric-value">API Fetch Failed</div>
-                    <div class="error-message">Error: '4a. close (USD)'</div>
-                </div>
-                <div class="metric-card" style="border-left-color: #34d399;">
                     <div class="metric-label">Daily Price Move</div>
-                    <div class="metric-value" style="color: #34d399;">+0.00%</div>
+                    <div class="metric-value" style="color: #f87171;">-0.69%</div>
                 </div>
-                <div class="metric-card" style="border-left-color: #94a3b8;">
-                    <div class="metric-label">Calculated Directional Bias</div>
-                    <span class="badge neutral">Neutral</span>
+
+                <div class="metric-card">
+                    <div class="metric-label">Daily Range</div>
+                    <div class="metric-value">0.68%</div>
                 </div>
+
+                <div class="metric-card">
+                    <div class="metric-label">Volume</div>
+                    <div class="metric-value">41,126,315</div>
+                    <div class="badge neutral">Normal Volume</div>
+                </div>
+
+                <div class="metric-card" style="border-left-color: #f87171;">
+                    <div class="metric-label">Directional Bias (20-Day MA)</div>
+                    <span class="badge bearish">Bearish Trend</span>
+                </div>
+
+                <div class="data-source">Data Source: Alpha Vantage</div>
+                
             </div>
+
             <div class="panel">
-                <div class="panel-title">BTC-USD Historical Price Matrix</div>
+                <div class="panel-title">SPY - Price & Volume Matrix</div>
                 <div class="chart-container"><canvas id="chart-2"></canvas></div>
+                <div class="chart-container" style="height: 150px; margin-top: 20px;"><canvas id="volume-chart-2"></canvas></div>
             </div>
         </div>
     </div>
+
     <script>
+        // Price Chart
         new Chart(document.getElementById('chart-2'), {
             type: 'line',
             data: {
-                labels: ["08-10", "08-11", "08-12", "08-13", "08-14", "08-17", "08-18", "08-19", "08-20", "08-21", "08-22", "08-23", "08-24", "08-25", "08-26", "08-27", "08-28", "08-29", "08-30", "08-31"],
+                labels: ["07-22", "07-23", "07-24", "07-27", "07-28", "07-29", "07-30", "07-31", "08-03", "08-04", "08-05", "08-06", "08-07", "08-10", "08-11", "08-12", "08-13", "08-14", "08-17", "08-18", "08-19", "08-20", "08-21", "08-24", "08-25", "08-26", "08-27", "08-28", "08-31", "09-01"],
                 datasets: [{
-                    label: 'BTC-USD',
-                    data: [150, 152, 151, 153, 155, 154, 156, 158, 157, 160, 159, 161, 163, 162, 165, 167, 166, 168, 170, 169],
+                    label: 'Close',
+                    data: [747.41, 738.18, 738.93, 739.09, 740.86, 729.46, 741.69, 747.03, 757.67, 771.33, 769.79, 768.56, 773.26, 773.03, 770.56, 772.49, 777.88, 776.34, 772.67, 767.45, 769.06, 762.6, 765.72, 763.47, 765.91, 766.08, 771.1, 769.35, 767.05, 761.78],
                     borderColor: '#3b82f6',
                     backgroundColor: 'rgba(59, 130, 246, 0.05)',
                     borderWidth: 2,
                     pointRadius: 3,
                     fill: true,
                     tension: 0.1
+                }, {
+                    label: 'Open',
+                    data: [746.62, 739.37, 738.51, 744.91, 739.19, 739.97, 736.05, 744.68, 749.44, 760.63, 775.85, 770.21, 771.02, 772.6, 774.53, 774.71, 774.87, 778.54, 776.18, 768.7, 770.36, 765.96, 766.05, 764.78, 766.16, 764.73, 768.5, 771.76, 767.33, 762.01],
+                    borderColor: '#60a5fa',
+                    borderWidth: 1,
+                    pointRadius: 0,
+                    fill: false,
+                    tension: 0.1,
+                    borderDash: [5, 5]
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: true, labels: { color: '#94a3b8' } } },
+                scales: {
+                    x: { grid: { color: '#1e293b' }, ticks: { color: '#94a3b8' } },
+                    y: { grid: { color: '#1e293b' }, ticks: { color: '#94a3b8' } }
+                }
+            }
+        });
+
+        // Volume Chart
+        new Chart(document.getElementById('volume-chart-2'), {
+            type: 'bar',
+            data: {
+                labels: ["07-22", "07-23", "07-24", "07-27", "07-28", "07-29", "07-30", "07-31", "08-03", "08-04", "08-05", "08-06", "08-07", "08-10", "08-11", "08-12", "08-13", "08-14", "08-17", "08-18", "08-19", "08-20", "08-21", "08-24", "08-25", "08-26", "08-27", "08-28", "08-31", "09-01"],
+                datasets: [{
+                    label: 'Volume',
+                    data: [32836200.0, 55437332.0, 44781983.0, 41461194.0, 47322247.0, 70697215.0, 66811268.0, 62445899.0, 59927538.0, 69154788.0, 44689081.0, 38416896.0, 43586333.0, 39249478.0, 36740555.0, 33179126.0, 35634483.0, 31367913.0, 34356577.0, 43920908.0, 40306023.0, 45520302.0, 39188673.0, 32430886.0, 27422263.0, 28751592.0, 34557064.0, 36744344.0, 38810779.0, 41126315.0],
+                    backgroundColor: 'rgba(59, 130, 246, 0.5)',
+                    borderColor: '#3b82f6',
+                    borderWidth: 1
                 }]
             },
             options: {
@@ -202,41 +410,108 @@
     <div id="tab-3" class="content-section ">
         <div class="grid-layout">
             <div class="panel">
-                <div class="panel-title">SPY Data Statistics</div>
+                <div class="panel-title">BTC-USD - Latest Session</div>
+
+                <div class="ohlc-grid">
+                    <div class="ohlc-item">
+                        <div class="ohlc-label">OPEN</div>
+                        <div class="ohlc-value" style="color: #60a5fa;">N/A</div>
+                    </div>
+                    <div class="ohlc-item">
+                        <div class="ohlc-label">HIGH</div>
+                        <div class="ohlc-value" style="color: #34d399;">N/A</div>
+                    </div>
+                    <div class="ohlc-item">
+                        <div class="ohlc-label">LOW</div>
+                        <div class="ohlc-value" style="color: #f87171;">N/A</div>
+                    </div>
+                    <div class="ohlc-item">
+                        <div class="ohlc-label">CLOSE</div>
+                        <div class="ohlc-value" style="color: #fbbf24;">N/A</div>
+                    </div>
+                </div>
+
                 <div class="metric-card">
-                    <div class="metric-label">Last Tracked Close Price</div>
-                    <div class="metric-value">$767.05</div>
-                    
-                </div>
-                <div class="metric-card" style="border-left-color: #f87171;">
                     <div class="metric-label">Daily Price Move</div>
-                    <div class="metric-value" style="color: #f87171;">-0.30%</div>
+                    <div class="metric-value" style="color: #34d399;">+0.00%</div>
                 </div>
+
+                <div class="metric-card">
+                    <div class="metric-label">Daily Range</div>
+                    <div class="metric-value">0.00%</div>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-label">Volume</div>
+                    <div class="metric-value">N/A</div>
+                    <div class="badge neutral">N/A</div>
+                </div>
+
                 <div class="metric-card" style="border-left-color: #f87171;">
-                    <div class="metric-label">Calculated Directional Bias</div>
-                    <span class="badge bearish">Bearish Trend</span>
+                    <div class="metric-label">Directional Bias (20-Day MA)</div>
+                    <span class="badge neutral">Neutral</span>
                 </div>
+
+                <div class="data-source">Data Source: </div>
+                <div class="error-message">Failed to fetch from MT5</div>
             </div>
+
             <div class="panel">
-                <div class="panel-title">SPY Historical Price Matrix</div>
+                <div class="panel-title">BTC-USD - Price & Volume Matrix</div>
                 <div class="chart-container"><canvas id="chart-3"></canvas></div>
+                <div class="chart-container" style="height: 150px; margin-top: 20px;"><canvas id="volume-chart-3"></canvas></div>
             </div>
         </div>
     </div>
+
     <script>
+        // Price Chart
         new Chart(document.getElementById('chart-3'), {
             type: 'line',
             data: {
-                labels: ["07-21", "07-22", "07-23", "07-24", "07-27", "07-28", "07-29", "07-30", "07-31", "08-03", "08-04", "08-05", "08-06", "08-07", "08-10", "08-11", "08-12", "08-13", "08-14", "08-17", "08-18", "08-19", "08-20", "08-21", "08-24", "08-25", "08-26", "08-27", "08-28", "08-31"],
+                labels: [],
                 datasets: [{
-                    label: 'SPY',
-                    data: [748.28, 747.41, 738.18, 738.93, 739.09, 740.86, 729.46, 741.69, 747.03, 757.67, 771.33, 769.79, 768.56, 773.26, 773.03, 770.56, 772.49, 777.88, 776.34, 772.67, 767.45, 769.06, 762.6, 765.72, 763.47, 765.91, 766.08, 771.1, 769.35, 767.05],
+                    label: 'Close',
+                    data: [],
                     borderColor: '#3b82f6',
                     backgroundColor: 'rgba(59, 130, 246, 0.05)',
                     borderWidth: 2,
                     pointRadius: 3,
                     fill: true,
                     tension: 0.1
+                }, {
+                    label: 'Open',
+                    data: [],
+                    borderColor: '#60a5fa',
+                    borderWidth: 1,
+                    pointRadius: 0,
+                    fill: false,
+                    tension: 0.1,
+                    borderDash: [5, 5]
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: true, labels: { color: '#94a3b8' } } },
+                scales: {
+                    x: { grid: { color: '#1e293b' }, ticks: { color: '#94a3b8' } },
+                    y: { grid: { color: '#1e293b' }, ticks: { color: '#94a3b8' } }
+                }
+            }
+        });
+
+        // Volume Chart
+        new Chart(document.getElementById('volume-chart-3'), {
+            type: 'bar',
+            data: {
+                labels: [],
+                datasets: [{
+                    label: 'Volume',
+                    data: [],
+                    backgroundColor: 'rgba(59, 130, 246, 0.5)',
+                    borderColor: '#3b82f6',
+                    borderWidth: 1
                 }]
             },
             options: {
@@ -254,41 +529,227 @@
     <div id="tab-4" class="content-section ">
         <div class="grid-layout">
             <div class="panel">
-                <div class="panel-title">XAU-USD Data Statistics</div>
+                <div class="panel-title">XAU-USD - Latest Session</div>
+
+                <div class="ohlc-grid">
+                    <div class="ohlc-item">
+                        <div class="ohlc-label">OPEN</div>
+                        <div class="ohlc-value" style="color: #60a5fa;">$4,333.28</div>
+                    </div>
+                    <div class="ohlc-item">
+                        <div class="ohlc-label">HIGH</div>
+                        <div class="ohlc-value" style="color: #34d399;">$4,335.62</div>
+                    </div>
+                    <div class="ohlc-item">
+                        <div class="ohlc-label">LOW</div>
+                        <div class="ohlc-value" style="color: #f87171;">$4,282.55</div>
+                    </div>
+                    <div class="ohlc-item">
+                        <div class="ohlc-label">CLOSE</div>
+                        <div class="ohlc-value" style="color: #fbbf24;">$4,329.87</div>
+                    </div>
+                </div>
+
                 <div class="metric-card">
-                    <div class="metric-label">Last Tracked Close Price</div>
-                    <div class="metric-value">API Fetch Failed</div>
-                    <div class="error-message">Invalid API call. Please retry or visit the documentation (https://www.alphavantage.co/documentation/) for FX_DAILY.</div>
-                </div>
-                <div class="metric-card" style="border-left-color: #34d399;">
                     <div class="metric-label">Daily Price Move</div>
-                    <div class="metric-value" style="color: #34d399;">+0.00%</div>
+                    <div class="metric-value" style="color: #34d399;">+0.04%</div>
                 </div>
-                <div class="metric-card" style="border-left-color: #94a3b8;">
-                    <div class="metric-label">Calculated Directional Bias</div>
-                    <span class="badge neutral">Neutral</span>
+
+                <div class="metric-card">
+                    <div class="metric-label">Daily Range</div>
+                    <div class="metric-value">1.24%</div>
                 </div>
+
+                <div class="metric-card">
+                    <div class="metric-label">Volume</div>
+                    <div class="metric-value">197,712</div>
+                    <div class="badge neutral">Low Volume</div>
+                </div>
+
+                <div class="metric-card" style="border-left-color: #f87171;">
+                    <div class="metric-label">Directional Bias (20-Day MA)</div>
+                    <span class="badge bearish">Bearish Trend</span>
+                </div>
+
+                <div class="data-source">Data Source: MT5</div>
+                
             </div>
+
             <div class="panel">
-                <div class="panel-title">XAU-USD Historical Price Matrix</div>
+                <div class="panel-title">XAU-USD - Price & Volume Matrix</div>
                 <div class="chart-container"><canvas id="chart-4"></canvas></div>
+                <div class="chart-container" style="height: 150px; margin-top: 20px;"><canvas id="volume-chart-4"></canvas></div>
             </div>
         </div>
     </div>
+
     <script>
+        // Price Chart
         new Chart(document.getElementById('chart-4'), {
             type: 'line',
             data: {
-                labels: ["08-10", "08-11", "08-12", "08-13", "08-14", "08-17", "08-18", "08-19", "08-20", "08-21", "08-22", "08-23", "08-24", "08-25", "08-26", "08-27", "08-28", "08-29", "08-30", "08-31"],
+                labels: ["07-23", "07-24", "07-27", "07-28", "07-29", "07-30", "07-31", "08-03", "08-04", "08-05", "08-06", "08-07", "08-10", "08-11", "08-12", "08-13", "08-14", "08-17", "08-18", "08-19", "08-20", "08-21", "08-24", "08-25", "08-26", "08-27", "08-28", "08-31", "09-01", "09-02"],
                 datasets: [{
-                    label: 'XAU-USD',
-                    data: [150, 152, 151, 153, 155, 154, 156, 158, 157, 160, 159, 161, 163, 162, 165, 167, 166, 168, 170, 169],
+                    label: 'Close',
+                    data: [4049.43, 4052.74, 4076.6, 4028.54, 4066.23, 4103.64, 4044.36, 4055.15, 4077.25, 4247.02, 4240.96, 4341.94, 4390.54, 4368.31, 4408.26, 4351.18, 4376.36, 4416.65, 4334.39, 4522.68, 4519.01, 4603.79, 4651.55, 4658.86, 4594.69, 4601.84, 4454.84, 4449.07, 4328.19, 4329.87],
                     borderColor: '#3b82f6',
                     backgroundColor: 'rgba(59, 130, 246, 0.05)',
                     borderWidth: 2,
                     pointRadius: 3,
                     fill: true,
                     tension: 0.1
+                }, {
+                    label: 'Open',
+                    data: [4119.36, 4050.05, 4096.84, 4079.41, 4030.12, 4066.4, 4106.35, 4078.67, 4050.08, 4077.9, 4248.45, 4238.03, 4344.72, 4389.59, 4372.22, 4410.41, 4353.77, 4379.27, 4417.76, 4333.79, 4518.32, 4518.67, 4614.57, 4653.3, 4657.77, 4596.37, 4603.06, 4432.41, 4448.75, 4333.28],
+                    borderColor: '#60a5fa',
+                    borderWidth: 1,
+                    pointRadius: 0,
+                    fill: false,
+                    tension: 0.1,
+                    borderDash: [5, 5]
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: true, labels: { color: '#94a3b8' } } },
+                scales: {
+                    x: { grid: { color: '#1e293b' }, ticks: { color: '#94a3b8' } },
+                    y: { grid: { color: '#1e293b' }, ticks: { color: '#94a3b8' } }
+                }
+            }
+        });
+
+        // Volume Chart
+        new Chart(document.getElementById('volume-chart-4'), {
+            type: 'bar',
+            data: {
+                labels: ["07-23", "07-24", "07-27", "07-28", "07-29", "07-30", "07-31", "08-03", "08-04", "08-05", "08-06", "08-07", "08-10", "08-11", "08-12", "08-13", "08-14", "08-17", "08-18", "08-19", "08-20", "08-21", "08-24", "08-25", "08-26", "08-27", "08-28", "08-31", "09-01", "09-02"],
+                datasets: [{
+                    label: 'Volume',
+                    data: [344564.0, 260792.0, 307025.0, 323312.0, 368479.0, 394087.0, 294585.0, 289229.0, 284609.0, 337756.0, 350730.0, 353356.0, 306350.0, 322447.0, 321107.0, 321751.0, 289767.0, 281506.0, 295540.0, 355596.0, 336430.0, 330877.0, 375566.0, 343803.0, 301908.0, 326180.0, 346686.0, 332991.0, 371505.0, 197712.0],
+                    backgroundColor: 'rgba(59, 130, 246, 0.5)',
+                    borderColor: '#3b82f6',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: {
+                    x: { grid: { color: '#1e293b' }, ticks: { color: '#94a3b8' } },
+                    y: { grid: { color: '#1e293b' }, ticks: { color: '#94a3b8' } }
+                }
+            }
+        });
+    </script>
+    
+    <div id="tab-5" class="content-section ">
+        <div class="grid-layout">
+            <div class="panel">
+                <div class="panel-title">DXY - Latest Session</div>
+
+                <div class="ohlc-grid">
+                    <div class="ohlc-item">
+                        <div class="ohlc-label">OPEN</div>
+                        <div class="ohlc-value" style="color: #60a5fa;">$99.60</div>
+                    </div>
+                    <div class="ohlc-item">
+                        <div class="ohlc-label">HIGH</div>
+                        <div class="ohlc-value" style="color: #34d399;">$99.80</div>
+                    </div>
+                    <div class="ohlc-item">
+                        <div class="ohlc-label">LOW</div>
+                        <div class="ohlc-value" style="color: #f87171;">$99.59</div>
+                    </div>
+                    <div class="ohlc-item">
+                        <div class="ohlc-label">CLOSE</div>
+                        <div class="ohlc-value" style="color: #fbbf24;">$99.69</div>
+                    </div>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-label">Daily Price Move</div>
+                    <div class="metric-value" style="color: #34d399;">+0.10%</div>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-label">Daily Range</div>
+                    <div class="metric-value">0.21%</div>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-label">Volume</div>
+                    <div class="metric-value">4,918</div>
+                    <div class="badge neutral">Low Volume</div>
+                </div>
+
+                <div class="metric-card" style="border-left-color: #34d399;">
+                    <div class="metric-label">Directional Bias (20-Day MA)</div>
+                    <span class="badge bullish">Bullish Trend</span>
+                </div>
+
+                <div class="data-source">Data Source: MT5</div>
+                
+            </div>
+
+            <div class="panel">
+                <div class="panel-title">DXY - Price & Volume Matrix</div>
+                <div class="chart-container"><canvas id="chart-5"></canvas></div>
+                <div class="chart-container" style="height: 150px; margin-top: 20px;"><canvas id="volume-chart-5"></canvas></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Price Chart
+        new Chart(document.getElementById('chart-5'), {
+            type: 'line',
+            data: {
+                labels: ["07-23", "07-24", "07-27", "07-28", "07-29", "07-30", "07-31", "08-03", "08-04", "08-05", "08-06", "08-07", "08-10", "08-11", "08-12", "08-13", "08-14", "08-17", "08-18", "08-19", "08-20", "08-21", "08-24", "08-25", "08-26", "08-27", "08-28", "08-31", "09-01", "09-02"],
+                datasets: [{
+                    label: 'Close',
+                    data: [101.21, 101.29, 101.37, 101.24, 100.62, 99.79, 99.68, 99.83, 99.72, 99.5, 99.75, 99.51, 99.66, 99.67, 99.81, 99.8, 99.49, 99.42, 99.5, 98.65, 98.74, 98.67, 98.89, 98.82, 99.04, 99.07, 99.6, 99.34, 99.59, 99.69],
+                    borderColor: '#3b82f6',
+                    backgroundColor: 'rgba(59, 130, 246, 0.05)',
+                    borderWidth: 2,
+                    pointRadius: 3,
+                    fill: true,
+                    tension: 0.1
+                }, {
+                    label: 'Open',
+                    data: [100.91, 101.25, 101.08, 101.33, 101.24, 100.62, 99.89, 99.56, 99.85, 99.71, 99.49, 99.79, 99.49, 99.62, 99.66, 99.82, 99.78, 99.47, 99.41, 99.51, 98.71, 98.67, 98.71, 98.86, 98.8, 99.03, 99.02, 99.57, 99.33, 99.6],
+                    borderColor: '#60a5fa',
+                    borderWidth: 1,
+                    pointRadius: 0,
+                    fill: false,
+                    tension: 0.1,
+                    borderDash: [5, 5]
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: true, labels: { color: '#94a3b8' } } },
+                scales: {
+                    x: { grid: { color: '#1e293b' }, ticks: { color: '#94a3b8' } },
+                    y: { grid: { color: '#1e293b' }, ticks: { color: '#94a3b8' } }
+                }
+            }
+        });
+
+        // Volume Chart
+        new Chart(document.getElementById('volume-chart-5'), {
+            type: 'bar',
+            data: {
+                labels: ["07-23", "07-24", "07-27", "07-28", "07-29", "07-30", "07-31", "08-03", "08-04", "08-05", "08-06", "08-07", "08-10", "08-11", "08-12", "08-13", "08-14", "08-17", "08-18", "08-19", "08-20", "08-21", "08-24", "08-25", "08-26", "08-27", "08-28", "08-31", "09-01", "09-02"],
+                datasets: [{
+                    label: 'Volume',
+                    data: [9778.0, 7569.0, 7873.0, 6917.0, 12208.0, 16449.0, 17799.0, 10702.0, 8333.0, 8396.0, 6811.0, 9623.0, 6892.0, 6358.0, 9021.0, 7656.0, 7541.0, 7045.0, 6521.0, 11588.0, 10874.0, 9191.0, 9013.0, 7261.0, 6639.0, 6711.0, 8434.0, 6949.0, 7395.0, 4918.0],
+                    backgroundColor: 'rgba(59, 130, 246, 0.5)',
+                    borderColor: '#3b82f6',
+                    borderWidth: 1
                 }]
             },
             options: {
@@ -305,19 +766,16 @@
     
     <script>
         function switchTab(tabId, btnElement) {
-            // Hide all sections
             var sections = document.getElementsByClassName('content-section');
             for (var i = 0; i < sections.length; i++) {
                 sections[i].classList.remove('active');
             }
-            
-            // Remove active class from all buttons
+
             var buttons = document.getElementsByClassName('tab-btn');
             for (var i = 0; i < buttons.length; i++) {
                 buttons[i].classList.remove('active');
             }
-            
-            // Show selected section and activate button
+
             document.getElementById(tabId).classList.add('active');
             btnElement.classList.add('active');
         }

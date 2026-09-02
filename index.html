@@ -33,13 +33,14 @@
         .ohlc-item { background-color: #1f2937; border-radius: 4px; padding: 10px; text-align: center; }
         .ohlc-label { font-size: 10px; color: #94a3b8; margin-bottom: 4px; }
         .ohlc-value { font-size: 14px; font-weight: 600; }
-        .full-width { grid-column: 1 / -1; }
+        .prediction-section { margin-top: 20px; padding: 15px; background-color: #1a2332; border-radius: 8px; border: 1px solid #3b82f6; }
+        .prediction-title { font-size: 16px; color: #38bdf8; font-weight: bold; margin-bottom: 10px; }
     </style>
 </head>
 <body>
     <div class="header">
         <h1>Kronos Analysis Dashboard</h1>
-        <div class="meta-info">OHLCV Data Matrix<br>Updated: 2026-09-02 19:59:00</div>
+        <div class="meta-info">OHLCV + AI Predictions<br>Updated: 2026-09-02 20:30:07</div>
     </div>
     <div class="tabs-container">
         <button class="tab-btn active" onclick="switchTab('tab-0', this)">AAPL</button>
@@ -79,21 +80,26 @@
                     <div class="metric-value" style="color: #34d399;">+2.61%</div>
                 </div>
 
-                <div class="metric-card">
-                    <div class="metric-label">Daily Range</div>
-                    <div class="metric-value">3.99%</div>
-                </div>
-
-                <div class="metric-card">
-                    <div class="metric-label">Volume</div>
-                    <div class="metric-value">53,167,388</div>
-                    <div class="badge bullish">High Volume</div>
-                </div>
-
                 <div class="metric-card" style="border-left-color: #34d399;">
-                    <div class="metric-label">Directional Bias (20-Day MA)</div>
+                    <div class="metric-label">Directional Bias</div>
                     <span class="badge bullish">Bullish Trend</span>
                 </div>
+
+                
+                <div class="prediction-section">
+                    <div class="prediction-title">🔮 Kronos AI Forecast (Next 5 Days)</div>
+                    <div style="margin-bottom: 10px;">
+                        <span style="color: #94a3b8;">Next close: </span>
+                        <span style="color: #34d399; font-weight: bold;">$319.62</span>
+                        <span style="color: #34d399; margin-left: 10px;">
+                            (-1.70%)
+                        </span>
+                    </div>
+                    <div class="chart-container" style="height: 200px;">
+                        <canvas id="prediction-chart-0"></canvas>
+                    </div>
+                </div>
+            
 
                 <div class="data-source">Data Source: Alpha Vantage</div>
                 
@@ -117,26 +123,15 @@
                     label: 'Close',
                     data: [325.89, 321.66, 333.02, 336.91, 340.08, 338.19, 333.43, 308.91, 303.42, 309.38, 311.0, 312.41, 313.33, 308.26, 304.91, 302.25, 305.26, 305.93, 305.59, 310.03, 316.83, 311.3, 309.35, 310.34, 309.9, 313.45, 314.58, 319.7, 316.85, 325.13],
                     borderColor: '#3b82f6',
-                    backgroundColor: 'rgba(59, 130, 246, 0.05)',
                     borderWidth: 2,
                     pointRadius: 3,
-                    fill: true,
                     tension: 0.1
-                }, {
-                    label: 'Open',
-                    data: [327.87, 321.73, 321.79, 334.54, 340.03, 339.73, 333.1, 304.81, 309.58, 302.725, 309.36, 314.34, 311.45, 306.83, 307.75, 305.1, 304.21, 306.0, 306.21, 307.58, 310.14, 317.455, 312.05, 311.47, 310.79, 310.3, 310.545, 316.845, 319.6, 316.98],
-                    borderColor: '#60a5fa',
-                    borderWidth: 1,
-                    pointRadius: 0,
-                    fill: false,
-                    tension: 0.1,
-                    borderDash: [5, 5]
                 }]
             },
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
-                plugins: { legend: { display: true, labels: { color: '#94a3b8' } } },
+                plugins: { legend: { display: false } },
                 scales: {
                     x: { grid: { color: '#1e293b' }, ticks: { color: '#94a3b8' } },
                     y: { grid: { color: '#1e293b' }, ticks: { color: '#94a3b8' } }
@@ -153,7 +148,6 @@
                     label: 'Volume',
                     data: [38755929.0, 40840778.0, 47489415.0, 49604297.0, 51859042.0, 56090840.0, 74817792.0, 132489137.0, 75051951.0, 68000969.0, 49438763.0, 46139901.0, 34437191.0, 44812503.0, 37476746.0, 41657768.0, 40349289.0, 28229375.0, 38169263.0, 53424535.0, 50505646.0, 40959184.0, 46876815.0, 34673582.0, 25869807.0, 34024486.0, 32419233.0, 38649398.0, 41242724.0, 53167388.0],
                     backgroundColor: 'rgba(59, 130, 246, 0.5)',
-                    borderColor: '#3b82f6',
                     borderWidth: 1
                 }]
             },
@@ -167,8 +161,59 @@
                 }
             }
         });
-    </script>
     
+
+        // Prediction Chart
+        new Chart(document.getElementById('prediction-chart-0'), {
+            type: 'line',
+            data: {
+                labels: ["09-03", "09-04", "09-05", "09-06", "09-07"],
+                datasets: [{
+                    label: 'Predicted Close',
+                    data: [317.3282105263157, 317.9004210526315, 318.47263157894724, 319.04484210526306, 319.6170526315789],
+                    borderColor: '#34d399',
+                    backgroundColor: 'rgba(52, 211, 153, 0.1)',
+                    borderWidth: 2,
+                    pointRadius: 4,
+                    fill: true,
+                    tension: 0.1
+                }, {
+                    label: 'Predicted High',
+                    data: [320.50149263157886, 321.0794252631578, 321.6573578947367, 322.2352905263157, 322.81322315789464],
+                    borderColor: '#f87171',
+                    borderWidth: 1,
+                    pointRadius: 0,
+                    fill: false,
+                    tension: 0.1,
+                    borderDash: [5, 5]
+                }, {
+                    label: 'Predicted Low',
+                    data: [314.1549284210525, 314.72141684210516, 315.28790526315777, 315.85439368421044, 316.4208821052631],
+                    borderColor: '#60a5fa',
+                    borderWidth: 1,
+                    pointRadius: 0,
+                    fill: false,
+                    tension: 0.1,
+                    borderDash: [5, 5]
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { 
+                    legend: { 
+                        display: true, 
+                        labels: { color: '#94a3b8', font: { size: 10 } } 
+                    } 
+                },
+                scales: {
+                    x: { grid: { color: '#1e293b' }, ticks: { color: '#94a3b8' } },
+                    y: { grid: { color: '#1e293b' }, ticks: { color: '#94a3b8' } }
+                }
+            }
+        });
+        </script>
+
     <div id="tab-1" class="content-section ">
         <div class="grid-layout">
             <div class="panel">
@@ -198,21 +243,26 @@
                     <div class="metric-value" style="color: #f87171;">-1.51%</div>
                 </div>
 
-                <div class="metric-card">
-                    <div class="metric-label">Daily Range</div>
-                    <div class="metric-value">2.47%</div>
-                </div>
-
-                <div class="metric-card">
-                    <div class="metric-label">Volume</div>
-                    <div class="metric-value">109,756,184</div>
-                    <div class="badge neutral">Normal Volume</div>
-                </div>
-
                 <div class="metric-card" style="border-left-color: #f87171;">
-                    <div class="metric-label">Directional Bias (20-Day MA)</div>
+                    <div class="metric-label">Directional Bias</div>
                     <span class="badge bearish">Bearish Trend</span>
                 </div>
+
+                
+                <div class="prediction-section">
+                    <div class="prediction-title">🔮 Kronos AI Forecast (Next 5 Days)</div>
+                    <div style="margin-bottom: 10px;">
+                        <span style="color: #94a3b8;">Next close: </span>
+                        <span style="color: #f87171; font-weight: bold;">$215.26</span>
+                        <span style="color: #f87171; margin-left: 10px;">
+                            (-1.00%)
+                        </span>
+                    </div>
+                    <div class="chart-container" style="height: 200px;">
+                        <canvas id="prediction-chart-1"></canvas>
+                    </div>
+                </div>
+            
 
                 <div class="data-source">Data Source: Alpha Vantage</div>
                 
@@ -236,26 +286,15 @@
                     label: 'Close',
                     data: [212.06, 208.76, 206.84, 196.51, 197.01, 190.01, 195.04, 200.75, 206.64, 211.94, 219.22, 218.99, 223.96, 217.55, 217.5, 224.09, 225.3, 225.16, 225.01, 219.74, 217.56, 216.85, 214.72, 208.48, 213.05, 209.66, 227.98, 217.55, 220.78, 217.44],
                     borderColor: '#3b82f6',
-                    backgroundColor: 'rgba(59, 130, 246, 0.05)',
                     borderWidth: 2,
                     pointRadius: 3,
-                    fill: true,
                     tension: 0.1
-                }, {
-                    label: 'Open',
-                    data: [205.805, 209.455, 207.45, 208.2, 195.0, 195.845, 193.45, 198.4405, 197.69, 211.3, 216.86, 221.53, 221.54, 223.4, 222.17, 221.04, 225.055, 226.765, 225.98, 220.45, 221.67, 218.36, 218.42, 215.53, 211.025, 212.64, 222.86, 227.36, 218.87, 216.75],
-                    borderColor: '#60a5fa',
-                    borderWidth: 1,
-                    pointRadius: 0,
-                    fill: false,
-                    tension: 0.1,
-                    borderDash: [5, 5]
                 }]
             },
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
-                plugins: { legend: { display: true, labels: { color: '#94a3b8' } } },
+                plugins: { legend: { display: false } },
                 scales: {
                     x: { grid: { color: '#1e293b' }, ticks: { color: '#94a3b8' } },
                     y: { grid: { color: '#1e293b' }, ticks: { color: '#94a3b8' } }
@@ -272,7 +311,6 @@
                     label: 'Volume',
                     data: [137645596.0, 110505328.0, 114836805.0, 154353698.0, 134111494.0, 147680809.0, 129010151.0, 139961152.0, 128406883.0, 134921997.0, 158187403.0, 113940644.0, 105669440.0, 115846596.0, 101273148.0, 108783636.0, 98867226.0, 75680870.0, 93678685.0, 103128247.0, 96797314.0, 92457037.0, 98869300.0, 135187288.0, 122309019.0, 179900003.0, 298909822.0, 195116417.0, 124702660.0, 109756184.0],
                     backgroundColor: 'rgba(59, 130, 246, 0.5)',
-                    borderColor: '#3b82f6',
                     borderWidth: 1
                 }]
             },
@@ -286,8 +324,59 @@
                 }
             }
         });
-    </script>
     
+
+        // Prediction Chart
+        new Chart(document.getElementById('prediction-chart-1'), {
+            type: 'line',
+            data: {
+                labels: ["09-03", "09-04", "09-05", "09-06", "09-07"],
+                datasets: [{
+                    label: 'Predicted Close',
+                    data: [216.29673684210522, 216.03647368421048, 215.77621052631577, 215.51594736842102, 215.25568421052628],
+                    borderColor: '#34d399',
+                    backgroundColor: 'rgba(52, 211, 153, 0.1)',
+                    borderWidth: 2,
+                    pointRadius: 4,
+                    fill: true,
+                    tension: 0.1
+                }, {
+                    label: 'Predicted High',
+                    data: [218.45970421052627, 218.19683842105258, 217.9339726315789, 217.67110684210525, 217.40824105263155],
+                    borderColor: '#f87171',
+                    borderWidth: 1,
+                    pointRadius: 0,
+                    fill: false,
+                    tension: 0.1,
+                    borderDash: [5, 5]
+                }, {
+                    label: 'Predicted Low',
+                    data: [214.13376947368417, 213.87610894736838, 213.61844842105262, 213.3607878947368, 213.103127368421],
+                    borderColor: '#60a5fa',
+                    borderWidth: 1,
+                    pointRadius: 0,
+                    fill: false,
+                    tension: 0.1,
+                    borderDash: [5, 5]
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { 
+                    legend: { 
+                        display: true, 
+                        labels: { color: '#94a3b8', font: { size: 10 } } 
+                    } 
+                },
+                scales: {
+                    x: { grid: { color: '#1e293b' }, ticks: { color: '#94a3b8' } },
+                    y: { grid: { color: '#1e293b' }, ticks: { color: '#94a3b8' } }
+                }
+            }
+        });
+        </script>
+
     <div id="tab-2" class="content-section ">
         <div class="grid-layout">
             <div class="panel">
@@ -317,21 +406,26 @@
                     <div class="metric-value" style="color: #f87171;">-0.69%</div>
                 </div>
 
-                <div class="metric-card">
-                    <div class="metric-label">Daily Range</div>
-                    <div class="metric-value">0.68%</div>
-                </div>
-
-                <div class="metric-card">
-                    <div class="metric-label">Volume</div>
-                    <div class="metric-value">41,126,315</div>
-                    <div class="badge neutral">Normal Volume</div>
-                </div>
-
                 <div class="metric-card" style="border-left-color: #f87171;">
-                    <div class="metric-label">Directional Bias (20-Day MA)</div>
+                    <div class="metric-label">Directional Bias</div>
                     <span class="badge bearish">Bearish Trend</span>
                 </div>
+
+                
+                <div class="prediction-section">
+                    <div class="prediction-title">🔮 Kronos AI Forecast (Next 5 Days)</div>
+                    <div style="margin-bottom: 10px;">
+                        <span style="color: #94a3b8;">Next close: </span>
+                        <span style="color: #f87171; font-weight: bold;">$763.18</span>
+                        <span style="color: #f87171; margin-left: 10px;">
+                            (+0.18%)
+                        </span>
+                    </div>
+                    <div class="chart-container" style="height: 200px;">
+                        <canvas id="prediction-chart-2"></canvas>
+                    </div>
+                </div>
+            
 
                 <div class="data-source">Data Source: Alpha Vantage</div>
                 
@@ -355,26 +449,15 @@
                     label: 'Close',
                     data: [747.41, 738.18, 738.93, 739.09, 740.86, 729.46, 741.69, 747.03, 757.67, 771.33, 769.79, 768.56, 773.26, 773.03, 770.56, 772.49, 777.88, 776.34, 772.67, 767.45, 769.06, 762.6, 765.72, 763.47, 765.91, 766.08, 771.1, 769.35, 767.05, 761.78],
                     borderColor: '#3b82f6',
-                    backgroundColor: 'rgba(59, 130, 246, 0.05)',
                     borderWidth: 2,
                     pointRadius: 3,
-                    fill: true,
                     tension: 0.1
-                }, {
-                    label: 'Open',
-                    data: [746.62, 739.37, 738.51, 744.91, 739.19, 739.97, 736.05, 744.68, 749.44, 760.63, 775.85, 770.21, 771.02, 772.6, 774.53, 774.71, 774.87, 778.54, 776.18, 768.7, 770.36, 765.96, 766.05, 764.78, 766.16, 764.73, 768.5, 771.76, 767.33, 762.01],
-                    borderColor: '#60a5fa',
-                    borderWidth: 1,
-                    pointRadius: 0,
-                    fill: false,
-                    tension: 0.1,
-                    borderDash: [5, 5]
                 }]
             },
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
-                plugins: { legend: { display: true, labels: { color: '#94a3b8' } } },
+                plugins: { legend: { display: false } },
                 scales: {
                     x: { grid: { color: '#1e293b' }, ticks: { color: '#94a3b8' } },
                     y: { grid: { color: '#1e293b' }, ticks: { color: '#94a3b8' } }
@@ -391,7 +474,6 @@
                     label: 'Volume',
                     data: [32836200.0, 55437332.0, 44781983.0, 41461194.0, 47322247.0, 70697215.0, 66811268.0, 62445899.0, 59927538.0, 69154788.0, 44689081.0, 38416896.0, 43586333.0, 39249478.0, 36740555.0, 33179126.0, 35634483.0, 31367913.0, 34356577.0, 43920908.0, 40306023.0, 45520302.0, 39188673.0, 32430886.0, 27422263.0, 28751592.0, 34557064.0, 36744344.0, 38810779.0, 41126315.0],
                     backgroundColor: 'rgba(59, 130, 246, 0.5)',
-                    borderColor: '#3b82f6',
                     borderWidth: 1
                 }]
             },
@@ -405,8 +487,59 @@
                 }
             }
         });
-    </script>
     
+
+        // Prediction Chart
+        new Chart(document.getElementById('prediction-chart-2'), {
+            type: 'line',
+            data: {
+                labels: ["09-03", "09-04", "09-05", "09-06", "09-07"],
+                datasets: [{
+                    label: 'Predicted Close',
+                    data: [764.844315789474, 764.4287744360905, 764.0132330827071, 763.5976917293236, 763.1821503759402],
+                    borderColor: '#34d399',
+                    backgroundColor: 'rgba(52, 211, 153, 0.1)',
+                    borderWidth: 2,
+                    pointRadius: 4,
+                    fill: true,
+                    tension: 0.1
+                }, {
+                    label: 'Predicted High',
+                    data: [772.4927589473687, 772.0730621804514, 771.6533654135342, 771.2336686466168, 770.8139718796996],
+                    borderColor: '#f87171',
+                    borderWidth: 1,
+                    pointRadius: 0,
+                    fill: false,
+                    tension: 0.1,
+                    borderDash: [5, 5]
+                }, {
+                    label: 'Predicted Low',
+                    data: [757.1958726315793, 756.7844866917296, 756.37310075188, 755.9617148120304, 755.5503288721808],
+                    borderColor: '#60a5fa',
+                    borderWidth: 1,
+                    pointRadius: 0,
+                    fill: false,
+                    tension: 0.1,
+                    borderDash: [5, 5]
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { 
+                    legend: { 
+                        display: true, 
+                        labels: { color: '#94a3b8', font: { size: 10 } } 
+                    } 
+                },
+                scales: {
+                    x: { grid: { color: '#1e293b' }, ticks: { color: '#94a3b8' } },
+                    y: { grid: { color: '#1e293b' }, ticks: { color: '#94a3b8' } }
+                }
+            }
+        });
+        </script>
+
     <div id="tab-3" class="content-section ">
         <div class="grid-layout">
             <div class="panel">
@@ -415,45 +548,50 @@
                 <div class="ohlc-grid">
                     <div class="ohlc-item">
                         <div class="ohlc-label">OPEN</div>
-                        <div class="ohlc-value" style="color: #60a5fa;">N/A</div>
+                        <div class="ohlc-value" style="color: #60a5fa;">$77,394.91</div>
                     </div>
                     <div class="ohlc-item">
                         <div class="ohlc-label">HIGH</div>
-                        <div class="ohlc-value" style="color: #34d399;">N/A</div>
+                        <div class="ohlc-value" style="color: #34d399;">$77,743.90</div>
                     </div>
                     <div class="ohlc-item">
                         <div class="ohlc-label">LOW</div>
-                        <div class="ohlc-value" style="color: #f87171;">N/A</div>
+                        <div class="ohlc-value" style="color: #f87171;">$76,175.28</div>
                     </div>
                     <div class="ohlc-item">
                         <div class="ohlc-label">CLOSE</div>
-                        <div class="ohlc-value" style="color: #fbbf24;">N/A</div>
+                        <div class="ohlc-value" style="color: #fbbf24;">$76,927.67</div>
                     </div>
                 </div>
 
                 <div class="metric-card">
                     <div class="metric-label">Daily Price Move</div>
-                    <div class="metric-value" style="color: #34d399;">+0.00%</div>
+                    <div class="metric-value" style="color: #f87171;">-0.60%</div>
                 </div>
 
-                <div class="metric-card">
-                    <div class="metric-label">Daily Range</div>
-                    <div class="metric-value">0.00%</div>
+                <div class="metric-card" style="border-left-color: #34d399;">
+                    <div class="metric-label">Directional Bias</div>
+                    <span class="badge bullish">Bullish Trend</span>
                 </div>
 
-                <div class="metric-card">
-                    <div class="metric-label">Volume</div>
-                    <div class="metric-value">N/A</div>
-                    <div class="badge neutral">N/A</div>
+                
+                <div class="prediction-section">
+                    <div class="prediction-title">🔮 Kronos AI Forecast (Next 5 Days)</div>
+                    <div style="margin-bottom: 10px;">
+                        <span style="color: #94a3b8;">Next close: </span>
+                        <span style="color: #34d399; font-weight: bold;">$86,972.89</span>
+                        <span style="color: #34d399; margin-left: 10px;">
+                            (+13.06%)
+                        </span>
+                    </div>
+                    <div class="chart-container" style="height: 200px;">
+                        <canvas id="prediction-chart-3"></canvas>
+                    </div>
                 </div>
+            
 
-                <div class="metric-card" style="border-left-color: #f87171;">
-                    <div class="metric-label">Directional Bias (20-Day MA)</div>
-                    <span class="badge neutral">Neutral</span>
-                </div>
-
-                <div class="data-source">Data Source: </div>
-                <div class="error-message">Failed to fetch from MT5</div>
+                <div class="data-source">Data Source: MT5</div>
+                
             </div>
 
             <div class="panel">
@@ -469,31 +607,20 @@
         new Chart(document.getElementById('chart-3'), {
             type: 'line',
             data: {
-                labels: [],
+                labels: ["08-04", "08-05", "08-06", "08-07", "08-08", "08-09", "08-10", "08-11", "08-12", "08-13", "08-14", "08-15", "08-16", "08-17", "08-18", "08-19", "08-20", "08-21", "08-22", "08-23", "08-24", "08-25", "08-26", "08-27", "08-28", "08-29", "08-30", "08-31", "09-01", "09-02"],
                 datasets: [{
                     label: 'Close',
-                    data: [],
+                    data: [64270.01, 64755.7, 64355.937, 64893.3, 65001.035, 65066.139, 64081.482, 63672.876, 63527.8, 63337.568, 62830.241, 63029.11, 62992.965, 64312.808, 64499.391, 68968.421, 72589.791, 77433.812, 77280.621, 77329.379, 78854.4, 78120.959, 78370.179, 80018.311, 77331.3, 78046.538, 78513.133, 78814.594, 77394.91, 76927.669],
                     borderColor: '#3b82f6',
-                    backgroundColor: 'rgba(59, 130, 246, 0.05)',
                     borderWidth: 2,
                     pointRadius: 3,
-                    fill: true,
                     tension: 0.1
-                }, {
-                    label: 'Open',
-                    data: [],
-                    borderColor: '#60a5fa',
-                    borderWidth: 1,
-                    pointRadius: 0,
-                    fill: false,
-                    tension: 0.1,
-                    borderDash: [5, 5]
                 }]
             },
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
-                plugins: { legend: { display: true, labels: { color: '#94a3b8' } } },
+                plugins: { legend: { display: false } },
                 scales: {
                     x: { grid: { color: '#1e293b' }, ticks: { color: '#94a3b8' } },
                     y: { grid: { color: '#1e293b' }, ticks: { color: '#94a3b8' } }
@@ -505,12 +632,11 @@
         new Chart(document.getElementById('volume-chart-3'), {
             type: 'bar',
             data: {
-                labels: [],
+                labels: ["08-04", "08-05", "08-06", "08-07", "08-08", "08-09", "08-10", "08-11", "08-12", "08-13", "08-14", "08-15", "08-16", "08-17", "08-18", "08-19", "08-20", "08-21", "08-22", "08-23", "08-24", "08-25", "08-26", "08-27", "08-28", "08-29", "08-30", "08-31", "09-01", "09-02"],
                 datasets: [{
                     label: 'Volume',
-                    data: [],
+                    data: [392103.0, 368485.0, 338562.0, 330435.0, 149189.0, 156950.0, 328305.0, 277037.0, 281642.0, 317172.0, 272901.0, 206946.0, 148449.0, 262934.0, 241021.0, 335128.0, 597931.0, 635049.0, 600329.0, 502095.0, 616734.0, 583070.0, 522660.0, 509276.0, 493312.0, 342378.0, 355208.0, 538790.0, 512698.0, 301562.0],
                     backgroundColor: 'rgba(59, 130, 246, 0.5)',
-                    borderColor: '#3b82f6',
                     borderWidth: 1
                 }]
             },
@@ -524,8 +650,59 @@
                 }
             }
         });
-    </script>
     
+
+        // Prediction Chart
+        new Chart(document.getElementById('prediction-chart-3'), {
+            type: 'line',
+            data: {
+                labels: ["09-03", "09-04", "09-05", "09-06", "09-07"],
+                datasets: [{
+                    label: 'Predicted Close',
+                    data: [83306.69315263155, 84223.24234812027, 85139.791543609, 86056.34073909771, 86972.88993458645],
+                    borderColor: '#34d399',
+                    backgroundColor: 'rgba(52, 211, 153, 0.1)',
+                    borderWidth: 2,
+                    pointRadius: 4,
+                    fill: true,
+                    tension: 0.1
+                }, {
+                    label: 'Predicted High',
+                    data: [84139.76008415787, 85065.47477160147, 85991.18945904508, 86916.90414648868, 87842.61883393231],
+                    borderColor: '#f87171',
+                    borderWidth: 1,
+                    pointRadius: 0,
+                    fill: false,
+                    tension: 0.1,
+                    borderDash: [5, 5]
+                }, {
+                    label: 'Predicted Low',
+                    data: [82473.62622110522, 83381.00992463907, 84288.39362817291, 85195.77733170673, 86103.16103524058],
+                    borderColor: '#60a5fa',
+                    borderWidth: 1,
+                    pointRadius: 0,
+                    fill: false,
+                    tension: 0.1,
+                    borderDash: [5, 5]
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { 
+                    legend: { 
+                        display: true, 
+                        labels: { color: '#94a3b8', font: { size: 10 } } 
+                    } 
+                },
+                scales: {
+                    x: { grid: { color: '#1e293b' }, ticks: { color: '#94a3b8' } },
+                    y: { grid: { color: '#1e293b' }, ticks: { color: '#94a3b8' } }
+                }
+            }
+        });
+        </script>
+
     <div id="tab-4" class="content-section ">
         <div class="grid-layout">
             <div class="panel">
@@ -538,7 +715,7 @@
                     </div>
                     <div class="ohlc-item">
                         <div class="ohlc-label">HIGH</div>
-                        <div class="ohlc-value" style="color: #34d399;">$4,335.62</div>
+                        <div class="ohlc-value" style="color: #34d399;">$4,344.26</div>
                     </div>
                     <div class="ohlc-item">
                         <div class="ohlc-label">LOW</div>
@@ -546,30 +723,35 @@
                     </div>
                     <div class="ohlc-item">
                         <div class="ohlc-label">CLOSE</div>
-                        <div class="ohlc-value" style="color: #fbbf24;">$4,329.87</div>
+                        <div class="ohlc-value" style="color: #fbbf24;">$4,337.00</div>
                     </div>
                 </div>
 
                 <div class="metric-card">
                     <div class="metric-label">Daily Price Move</div>
-                    <div class="metric-value" style="color: #34d399;">+0.04%</div>
-                </div>
-
-                <div class="metric-card">
-                    <div class="metric-label">Daily Range</div>
-                    <div class="metric-value">1.24%</div>
-                </div>
-
-                <div class="metric-card">
-                    <div class="metric-label">Volume</div>
-                    <div class="metric-value">197,712</div>
-                    <div class="badge neutral">Low Volume</div>
+                    <div class="metric-value" style="color: #34d399;">+0.20%</div>
                 </div>
 
                 <div class="metric-card" style="border-left-color: #f87171;">
-                    <div class="metric-label">Directional Bias (20-Day MA)</div>
+                    <div class="metric-label">Directional Bias</div>
                     <span class="badge bearish">Bearish Trend</span>
                 </div>
+
+                
+                <div class="prediction-section">
+                    <div class="prediction-title">🔮 Kronos AI Forecast (Next 5 Days)</div>
+                    <div style="margin-bottom: 10px;">
+                        <span style="color: #94a3b8;">Next close: </span>
+                        <span style="color: #34d399; font-weight: bold;">$4,576.93</span>
+                        <span style="color: #34d399; margin-left: 10px;">
+                            (+5.53%)
+                        </span>
+                    </div>
+                    <div class="chart-container" style="height: 200px;">
+                        <canvas id="prediction-chart-4"></canvas>
+                    </div>
+                </div>
+            
 
                 <div class="data-source">Data Source: MT5</div>
                 
@@ -591,28 +773,17 @@
                 labels: ["07-23", "07-24", "07-27", "07-28", "07-29", "07-30", "07-31", "08-03", "08-04", "08-05", "08-06", "08-07", "08-10", "08-11", "08-12", "08-13", "08-14", "08-17", "08-18", "08-19", "08-20", "08-21", "08-24", "08-25", "08-26", "08-27", "08-28", "08-31", "09-01", "09-02"],
                 datasets: [{
                     label: 'Close',
-                    data: [4049.43, 4052.74, 4076.6, 4028.54, 4066.23, 4103.64, 4044.36, 4055.15, 4077.25, 4247.02, 4240.96, 4341.94, 4390.54, 4368.31, 4408.26, 4351.18, 4376.36, 4416.65, 4334.39, 4522.68, 4519.01, 4603.79, 4651.55, 4658.86, 4594.69, 4601.84, 4454.84, 4449.07, 4328.19, 4329.87],
+                    data: [4049.43, 4052.74, 4076.6, 4028.54, 4066.23, 4103.64, 4044.36, 4055.15, 4077.25, 4247.02, 4240.96, 4341.94, 4390.54, 4368.31, 4408.26, 4351.18, 4376.36, 4416.65, 4334.39, 4522.68, 4519.01, 4603.79, 4651.55, 4658.86, 4594.69, 4601.84, 4454.84, 4449.07, 4328.19, 4337.0],
                     borderColor: '#3b82f6',
-                    backgroundColor: 'rgba(59, 130, 246, 0.05)',
                     borderWidth: 2,
                     pointRadius: 3,
-                    fill: true,
                     tension: 0.1
-                }, {
-                    label: 'Open',
-                    data: [4119.36, 4050.05, 4096.84, 4079.41, 4030.12, 4066.4, 4106.35, 4078.67, 4050.08, 4077.9, 4248.45, 4238.03, 4344.72, 4389.59, 4372.22, 4410.41, 4353.77, 4379.27, 4417.76, 4333.79, 4518.32, 4518.67, 4614.57, 4653.3, 4657.77, 4596.37, 4603.06, 4432.41, 4448.75, 4333.28],
-                    borderColor: '#60a5fa',
-                    borderWidth: 1,
-                    pointRadius: 0,
-                    fill: false,
-                    tension: 0.1,
-                    borderDash: [5, 5]
                 }]
             },
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
-                plugins: { legend: { display: true, labels: { color: '#94a3b8' } } },
+                plugins: { legend: { display: false } },
                 scales: {
                     x: { grid: { color: '#1e293b' }, ticks: { color: '#94a3b8' } },
                     y: { grid: { color: '#1e293b' }, ticks: { color: '#94a3b8' } }
@@ -627,9 +798,8 @@
                 labels: ["07-23", "07-24", "07-27", "07-28", "07-29", "07-30", "07-31", "08-03", "08-04", "08-05", "08-06", "08-07", "08-10", "08-11", "08-12", "08-13", "08-14", "08-17", "08-18", "08-19", "08-20", "08-21", "08-24", "08-25", "08-26", "08-27", "08-28", "08-31", "09-01", "09-02"],
                 datasets: [{
                     label: 'Volume',
-                    data: [344564.0, 260792.0, 307025.0, 323312.0, 368479.0, 394087.0, 294585.0, 289229.0, 284609.0, 337756.0, 350730.0, 353356.0, 306350.0, 322447.0, 321107.0, 321751.0, 289767.0, 281506.0, 295540.0, 355596.0, 336430.0, 330877.0, 375566.0, 343803.0, 301908.0, 326180.0, 346686.0, 332991.0, 371505.0, 197712.0],
+                    data: [344564.0, 260792.0, 307025.0, 323312.0, 368479.0, 394087.0, 294585.0, 289229.0, 284609.0, 337756.0, 350730.0, 353356.0, 306350.0, 322447.0, 321107.0, 321751.0, 289767.0, 281506.0, 295540.0, 355596.0, 336430.0, 330877.0, 375566.0, 343803.0, 301908.0, 326180.0, 346686.0, 332991.0, 371505.0, 208247.0],
                     backgroundColor: 'rgba(59, 130, 246, 0.5)',
-                    borderColor: '#3b82f6',
                     borderWidth: 1
                 }]
             },
@@ -643,8 +813,59 @@
                 }
             }
         });
-    </script>
     
+
+        // Prediction Chart
+        new Chart(document.getElementById('prediction-chart-4'), {
+            type: 'line',
+            data: {
+                labels: ["09-03", "09-04", "09-05", "09-06", "09-07"],
+                datasets: [{
+                    label: 'Predicted Close',
+                    data: [4541.226684210525, 4550.152511278194, 4559.078338345863, 4568.004165413532, 4576.929992481201],
+                    borderColor: '#34d399',
+                    backgroundColor: 'rgba(52, 211, 153, 0.1)',
+                    borderWidth: 2,
+                    pointRadius: 4,
+                    fill: true,
+                    tension: 0.1
+                }, {
+                    label: 'Predicted High',
+                    data: [4586.63895105263, 4595.654036390975, 4604.669121729322, 4613.684207067668, 4622.699292406013],
+                    borderColor: '#f87171',
+                    borderWidth: 1,
+                    pointRadius: 0,
+                    fill: false,
+                    tension: 0.1,
+                    borderDash: [5, 5]
+                }, {
+                    label: 'Predicted Low',
+                    data: [4495.8144173684195, 4504.650986165412, 4513.487554962404, 4522.324123759397, 4531.160692556389],
+                    borderColor: '#60a5fa',
+                    borderWidth: 1,
+                    pointRadius: 0,
+                    fill: false,
+                    tension: 0.1,
+                    borderDash: [5, 5]
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { 
+                    legend: { 
+                        display: true, 
+                        labels: { color: '#94a3b8', font: { size: 10 } } 
+                    } 
+                },
+                scales: {
+                    x: { grid: { color: '#1e293b' }, ticks: { color: '#94a3b8' } },
+                    y: { grid: { color: '#1e293b' }, ticks: { color: '#94a3b8' } }
+                }
+            }
+        });
+        </script>
+
     <div id="tab-5" class="content-section ">
         <div class="grid-layout">
             <div class="panel">
@@ -665,30 +886,35 @@
                     </div>
                     <div class="ohlc-item">
                         <div class="ohlc-label">CLOSE</div>
-                        <div class="ohlc-value" style="color: #fbbf24;">$99.69</div>
+                        <div class="ohlc-value" style="color: #fbbf24;">$99.65</div>
                     </div>
                 </div>
 
                 <div class="metric-card">
                     <div class="metric-label">Daily Price Move</div>
-                    <div class="metric-value" style="color: #34d399;">+0.10%</div>
-                </div>
-
-                <div class="metric-card">
-                    <div class="metric-label">Daily Range</div>
-                    <div class="metric-value">0.21%</div>
-                </div>
-
-                <div class="metric-card">
-                    <div class="metric-label">Volume</div>
-                    <div class="metric-value">4,918</div>
-                    <div class="badge neutral">Low Volume</div>
+                    <div class="metric-value" style="color: #34d399;">+0.06%</div>
                 </div>
 
                 <div class="metric-card" style="border-left-color: #34d399;">
-                    <div class="metric-label">Directional Bias (20-Day MA)</div>
+                    <div class="metric-label">Directional Bias</div>
                     <span class="badge bullish">Bullish Trend</span>
                 </div>
+
+                
+                <div class="prediction-section">
+                    <div class="prediction-title">🔮 Kronos AI Forecast (Next 5 Days)</div>
+                    <div style="margin-bottom: 10px;">
+                        <span style="color: #94a3b8;">Next close: </span>
+                        <span style="color: #f87171; font-weight: bold;">$99.00</span>
+                        <span style="color: #f87171; margin-left: 10px;">
+                            (-0.66%)
+                        </span>
+                    </div>
+                    <div class="chart-container" style="height: 200px;">
+                        <canvas id="prediction-chart-5"></canvas>
+                    </div>
+                </div>
+            
 
                 <div class="data-source">Data Source: MT5</div>
                 
@@ -710,28 +936,17 @@
                 labels: ["07-23", "07-24", "07-27", "07-28", "07-29", "07-30", "07-31", "08-03", "08-04", "08-05", "08-06", "08-07", "08-10", "08-11", "08-12", "08-13", "08-14", "08-17", "08-18", "08-19", "08-20", "08-21", "08-24", "08-25", "08-26", "08-27", "08-28", "08-31", "09-01", "09-02"],
                 datasets: [{
                     label: 'Close',
-                    data: [101.21, 101.29, 101.37, 101.24, 100.62, 99.79, 99.68, 99.83, 99.72, 99.5, 99.75, 99.51, 99.66, 99.67, 99.81, 99.8, 99.49, 99.42, 99.5, 98.65, 98.74, 98.67, 98.89, 98.82, 99.04, 99.07, 99.6, 99.34, 99.59, 99.69],
+                    data: [101.21, 101.29, 101.37, 101.24, 100.62, 99.79, 99.68, 99.83, 99.72, 99.5, 99.75, 99.51, 99.66, 99.67, 99.81, 99.8, 99.49, 99.42, 99.5, 98.65, 98.74, 98.67, 98.89, 98.82, 99.04, 99.07, 99.6, 99.34, 99.59, 99.65],
                     borderColor: '#3b82f6',
-                    backgroundColor: 'rgba(59, 130, 246, 0.05)',
                     borderWidth: 2,
                     pointRadius: 3,
-                    fill: true,
                     tension: 0.1
-                }, {
-                    label: 'Open',
-                    data: [100.91, 101.25, 101.08, 101.33, 101.24, 100.62, 99.89, 99.56, 99.85, 99.71, 99.49, 99.79, 99.49, 99.62, 99.66, 99.82, 99.78, 99.47, 99.41, 99.51, 98.71, 98.67, 98.71, 98.86, 98.8, 99.03, 99.02, 99.57, 99.33, 99.6],
-                    borderColor: '#60a5fa',
-                    borderWidth: 1,
-                    pointRadius: 0,
-                    fill: false,
-                    tension: 0.1,
-                    borderDash: [5, 5]
                 }]
             },
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
-                plugins: { legend: { display: true, labels: { color: '#94a3b8' } } },
+                plugins: { legend: { display: false } },
                 scales: {
                     x: { grid: { color: '#1e293b' }, ticks: { color: '#94a3b8' } },
                     y: { grid: { color: '#1e293b' }, ticks: { color: '#94a3b8' } }
@@ -746,9 +961,8 @@
                 labels: ["07-23", "07-24", "07-27", "07-28", "07-29", "07-30", "07-31", "08-03", "08-04", "08-05", "08-06", "08-07", "08-10", "08-11", "08-12", "08-13", "08-14", "08-17", "08-18", "08-19", "08-20", "08-21", "08-24", "08-25", "08-26", "08-27", "08-28", "08-31", "09-01", "09-02"],
                 datasets: [{
                     label: 'Volume',
-                    data: [9778.0, 7569.0, 7873.0, 6917.0, 12208.0, 16449.0, 17799.0, 10702.0, 8333.0, 8396.0, 6811.0, 9623.0, 6892.0, 6358.0, 9021.0, 7656.0, 7541.0, 7045.0, 6521.0, 11588.0, 10874.0, 9191.0, 9013.0, 7261.0, 6639.0, 6711.0, 8434.0, 6949.0, 7395.0, 4918.0],
+                    data: [9778.0, 7569.0, 7873.0, 6917.0, 12208.0, 16449.0, 17799.0, 10702.0, 8333.0, 8396.0, 6811.0, 9623.0, 6892.0, 6358.0, 9021.0, 7656.0, 7541.0, 7045.0, 6521.0, 11588.0, 10874.0, 9191.0, 9013.0, 7261.0, 6639.0, 6711.0, 8434.0, 6949.0, 7395.0, 5358.0],
                     backgroundColor: 'rgba(59, 130, 246, 0.5)',
-                    borderColor: '#3b82f6',
                     borderWidth: 1
                 }]
             },
@@ -762,8 +976,59 @@
                 }
             }
         });
-    </script>
     
+
+        // Prediction Chart
+        new Chart(document.getElementById('prediction-chart-5'), {
+            type: 'line',
+            data: {
+                labels: ["09-03", "09-04", "09-05", "09-06", "09-07"],
+                datasets: [{
+                    label: 'Predicted Close',
+                    data: [99.08899999999997, 99.06571428571425, 99.04242857142854, 99.01914285714282, 98.9958571428571],
+                    borderColor: '#34d399',
+                    backgroundColor: 'rgba(52, 211, 153, 0.1)',
+                    borderWidth: 2,
+                    pointRadius: 4,
+                    fill: true,
+                    tension: 0.1
+                }, {
+                    label: 'Predicted High',
+                    data: [100.07988999999998, 100.0563714285714, 100.03285285714283, 100.00933428571426, 99.98581571428568],
+                    borderColor: '#f87171',
+                    borderWidth: 1,
+                    pointRadius: 0,
+                    fill: false,
+                    tension: 0.1,
+                    borderDash: [5, 5]
+                }, {
+                    label: 'Predicted Low',
+                    data: [98.09810999999996, 98.0750571428571, 98.05200428571426, 98.02895142857139, 98.00589857142853],
+                    borderColor: '#60a5fa',
+                    borderWidth: 1,
+                    pointRadius: 0,
+                    fill: false,
+                    tension: 0.1,
+                    borderDash: [5, 5]
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { 
+                    legend: { 
+                        display: true, 
+                        labels: { color: '#94a3b8', font: { size: 10 } } 
+                    } 
+                },
+                scales: {
+                    x: { grid: { color: '#1e293b' }, ticks: { color: '#94a3b8' } },
+                    y: { grid: { color: '#1e293b' }, ticks: { color: '#94a3b8' } }
+                }
+            }
+        });
+        </script>
+
     <script>
         function switchTab(tabId, btnElement) {
             var sections = document.getElementsByClassName('content-section');

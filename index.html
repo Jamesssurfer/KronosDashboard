@@ -114,7 +114,7 @@
 <body>
     <div class="header">
         <h1>Kronos Analysis Dashboard</h1>
-        <div class="meta-info">AI Predictions + Validation<br>Updated: 2026-09-03 16:07:38</div>
+        <div class="meta-info">AI Predictions + Validation<br>Updated: 2026-09-03 16:13:53</div>
     </div>
     
     <div class="status-banner status-warn">
@@ -382,18 +382,18 @@
                     </div>
                     <div class="ohlc-item">
                         <div class="ohlc-label">CLOSE</div>
-                        <div class="ohlc-value" style="color: #fbbf24;">$78,010.65</div>
+                        <div class="ohlc-value" style="color: #fbbf24;">$77,856.70</div>
                     </div>
                 </div>
 
                 <div class="metric-card">
                     <div class="metric-label">Day-over-Day Change</div>
-                    <div class="metric-value" style="color: #34d399;">+0.86%</div>
+                    <div class="metric-value" style="color: #34d399;">+0.66%</div>
                 </div>
 
                 <div class="metric-card">
                     <div class="metric-label">Volume</div>
-                    <div class="metric-value">209,767</div>
+                    <div class="metric-value">211,944</div>
                 </div>
 
                 <div class="metric-card" style="border-left-color: #34d399;">
@@ -412,6 +412,19 @@
                 <div class="chart-container" style="height: 130px;"><canvas id="volume-chart-4"></canvas></div>
 
                 
+                <div class="validation-section">
+                    <div class="prediction-title" style="color: #fbbf24;">Ground Truth Validation</div>
+                    <div style="margin-bottom: 10px;">
+                        <span class="meta-label">Model Accuracy</span>
+                        <span style="color: #fbbf24; font-weight: bold;">99.3%</span>
+                        <span class="meta-label" style="margin-left: 14px;">MAPE</span>
+                        <span class="meta-value">0.70%</span>
+                    </div>
+                    <div class="chart-container" style="height: 170px;">
+                        <canvas id="validation-4"></canvas>
+                    </div>
+                </div>
+    
             </div>
         </div>
 
@@ -421,20 +434,20 @@
                     <div class="forecast-compare-grid">
                         
                         <div class="forecast-variant">
-                            <div class="variant-label">With Volume &middot; <span style="color: #34d399;">Bullish</span></div>
+                            <div class="variant-label">With Volume &middot; <span style="color: #94a3b8;">Neutral</span></div>
                             <div style="margin-bottom: 8px;">
                                 <span class="meta-label">Target</span>
-                                <span style="color: #34d399; font-weight: bold;">$86,241.42</span>
-                                <span style="color: #34d399;">(+10.55%)</span>
+                                <span style="color: #94a3b8; font-weight: bold;">$77,680.17</span>
+                                <span style="color: #94a3b8;">(-0.23%)</span>
                             </div>
                             <div class="ci-metric-row">
                                 <div class="ci-metric">
                                     <div class="metric-label">90% Band</div>
-                                    <div class="metric-value" style="font-size: 12px;">$84,516.59&ndash;$87,966.25</div>
+                                    <div class="metric-value" style="font-size: 12px;">$77,680.17&ndash;$77,680.17</div>
                                 </div>
                                 <div class="ci-metric">
                                     <div class="metric-label">Width</div>
-                                    <div class="metric-value" style="font-size: 12px;">$3,449.66 (4.4%)</div>
+                                    <div class="metric-value" style="font-size: 12px;">$0.00 (0.0%)</div>
                                 </div>
                             </div>
                             <div class="chart-container" style="height: 150px;">
@@ -444,20 +457,20 @@
     
                         
                         <div class="forecast-variant">
-                            <div class="variant-label">No Volume &middot; <span style="color: #34d399;">Bullish</span></div>
+                            <div class="variant-label">No Volume &middot; <span style="color: #94a3b8;">Neutral</span></div>
                             <div style="margin-bottom: 8px;">
                                 <span class="meta-label">Target</span>
-                                <span style="color: #34d399; font-weight: bold;">$86,241.42</span>
-                                <span style="color: #34d399;">(+10.55%)</span>
+                                <span style="color: #94a3b8; font-weight: bold;">$78,086.82</span>
+                                <span style="color: #94a3b8;">(+0.30%)</span>
                             </div>
                             <div class="ci-metric-row">
                                 <div class="ci-metric">
                                     <div class="metric-label">90% Band</div>
-                                    <div class="metric-value" style="font-size: 12px;">$84,516.59&ndash;$87,966.25</div>
+                                    <div class="metric-value" style="font-size: 12px;">$78,086.82&ndash;$78,086.82</div>
                                 </div>
                                 <div class="ci-metric">
                                     <div class="metric-label">Width</div>
-                                    <div class="metric-value" style="font-size: 12px;">$3,449.66 (4.4%)</div>
+                                    <div class="metric-value" style="font-size: 12px;">$0.00 (0.0%)</div>
                                 </div>
                             </div>
                             <div class="chart-container" style="height: 150px;">
@@ -473,20 +486,20 @@
                     <div class="forecast-compare-grid">
                         
                         <div class="forecast-variant">
-                            <div class="variant-label">With Volume &middot; <span style="color: #34d399;">Bullish</span></div>
+                            <div class="variant-label">With Volume &middot; <span style="color: #f87171;">Bearish</span></div>
                             <div style="margin-bottom: 8px;">
                                 <span class="meta-label">Target</span>
-                                <span style="color: #34d399; font-weight: bold;">$90,303.04</span>
-                                <span style="color: #34d399;">(+15.76%)</span>
+                                <span style="color: #f87171; font-weight: bold;">$76,079.30</span>
+                                <span style="color: #f87171;">(-2.28%)</span>
                             </div>
                             <div class="ci-metric-row">
                                 <div class="ci-metric">
                                     <div class="metric-label">90% Band</div>
-                                    <div class="metric-value" style="font-size: 12px;">$88,496.98&ndash;$92,109.11</div>
+                                    <div class="metric-value" style="font-size: 12px;">$76,079.30&ndash;$76,079.30</div>
                                 </div>
                                 <div class="ci-metric">
                                     <div class="metric-label">Width</div>
-                                    <div class="metric-value" style="font-size: 12px;">$3,612.12 (4.6%)</div>
+                                    <div class="metric-value" style="font-size: 12px;">$0.00 (0.0%)</div>
                                 </div>
                             </div>
                             <div class="chart-container" style="height: 150px;">
@@ -496,20 +509,20 @@
     
                         
                         <div class="forecast-variant">
-                            <div class="variant-label">No Volume &middot; <span style="color: #34d399;">Bullish</span></div>
+                            <div class="variant-label">No Volume &middot; <span style="color: #94a3b8;">Neutral</span></div>
                             <div style="margin-bottom: 8px;">
                                 <span class="meta-label">Target</span>
-                                <span style="color: #34d399; font-weight: bold;">$90,303.04</span>
-                                <span style="color: #34d399;">(+15.76%)</span>
+                                <span style="color: #94a3b8; font-weight: bold;">$76,393.20</span>
+                                <span style="color: #94a3b8;">(-1.88%)</span>
                             </div>
                             <div class="ci-metric-row">
                                 <div class="ci-metric">
                                     <div class="metric-label">90% Band</div>
-                                    <div class="metric-value" style="font-size: 12px;">$88,496.98&ndash;$92,109.11</div>
+                                    <div class="metric-value" style="font-size: 12px;">$76,393.20&ndash;$76,393.20</div>
                                 </div>
                                 <div class="ci-metric">
                                     <div class="metric-label">Width</div>
-                                    <div class="metric-value" style="font-size: 12px;">$3,612.12 (4.6%)</div>
+                                    <div class="metric-value" style="font-size: 12px;">$0.00 (0.0%)</div>
                                 </div>
                             </div>
                             <div class="chart-container" style="height: 150px;">
@@ -525,20 +538,20 @@
                     <div class="forecast-compare-grid">
                         
                         <div class="forecast-variant">
-                            <div class="variant-label">With Volume &middot; <span style="color: #34d399;">Bullish</span></div>
+                            <div class="variant-label">With Volume &middot; <span style="color: #f87171;">Bearish</span></div>
                             <div style="margin-bottom: 8px;">
                                 <span class="meta-label">Target</span>
-                                <span style="color: #34d399; font-weight: bold;">$98,426.29</span>
-                                <span style="color: #34d399;">(+26.17%)</span>
+                                <span style="color: #f87171; font-weight: bold;">$75,666.31</span>
+                                <span style="color: #f87171;">(-2.81%)</span>
                             </div>
                             <div class="ci-metric-row">
                                 <div class="ci-metric">
                                     <div class="metric-label">90% Band</div>
-                                    <div class="metric-value" style="font-size: 12px;">$96,457.77&ndash;$100,394.82</div>
+                                    <div class="metric-value" style="font-size: 12px;">$75,666.31&ndash;$75,666.31</div>
                                 </div>
                                 <div class="ci-metric">
                                     <div class="metric-label">Width</div>
-                                    <div class="metric-value" style="font-size: 12px;">$3,937.05 (5.0%)</div>
+                                    <div class="metric-value" style="font-size: 12px;">$0.00 (0.0%)</div>
                                 </div>
                             </div>
                             <div class="chart-container" style="height: 150px;">
@@ -548,20 +561,20 @@
     
                         
                         <div class="forecast-variant">
-                            <div class="variant-label">No Volume &middot; <span style="color: #34d399;">Bullish</span></div>
+                            <div class="variant-label">No Volume &middot; <span style="color: #94a3b8;">Neutral</span></div>
                             <div style="margin-bottom: 8px;">
                                 <span class="meta-label">Target</span>
-                                <span style="color: #34d399; font-weight: bold;">$98,426.29</span>
-                                <span style="color: #34d399;">(+26.17%)</span>
+                                <span style="color: #94a3b8; font-weight: bold;">$77,947.08</span>
+                                <span style="color: #94a3b8;">(+0.12%)</span>
                             </div>
                             <div class="ci-metric-row">
                                 <div class="ci-metric">
                                     <div class="metric-label">90% Band</div>
-                                    <div class="metric-value" style="font-size: 12px;">$96,457.77&ndash;$100,394.82</div>
+                                    <div class="metric-value" style="font-size: 12px;">$77,947.08&ndash;$77,947.08</div>
                                 </div>
                                 <div class="ci-metric">
                                     <div class="metric-label">Width</div>
-                                    <div class="metric-value" style="font-size: 12px;">$3,937.05 (5.0%)</div>
+                                    <div class="metric-value" style="font-size: 12px;">$0.00 (0.0%)</div>
                                 </div>
                             </div>
                             <div class="chart-container" style="height: 150px;">
@@ -587,7 +600,7 @@
                     </div>
                     <div class="ohlc-item">
                         <div class="ohlc-label">HIGH</div>
-                        <div class="ohlc-value" style="color: #34d399;">$4,443.25</div>
+                        <div class="ohlc-value" style="color: #34d399;">$4,443.38</div>
                     </div>
                     <div class="ohlc-item">
                         <div class="ohlc-label">LOW</div>
@@ -595,18 +608,18 @@
                     </div>
                     <div class="ohlc-item">
                         <div class="ohlc-label">CLOSE</div>
-                        <div class="ohlc-value" style="color: #fbbf24;">$4,443.07</div>
+                        <div class="ohlc-value" style="color: #fbbf24;">$4,432.59</div>
                     </div>
                 </div>
 
                 <div class="metric-card">
                     <div class="metric-label">Day-over-Day Change</div>
-                    <div class="metric-value" style="color: #34d399;">+1.25%</div>
+                    <div class="metric-value" style="color: #34d399;">+1.01%</div>
                 </div>
 
                 <div class="metric-card">
                     <div class="metric-label">Volume</div>
-                    <div class="metric-value">129,835</div>
+                    <div class="metric-value">132,071</div>
                 </div>
 
                 <div class="metric-card" style="border-left-color: #f87171;">
@@ -625,6 +638,19 @@
                 <div class="chart-container" style="height: 130px;"><canvas id="volume-chart-5"></canvas></div>
 
                 
+                <div class="validation-section">
+                    <div class="prediction-title" style="color: #fbbf24;">Ground Truth Validation</div>
+                    <div style="margin-bottom: 10px;">
+                        <span class="meta-label">Model Accuracy</span>
+                        <span style="color: #fbbf24; font-weight: bold;">97.6%</span>
+                        <span class="meta-label" style="margin-left: 14px;">MAPE</span>
+                        <span class="meta-value">2.41%</span>
+                    </div>
+                    <div class="chart-container" style="height: 170px;">
+                        <canvas id="validation-5"></canvas>
+                    </div>
+                </div>
+    
             </div>
         </div>
 
@@ -634,20 +660,20 @@
                     <div class="forecast-compare-grid">
                         
                         <div class="forecast-variant">
-                            <div class="variant-label">With Volume &middot; <span style="color: #34d399;">Bullish</span></div>
+                            <div class="variant-label">With Volume &middot; <span style="color: #94a3b8;">Neutral</span></div>
                             <div style="margin-bottom: 8px;">
                                 <span class="meta-label">Target</span>
-                                <span style="color: #34d399; font-weight: bold;">$4,550.85</span>
-                                <span style="color: #34d399;">(+2.43%)</span>
+                                <span style="color: #94a3b8; font-weight: bold;">$4,368.43</span>
+                                <span style="color: #94a3b8;">(-1.45%)</span>
                             </div>
                             <div class="ci-metric-row">
                                 <div class="ci-metric">
                                     <div class="metric-label">90% Band</div>
-                                    <div class="metric-value" style="font-size: 12px;">$4,459.83&ndash;$4,641.86</div>
+                                    <div class="metric-value" style="font-size: 12px;">$4,368.43&ndash;$4,368.43</div>
                                 </div>
                                 <div class="ci-metric">
                                     <div class="metric-label">Width</div>
-                                    <div class="metric-value" style="font-size: 12px;">$182.03 (4.1%)</div>
+                                    <div class="metric-value" style="font-size: 12px;">$0.00 (0.0%)</div>
                                 </div>
                             </div>
                             <div class="chart-container" style="height: 150px;">
@@ -657,20 +683,20 @@
     
                         
                         <div class="forecast-variant">
-                            <div class="variant-label">No Volume &middot; <span style="color: #34d399;">Bullish</span></div>
+                            <div class="variant-label">No Volume &middot; <span style="color: #94a3b8;">Neutral</span></div>
                             <div style="margin-bottom: 8px;">
                                 <span class="meta-label">Target</span>
-                                <span style="color: #34d399; font-weight: bold;">$4,550.85</span>
-                                <span style="color: #34d399;">(+2.43%)</span>
+                                <span style="color: #94a3b8; font-weight: bold;">$4,416.55</span>
+                                <span style="color: #94a3b8;">(-0.36%)</span>
                             </div>
                             <div class="ci-metric-row">
                                 <div class="ci-metric">
                                     <div class="metric-label">90% Band</div>
-                                    <div class="metric-value" style="font-size: 12px;">$4,459.83&ndash;$4,641.86</div>
+                                    <div class="metric-value" style="font-size: 12px;">$4,416.55&ndash;$4,416.55</div>
                                 </div>
                                 <div class="ci-metric">
                                     <div class="metric-label">Width</div>
-                                    <div class="metric-value" style="font-size: 12px;">$182.03 (4.1%)</div>
+                                    <div class="metric-value" style="font-size: 12px;">$0.00 (0.0%)</div>
                                 </div>
                             </div>
                             <div class="chart-container" style="height: 150px;">
@@ -686,20 +712,20 @@
                     <div class="forecast-compare-grid">
                         
                         <div class="forecast-variant">
-                            <div class="variant-label">With Volume &middot; <span style="color: #34d399;">Bullish</span></div>
+                            <div class="variant-label">With Volume &middot; <span style="color: #94a3b8;">Neutral</span></div>
                             <div style="margin-bottom: 8px;">
                                 <span class="meta-label">Target</span>
-                                <span style="color: #34d399; font-weight: bold;">$4,582.11</span>
-                                <span style="color: #34d399;">(+3.13%)</span>
+                                <span style="color: #94a3b8; font-weight: bold;">$4,368.38</span>
+                                <span style="color: #94a3b8;">(-1.45%)</span>
                             </div>
                             <div class="ci-metric-row">
                                 <div class="ci-metric">
                                     <div class="metric-label">90% Band</div>
-                                    <div class="metric-value" style="font-size: 12px;">$4,490.47&ndash;$4,673.76</div>
+                                    <div class="metric-value" style="font-size: 12px;">$4,368.38&ndash;$4,368.38</div>
                                 </div>
                                 <div class="ci-metric">
                                     <div class="metric-label">Width</div>
-                                    <div class="metric-value" style="font-size: 12px;">$183.28 (4.1%)</div>
+                                    <div class="metric-value" style="font-size: 12px;">$0.00 (0.0%)</div>
                                 </div>
                             </div>
                             <div class="chart-container" style="height: 150px;">
@@ -709,20 +735,20 @@
     
                         
                         <div class="forecast-variant">
-                            <div class="variant-label">No Volume &middot; <span style="color: #34d399;">Bullish</span></div>
+                            <div class="variant-label">No Volume &middot; <span style="color: #94a3b8;">Neutral</span></div>
                             <div style="margin-bottom: 8px;">
                                 <span class="meta-label">Target</span>
-                                <span style="color: #34d399; font-weight: bold;">$4,582.11</span>
-                                <span style="color: #34d399;">(+3.13%)</span>
+                                <span style="color: #94a3b8; font-weight: bold;">$4,407.12</span>
+                                <span style="color: #94a3b8;">(-0.57%)</span>
                             </div>
                             <div class="ci-metric-row">
                                 <div class="ci-metric">
                                     <div class="metric-label">90% Band</div>
-                                    <div class="metric-value" style="font-size: 12px;">$4,490.47&ndash;$4,673.76</div>
+                                    <div class="metric-value" style="font-size: 12px;">$4,407.12&ndash;$4,407.12</div>
                                 </div>
                                 <div class="ci-metric">
                                     <div class="metric-label">Width</div>
-                                    <div class="metric-value" style="font-size: 12px;">$183.28 (4.1%)</div>
+                                    <div class="metric-value" style="font-size: 12px;">$0.00 (0.0%)</div>
                                 </div>
                             </div>
                             <div class="chart-container" style="height: 150px;">
@@ -738,20 +764,20 @@
                     <div class="forecast-compare-grid">
                         
                         <div class="forecast-variant">
-                            <div class="variant-label">With Volume &middot; <span style="color: #34d399;">Bullish</span></div>
+                            <div class="variant-label">With Volume &middot; <span style="color: #94a3b8;">Neutral</span></div>
                             <div style="margin-bottom: 8px;">
                                 <span class="meta-label">Target</span>
-                                <span style="color: #34d399; font-weight: bold;">$4,644.65</span>
-                                <span style="color: #34d399;">(+4.54%)</span>
+                                <span style="color: #94a3b8; font-weight: bold;">$4,479.69</span>
+                                <span style="color: #94a3b8;">(+1.06%)</span>
                             </div>
                             <div class="ci-metric-row">
                                 <div class="ci-metric">
                                     <div class="metric-label">90% Band</div>
-                                    <div class="metric-value" style="font-size: 12px;">$4,551.76&ndash;$4,737.55</div>
+                                    <div class="metric-value" style="font-size: 12px;">$4,479.69&ndash;$4,479.69</div>
                                 </div>
                                 <div class="ci-metric">
                                     <div class="metric-label">Width</div>
-                                    <div class="metric-value" style="font-size: 12px;">$185.79 (4.2%)</div>
+                                    <div class="metric-value" style="font-size: 12px;">$0.00 (0.0%)</div>
                                 </div>
                             </div>
                             <div class="chart-container" style="height: 150px;">
@@ -761,20 +787,20 @@
     
                         
                         <div class="forecast-variant">
-                            <div class="variant-label">No Volume &middot; <span style="color: #34d399;">Bullish</span></div>
+                            <div class="variant-label">No Volume &middot; <span style="color: #94a3b8;">Neutral</span></div>
                             <div style="margin-bottom: 8px;">
                                 <span class="meta-label">Target</span>
-                                <span style="color: #34d399; font-weight: bold;">$4,644.65</span>
-                                <span style="color: #34d399;">(+4.54%)</span>
+                                <span style="color: #94a3b8; font-weight: bold;">$4,424.47</span>
+                                <span style="color: #94a3b8;">(-0.18%)</span>
                             </div>
                             <div class="ci-metric-row">
                                 <div class="ci-metric">
                                     <div class="metric-label">90% Band</div>
-                                    <div class="metric-value" style="font-size: 12px;">$4,551.76&ndash;$4,737.55</div>
+                                    <div class="metric-value" style="font-size: 12px;">$4,424.47&ndash;$4,424.47</div>
                                 </div>
                                 <div class="ci-metric">
                                     <div class="metric-label">Width</div>
-                                    <div class="metric-value" style="font-size: 12px;">$185.79 (4.2%)</div>
+                                    <div class="metric-value" style="font-size: 12px;">$0.00 (0.0%)</div>
                                 </div>
                             </div>
                             <div class="chart-container" style="height: 150px;">
@@ -808,18 +834,18 @@
                     </div>
                     <div class="ohlc-item">
                         <div class="ohlc-label">CLOSE</div>
-                        <div class="ohlc-value" style="color: #fbbf24;">$99.17</div>
+                        <div class="ohlc-value" style="color: #fbbf24;">$99.22</div>
                     </div>
                 </div>
 
                 <div class="metric-card">
                     <div class="metric-label">Day-over-Day Change</div>
-                    <div class="metric-value" style="color: #f87171;">-0.33%</div>
+                    <div class="metric-value" style="color: #f87171;">-0.28%</div>
                 </div>
 
                 <div class="metric-card">
                     <div class="metric-label">Volume</div>
-                    <div class="metric-value">4,653</div>
+                    <div class="metric-value">4,756</div>
                 </div>
 
                 <div class="metric-card" style="border-left-color: #f87171;">
@@ -838,6 +864,19 @@
                 <div class="chart-container" style="height: 130px;"><canvas id="volume-chart-6"></canvas></div>
 
                 
+                <div class="validation-section">
+                    <div class="prediction-title" style="color: #fbbf24;">Ground Truth Validation</div>
+                    <div style="margin-bottom: 10px;">
+                        <span class="meta-label">Model Accuracy</span>
+                        <span style="color: #fbbf24; font-weight: bold;">99.7%</span>
+                        <span class="meta-label" style="margin-left: 14px;">MAPE</span>
+                        <span class="meta-value">0.33%</span>
+                    </div>
+                    <div class="chart-container" style="height: 170px;">
+                        <canvas id="validation-6"></canvas>
+                    </div>
+                </div>
+    
             </div>
         </div>
 
@@ -850,17 +889,17 @@
                             <div class="variant-label">With Volume &middot; <span style="color: #94a3b8;">Neutral</span></div>
                             <div style="margin-bottom: 8px;">
                                 <span class="meta-label">Target</span>
-                                <span style="color: #94a3b8; font-weight: bold;">$98.99</span>
-                                <span style="color: #94a3b8;">(-0.18%)</span>
+                                <span style="color: #94a3b8; font-weight: bold;">$99.18</span>
+                                <span style="color: #94a3b8;">(-0.04%)</span>
                             </div>
                             <div class="ci-metric-row">
                                 <div class="ci-metric">
                                     <div class="metric-label">90% Band</div>
-                                    <div class="metric-value" style="font-size: 12px;">$97.01&ndash;$100.97</div>
+                                    <div class="metric-value" style="font-size: 12px;">$99.18&ndash;$99.18</div>
                                 </div>
                                 <div class="ci-metric">
                                     <div class="metric-label">Width</div>
-                                    <div class="metric-value" style="font-size: 12px;">$3.96 (4.0%)</div>
+                                    <div class="metric-value" style="font-size: 12px;">$0.00 (0.0%)</div>
                                 </div>
                             </div>
                             <div class="chart-container" style="height: 150px;">
@@ -873,17 +912,17 @@
                             <div class="variant-label">No Volume &middot; <span style="color: #94a3b8;">Neutral</span></div>
                             <div style="margin-bottom: 8px;">
                                 <span class="meta-label">Target</span>
-                                <span style="color: #94a3b8; font-weight: bold;">$98.99</span>
-                                <span style="color: #94a3b8;">(-0.18%)</span>
+                                <span style="color: #94a3b8; font-weight: bold;">$99.37</span>
+                                <span style="color: #94a3b8;">(+0.15%)</span>
                             </div>
                             <div class="ci-metric-row">
                                 <div class="ci-metric">
                                     <div class="metric-label">90% Band</div>
-                                    <div class="metric-value" style="font-size: 12px;">$97.01&ndash;$100.97</div>
+                                    <div class="metric-value" style="font-size: 12px;">$99.37&ndash;$99.37</div>
                                 </div>
                                 <div class="ci-metric">
                                     <div class="metric-label">Width</div>
-                                    <div class="metric-value" style="font-size: 12px;">$3.96 (4.0%)</div>
+                                    <div class="metric-value" style="font-size: 12px;">$0.00 (0.0%)</div>
                                 </div>
                             </div>
                             <div class="chart-container" style="height: 150px;">
@@ -902,17 +941,17 @@
                             <div class="variant-label">With Volume &middot; <span style="color: #94a3b8;">Neutral</span></div>
                             <div style="margin-bottom: 8px;">
                                 <span class="meta-label">Target</span>
-                                <span style="color: #94a3b8; font-weight: bold;">$98.89</span>
-                                <span style="color: #94a3b8;">(-0.28%)</span>
+                                <span style="color: #94a3b8; font-weight: bold;">$99.67</span>
+                                <span style="color: #94a3b8;">(+0.46%)</span>
                             </div>
                             <div class="ci-metric-row">
                                 <div class="ci-metric">
                                     <div class="metric-label">90% Band</div>
-                                    <div class="metric-value" style="font-size: 12px;">$96.91&ndash;$100.87</div>
+                                    <div class="metric-value" style="font-size: 12px;">$99.67&ndash;$99.67</div>
                                 </div>
                                 <div class="ci-metric">
                                     <div class="metric-label">Width</div>
-                                    <div class="metric-value" style="font-size: 12px;">$3.96 (4.0%)</div>
+                                    <div class="metric-value" style="font-size: 12px;">$0.00 (0.0%)</div>
                                 </div>
                             </div>
                             <div class="chart-container" style="height: 150px;">
@@ -925,17 +964,17 @@
                             <div class="variant-label">No Volume &middot; <span style="color: #94a3b8;">Neutral</span></div>
                             <div style="margin-bottom: 8px;">
                                 <span class="meta-label">Target</span>
-                                <span style="color: #94a3b8; font-weight: bold;">$98.89</span>
-                                <span style="color: #94a3b8;">(-0.28%)</span>
+                                <span style="color: #94a3b8; font-weight: bold;">$99.26</span>
+                                <span style="color: #94a3b8;">(+0.04%)</span>
                             </div>
                             <div class="ci-metric-row">
                                 <div class="ci-metric">
                                     <div class="metric-label">90% Band</div>
-                                    <div class="metric-value" style="font-size: 12px;">$96.91&ndash;$100.87</div>
+                                    <div class="metric-value" style="font-size: 12px;">$99.26&ndash;$99.26</div>
                                 </div>
                                 <div class="ci-metric">
                                     <div class="metric-label">Width</div>
-                                    <div class="metric-value" style="font-size: 12px;">$3.96 (4.0%)</div>
+                                    <div class="metric-value" style="font-size: 12px;">$0.00 (0.0%)</div>
                                 </div>
                             </div>
                             <div class="chart-container" style="height: 150px;">
@@ -954,17 +993,17 @@
                             <div class="variant-label">With Volume &middot; <span style="color: #94a3b8;">Neutral</span></div>
                             <div style="margin-bottom: 8px;">
                                 <span class="meta-label">Target</span>
-                                <span style="color: #94a3b8; font-weight: bold;">$98.68</span>
-                                <span style="color: #94a3b8;">(-0.50%)</span>
+                                <span style="color: #94a3b8; font-weight: bold;">$99.46</span>
+                                <span style="color: #94a3b8;">(+0.25%)</span>
                             </div>
                             <div class="ci-metric-row">
                                 <div class="ci-metric">
                                     <div class="metric-label">90% Band</div>
-                                    <div class="metric-value" style="font-size: 12px;">$96.71&ndash;$100.65</div>
+                                    <div class="metric-value" style="font-size: 12px;">$99.46&ndash;$99.46</div>
                                 </div>
                                 <div class="ci-metric">
                                     <div class="metric-label">Width</div>
-                                    <div class="metric-value" style="font-size: 12px;">$3.95 (4.0%)</div>
+                                    <div class="metric-value" style="font-size: 12px;">$0.00 (0.0%)</div>
                                 </div>
                             </div>
                             <div class="chart-container" style="height: 150px;">
@@ -977,17 +1016,17 @@
                             <div class="variant-label">No Volume &middot; <span style="color: #94a3b8;">Neutral</span></div>
                             <div style="margin-bottom: 8px;">
                                 <span class="meta-label">Target</span>
-                                <span style="color: #94a3b8; font-weight: bold;">$98.68</span>
-                                <span style="color: #94a3b8;">(-0.50%)</span>
+                                <span style="color: #94a3b8; font-weight: bold;">$99.51</span>
+                                <span style="color: #94a3b8;">(+0.30%)</span>
                             </div>
                             <div class="ci-metric-row">
                                 <div class="ci-metric">
                                     <div class="metric-label">90% Band</div>
-                                    <div class="metric-value" style="font-size: 12px;">$96.71&ndash;$100.65</div>
+                                    <div class="metric-value" style="font-size: 12px;">$99.51&ndash;$99.51</div>
                                 </div>
                                 <div class="ci-metric">
                                     <div class="metric-label">Width</div>
-                                    <div class="metric-value" style="font-size: 12px;">$3.95 (4.0%)</div>
+                                    <div class="metric-value" style="font-size: 12px;">$0.00 (0.0%)</div>
                                 </div>
                             </div>
                             <div class="chart-container" style="height: 150px;">
@@ -1017,22 +1056,22 @@
                     </div>
                     <div class="ohlc-item">
                         <div class="ohlc-label">LOW</div>
-                        <div class="ohlc-value" style="color: #f87171;">$89.92</div>
+                        <div class="ohlc-value" style="color: #f87171;">$89.86</div>
                     </div>
                     <div class="ohlc-item">
                         <div class="ohlc-label">CLOSE</div>
-                        <div class="ohlc-value" style="color: #fbbf24;">$90.02</div>
+                        <div class="ohlc-value" style="color: #fbbf24;">$90.53</div>
                     </div>
                 </div>
 
                 <div class="metric-card">
                     <div class="metric-label">Day-over-Day Change</div>
-                    <div class="metric-value" style="color: #f87171;">-1.04%</div>
+                    <div class="metric-value" style="color: #f87171;">-0.48%</div>
                 </div>
 
                 <div class="metric-card">
                     <div class="metric-label">Volume</div>
-                    <div class="metric-value">16,415</div>
+                    <div class="metric-value">17,183</div>
                 </div>
 
                 <div class="metric-card" style="border-left-color: #34d399;">
@@ -1051,6 +1090,19 @@
                 <div class="chart-container" style="height: 130px;"><canvas id="volume-chart-7"></canvas></div>
 
                 
+                <div class="validation-section">
+                    <div class="prediction-title" style="color: #fbbf24;">Ground Truth Validation</div>
+                    <div style="margin-bottom: 10px;">
+                        <span class="meta-label">Model Accuracy</span>
+                        <span style="color: #fbbf24; font-weight: bold;">96.2%</span>
+                        <span class="meta-label" style="margin-left: 14px;">MAPE</span>
+                        <span class="meta-value">3.75%</span>
+                    </div>
+                    <div class="chart-container" style="height: 170px;">
+                        <canvas id="validation-7"></canvas>
+                    </div>
+                </div>
+    
             </div>
         </div>
 
@@ -1060,20 +1112,20 @@
                     <div class="forecast-compare-grid">
                         
                         <div class="forecast-variant">
-                            <div class="variant-label">With Volume &middot; <span style="color: #94a3b8;">Neutral</span></div>
+                            <div class="variant-label">With Volume &middot; <span style="color: #34d399;">Bullish</span></div>
                             <div style="margin-bottom: 8px;">
                                 <span class="meta-label">Target</span>
-                                <span style="color: #94a3b8; font-weight: bold;">$90.88</span>
-                                <span style="color: #94a3b8;">(+0.95%)</span>
+                                <span style="color: #34d399; font-weight: bold;">$93.87</span>
+                                <span style="color: #34d399;">(+3.69%)</span>
                             </div>
                             <div class="ci-metric-row">
                                 <div class="ci-metric">
                                     <div class="metric-label">90% Band</div>
-                                    <div class="metric-value" style="font-size: 12px;">$89.06&ndash;$92.70</div>
+                                    <div class="metric-value" style="font-size: 12px;">$93.87&ndash;$93.87</div>
                                 </div>
                                 <div class="ci-metric">
                                     <div class="metric-label">Width</div>
-                                    <div class="metric-value" style="font-size: 12px;">$3.64 (4.0%)</div>
+                                    <div class="metric-value" style="font-size: 12px;">$0.00 (0.0%)</div>
                                 </div>
                             </div>
                             <div class="chart-container" style="height: 150px;">
@@ -1086,17 +1138,17 @@
                             <div class="variant-label">No Volume &middot; <span style="color: #94a3b8;">Neutral</span></div>
                             <div style="margin-bottom: 8px;">
                                 <span class="meta-label">Target</span>
-                                <span style="color: #94a3b8; font-weight: bold;">$90.88</span>
-                                <span style="color: #94a3b8;">(+0.95%)</span>
+                                <span style="color: #94a3b8; font-weight: bold;">$90.25</span>
+                                <span style="color: #94a3b8;">(-0.31%)</span>
                             </div>
                             <div class="ci-metric-row">
                                 <div class="ci-metric">
                                     <div class="metric-label">90% Band</div>
-                                    <div class="metric-value" style="font-size: 12px;">$89.06&ndash;$92.70</div>
+                                    <div class="metric-value" style="font-size: 12px;">$90.25&ndash;$90.25</div>
                                 </div>
                                 <div class="ci-metric">
                                     <div class="metric-label">Width</div>
-                                    <div class="metric-value" style="font-size: 12px;">$3.64 (4.0%)</div>
+                                    <div class="metric-value" style="font-size: 12px;">$0.00 (0.0%)</div>
                                 </div>
                             </div>
                             <div class="chart-container" style="height: 150px;">
@@ -1112,20 +1164,20 @@
                     <div class="forecast-compare-grid">
                         
                         <div class="forecast-variant">
-                            <div class="variant-label">With Volume &middot; <span style="color: #34d399;">Bullish</span></div>
+                            <div class="variant-label">With Volume &middot; <span style="color: #94a3b8;">Neutral</span></div>
                             <div style="margin-bottom: 8px;">
                                 <span class="meta-label">Target</span>
-                                <span style="color: #34d399; font-weight: bold;">$93.03</span>
-                                <span style="color: #34d399;">(+3.34%)</span>
+                                <span style="color: #94a3b8; font-weight: bold;">$92.04</span>
+                                <span style="color: #94a3b8;">(+1.67%)</span>
                             </div>
                             <div class="ci-metric-row">
                                 <div class="ci-metric">
                                     <div class="metric-label">90% Band</div>
-                                    <div class="metric-value" style="font-size: 12px;">$91.17&ndash;$94.89</div>
+                                    <div class="metric-value" style="font-size: 12px;">$92.04&ndash;$92.04</div>
                                 </div>
                                 <div class="ci-metric">
                                     <div class="metric-label">Width</div>
-                                    <div class="metric-value" style="font-size: 12px;">$3.72 (4.1%)</div>
+                                    <div class="metric-value" style="font-size: 12px;">$0.00 (0.0%)</div>
                                 </div>
                             </div>
                             <div class="chart-container" style="height: 150px;">
@@ -1135,20 +1187,20 @@
     
                         
                         <div class="forecast-variant">
-                            <div class="variant-label">No Volume &middot; <span style="color: #34d399;">Bullish</span></div>
+                            <div class="variant-label">No Volume &middot; <span style="color: #f87171;">Bearish</span></div>
                             <div style="margin-bottom: 8px;">
                                 <span class="meta-label">Target</span>
-                                <span style="color: #34d399; font-weight: bold;">$93.03</span>
-                                <span style="color: #34d399;">(+3.34%)</span>
+                                <span style="color: #f87171; font-weight: bold;">$87.05</span>
+                                <span style="color: #f87171;">(-3.84%)</span>
                             </div>
                             <div class="ci-metric-row">
                                 <div class="ci-metric">
                                     <div class="metric-label">90% Band</div>
-                                    <div class="metric-value" style="font-size: 12px;">$91.17&ndash;$94.89</div>
+                                    <div class="metric-value" style="font-size: 12px;">$87.05&ndash;$87.05</div>
                                 </div>
                                 <div class="ci-metric">
                                     <div class="metric-label">Width</div>
-                                    <div class="metric-value" style="font-size: 12px;">$3.72 (4.1%)</div>
+                                    <div class="metric-value" style="font-size: 12px;">$0.00 (0.0%)</div>
                                 </div>
                             </div>
                             <div class="chart-container" style="height: 150px;">
@@ -1164,20 +1216,20 @@
                     <div class="forecast-compare-grid">
                         
                         <div class="forecast-variant">
-                            <div class="variant-label">With Volume &middot; <span style="color: #34d399;">Bullish</span></div>
+                            <div class="variant-label">With Volume &middot; <span style="color: #f87171;">Bearish</span></div>
                             <div style="margin-bottom: 8px;">
                                 <span class="meta-label">Target</span>
-                                <span style="color: #34d399; font-weight: bold;">$97.33</span>
-                                <span style="color: #34d399;">(+8.12%)</span>
+                                <span style="color: #f87171; font-weight: bold;">$87.41</span>
+                                <span style="color: #f87171;">(-3.45%)</span>
                             </div>
                             <div class="ci-metric-row">
                                 <div class="ci-metric">
                                     <div class="metric-label">90% Band</div>
-                                    <div class="metric-value" style="font-size: 12px;">$95.38&ndash;$99.27</div>
+                                    <div class="metric-value" style="font-size: 12px;">$87.41&ndash;$87.41</div>
                                 </div>
                                 <div class="ci-metric">
                                     <div class="metric-label">Width</div>
-                                    <div class="metric-value" style="font-size: 12px;">$3.89 (4.3%)</div>
+                                    <div class="metric-value" style="font-size: 12px;">$0.00 (0.0%)</div>
                                 </div>
                             </div>
                             <div class="chart-container" style="height: 150px;">
@@ -1187,20 +1239,20 @@
     
                         
                         <div class="forecast-variant">
-                            <div class="variant-label">No Volume &middot; <span style="color: #34d399;">Bullish</span></div>
+                            <div class="variant-label">No Volume &middot; <span style="color: #f87171;">Bearish</span></div>
                             <div style="margin-bottom: 8px;">
                                 <span class="meta-label">Target</span>
-                                <span style="color: #34d399; font-weight: bold;">$97.33</span>
-                                <span style="color: #34d399;">(+8.12%)</span>
+                                <span style="color: #f87171; font-weight: bold;">$87.64</span>
+                                <span style="color: #f87171;">(-3.20%)</span>
                             </div>
                             <div class="ci-metric-row">
                                 <div class="ci-metric">
                                     <div class="metric-label">90% Band</div>
-                                    <div class="metric-value" style="font-size: 12px;">$95.38&ndash;$99.27</div>
+                                    <div class="metric-value" style="font-size: 12px;">$87.64&ndash;$87.64</div>
                                 </div>
                                 <div class="ci-metric">
                                     <div class="metric-label">Width</div>
-                                    <div class="metric-value" style="font-size: 12px;">$3.89 (4.3%)</div>
+                                    <div class="metric-value" style="font-size: 12px;">$0.00 (0.0%)</div>
                                 </div>
                             </div>
                             <div class="chart-container" style="height: 150px;">
@@ -1251,7 +1303,7 @@
                 labels: ["07-06", "07-07", "07-08", "07-09", "07-10", "07-11", "07-12", "07-13", "07-14", "07-15", "07-16", "07-17", "07-18", "07-19", "07-20", "07-21", "07-22", "07-23", "07-24", "07-25", "07-26", "07-27", "07-28", "07-29", "07-30", "07-31", "08-01", "08-02", "08-03", "08-04", "08-05", "08-06", "08-07", "08-08", "08-09", "08-10", "08-11", "08-12", "08-13", "08-14", "08-15", "08-16", "08-17", "08-18", "08-19", "08-20", "08-21", "08-22", "08-23", "08-24", "08-25", "08-26", "08-27", "08-28", "08-29", "08-30", "08-31", "09-01", "09-02", "09-03"],
                 datasets: [{
                     label: 'Close Price',
-                    data: [63750.071, 63621.024, 62029.826, 63243.019, 63772.11, 64304.915, 64122.257, 62131.373, 64507.358, 64892.12, 64042.073, 64038.12, 64616.996, 64468.348, 65297.501, 66325.617, 65839.81, 65069.85, 64094.004, 64257.993, 64574.699, 64892.408, 63843.703, 63440.473, 64702.191, 62881.731, 62583.862, 63429.172, 63707.999, 64270.01, 64755.7, 64355.937, 64893.3, 65001.035, 65066.139, 64081.482, 63672.876, 63527.8, 63337.568, 62830.241, 63029.11, 62992.965, 64312.808, 64499.391, 68968.421, 72589.791, 77433.812, 77280.621, 77329.379, 78854.4, 78120.959, 78370.179, 80018.311, 77331.3, 78046.538, 78513.133, 78814.594, 77394.91, 77343.026, 78010.645],
+                    data: [63750.071, 63621.024, 62029.826, 63243.019, 63772.11, 64304.915, 64122.257, 62131.373, 64507.358, 64892.12, 64042.073, 64038.12, 64616.996, 64468.348, 65297.501, 66325.617, 65839.81, 65069.85, 64094.004, 64257.993, 64574.699, 64892.408, 63843.703, 63440.473, 64702.191, 62881.731, 62583.862, 63429.172, 63707.999, 64270.01, 64755.7, 64355.937, 64893.3, 65001.035, 65066.139, 64081.482, 63672.876, 63527.8, 63337.568, 62830.241, 63029.11, 62992.965, 64312.808, 64499.391, 68968.421, 72589.791, 77433.812, 77280.621, 77329.379, 78854.4, 78120.959, 78370.179, 80018.311, 77331.3, 78046.538, 78513.133, 78814.594, 77394.91, 77343.026, 77856.7],
                     borderColor: '#3b82f6',
                     backgroundColor: 'rgba(59, 130, 246, 0.08)',
                     borderWidth: 2,
@@ -1279,7 +1331,7 @@
                 labels: ["07-06", "07-07", "07-08", "07-09", "07-10", "07-11", "07-12", "07-13", "07-14", "07-15", "07-16", "07-17", "07-18", "07-19", "07-20", "07-21", "07-22", "07-23", "07-24", "07-25", "07-26", "07-27", "07-28", "07-29", "07-30", "07-31", "08-01", "08-02", "08-03", "08-04", "08-05", "08-06", "08-07", "08-08", "08-09", "08-10", "08-11", "08-12", "08-13", "08-14", "08-15", "08-16", "08-17", "08-18", "08-19", "08-20", "08-21", "08-22", "08-23", "08-24", "08-25", "08-26", "08-27", "08-28", "08-29", "08-30", "08-31", "09-01", "09-02", "09-03"],
                 datasets: [{
                     label: 'Volume',
-                    data: [507429.0, 499550.0, 518647.0, 475031.0, 436433.0, 301780.0, 321840.0, 434562.0, 437894.0, 405081.0, 406409.0, 448810.0, 242890.0, 253096.0, 468591.0, 412972.0, 397445.0, 370451.0, 351162.0, 222900.0, 238942.0, 396324.0, 413878.0, 483782.0, 447521.0, 381993.0, 270143.0, 245305.0, 364431.0, 392103.0, 368485.0, 338562.0, 330435.0, 149189.0, 156950.0, 328305.0, 277037.0, 281642.0, 317172.0, 272901.0, 206946.0, 148449.0, 262934.0, 241021.0, 335128.0, 597931.0, 635049.0, 600329.0, 502095.0, 616734.0, 583070.0, 522660.0, 509276.0, 493312.0, 342378.0, 355208.0, 538790.0, 512698.0, 481770.0, 209767.0],
+                    data: [507429.0, 499550.0, 518647.0, 475031.0, 436433.0, 301780.0, 321840.0, 434562.0, 437894.0, 405081.0, 406409.0, 448810.0, 242890.0, 253096.0, 468591.0, 412972.0, 397445.0, 370451.0, 351162.0, 222900.0, 238942.0, 396324.0, 413878.0, 483782.0, 447521.0, 381993.0, 270143.0, 245305.0, 364431.0, 392103.0, 368485.0, 338562.0, 330435.0, 149189.0, 156950.0, 328305.0, 277037.0, 281642.0, 317172.0, 272901.0, 206946.0, 148449.0, 262934.0, 241021.0, 335128.0, 597931.0, 635049.0, 600329.0, 502095.0, 616734.0, 583070.0, 522660.0, 509276.0, 493312.0, 342378.0, 355208.0, 538790.0, 512698.0, 481770.0, 211944.0],
                     backgroundColor: 'rgba(59, 130, 246, 0.5)',
                     borderColor: '#3b82f6',
                     borderWidth: 1,
@@ -1306,9 +1358,9 @@
             data: {
                 labels: ["09-04", "09-05", "09-06", "09-07", "09-08"],
                 datasets: [
-                    { label: 'Upper 90%', data: [84651.96567473683, 85480.5367920451, 86309.10790935336, 87137.67902666163, 87966.25014396991], borderColor: 'rgba(248,113,113,0.55)', backgroundColor: 'rgba(148,163,184,0.14)', borderWidth: 1, pointRadius: 0, borderDash: [4,4], fill: '+1' },
-                    { label: 'Lower 10%', data: [81332.28074631578, 82128.35887863157, 82924.43701094735, 83720.51514326314, 84516.59327557894], borderColor: 'rgba(96,165,250,0.55)', borderWidth: 1, pointRadius: 0, borderDash: [4,4], fill: false },
-                    { label: 'Predicted', data: [82992.1232105263, 83804.44783533833, 84616.77246015036, 85429.09708496238, 86241.42170977443], borderColor: '#34d399', backgroundColor: 'rgba(52,211,153,0.12)', borderWidth: 2, pointRadius: 3, fill: false, tension: 0.1 }
+                    { label: 'Upper 90%', data: [76831.5703125, 76964.1484375, 77316.703125, 77309.296875, 77680.171875], borderColor: 'rgba(248,113,113,0.55)', backgroundColor: 'rgba(148,163,184,0.14)', borderWidth: 1, pointRadius: 0, borderDash: [4,4], fill: '+1' },
+                    { label: 'Lower 10%', data: [76831.5703125, 76964.1484375, 77316.703125, 77309.296875, 77680.171875], borderColor: 'rgba(96,165,250,0.55)', borderWidth: 1, pointRadius: 0, borderDash: [4,4], fill: false },
+                    { label: 'Predicted', data: [76831.5703125, 76964.1484375, 77316.703125, 77309.296875, 77680.171875], borderColor: '#34d399', backgroundColor: 'rgba(52,211,153,0.12)', borderWidth: 2, pointRadius: 3, fill: false, tension: 0.1 }
                 ]
             },
             options: {
@@ -1327,9 +1379,9 @@
             data: {
                 labels: ["09-04", "09-05", "09-06", "09-07", "09-08"],
                 datasets: [
-                    { label: 'Upper 90%', data: [84651.96567473683, 85480.5367920451, 86309.10790935336, 87137.67902666163, 87966.25014396991], borderColor: 'rgba(248,113,113,0.55)', backgroundColor: 'rgba(148,163,184,0.14)', borderWidth: 1, pointRadius: 0, borderDash: [4,4], fill: '+1' },
-                    { label: 'Lower 10%', data: [81332.28074631578, 82128.35887863157, 82924.43701094735, 83720.51514326314, 84516.59327557894], borderColor: 'rgba(96,165,250,0.55)', borderWidth: 1, pointRadius: 0, borderDash: [4,4], fill: false },
-                    { label: 'Predicted', data: [82992.1232105263, 83804.44783533833, 84616.77246015036, 85429.09708496238, 86241.42170977443], borderColor: '#a78bfa', backgroundColor: 'rgba(167,139,250,0.12)', borderWidth: 2, pointRadius: 3, fill: false, tension: 0.1 }
+                    { label: 'Upper 90%', data: [78005.078125, 78058.15625, 78145.53125, 78033.2109375, 78086.8203125], borderColor: 'rgba(248,113,113,0.55)', backgroundColor: 'rgba(148,163,184,0.14)', borderWidth: 1, pointRadius: 0, borderDash: [4,4], fill: '+1' },
+                    { label: 'Lower 10%', data: [78005.078125, 78058.15625, 78145.53125, 78033.2109375, 78086.8203125], borderColor: 'rgba(96,165,250,0.55)', borderWidth: 1, pointRadius: 0, borderDash: [4,4], fill: false },
+                    { label: 'Predicted', data: [78005.078125, 78058.15625, 78145.53125, 78033.2109375, 78086.8203125], borderColor: '#a78bfa', backgroundColor: 'rgba(167,139,250,0.12)', borderWidth: 2, pointRadius: 3, fill: false, tension: 0.1 }
                 ]
             },
             options: {
@@ -1348,9 +1400,9 @@
             data: {
                 labels: ["09-04", "09-05", "09-06", "09-07", "09-08", "09-09", "09-10", "09-11", "09-12", "09-13"],
                 datasets: [
-                    { label: 'Upper 90%', data: [84651.96567473683, 85480.5367920451, 86309.10790935336, 87137.67902666163, 87966.25014396991, 88794.82126127818, 89623.39237858645, 90451.96349589473, 91280.534613203, 92109.10573051126], borderColor: 'rgba(248,113,113,0.55)', backgroundColor: 'rgba(148,163,184,0.14)', borderWidth: 1, pointRadius: 0, borderDash: [4,4], fill: '+1' },
-                    { label: 'Lower 10%', data: [81332.28074631578, 82128.35887863157, 82924.43701094735, 83720.51514326314, 84516.59327557894, 85312.67140789473, 86108.74954021051, 86904.82767252631, 87700.9058048421, 88496.98393715789], borderColor: 'rgba(96,165,250,0.55)', borderWidth: 1, pointRadius: 0, borderDash: [4,4], fill: false },
-                    { label: 'Predicted', data: [82992.1232105263, 83804.44783533833, 84616.77246015036, 85429.09708496238, 86241.42170977443, 87053.74633458645, 87866.07095939848, 88678.39558421052, 89490.72020902255, 90303.04483383457], borderColor: '#34d399', backgroundColor: 'rgba(52,211,153,0.12)', borderWidth: 2, pointRadius: 3, fill: false, tension: 0.1 }
+                    { label: 'Upper 90%', data: [77033.96875, 77394.15625, 76836.140625, 76363.6796875, 76105.875, 76001.8125, 75921.4453125, 75964.6015625, 76100.65625, 76079.296875], borderColor: 'rgba(248,113,113,0.55)', backgroundColor: 'rgba(148,163,184,0.14)', borderWidth: 1, pointRadius: 0, borderDash: [4,4], fill: '+1' },
+                    { label: 'Lower 10%', data: [77033.96875, 77394.15625, 76836.140625, 76363.6796875, 76105.875, 76001.8125, 75921.4453125, 75964.6015625, 76100.65625, 76079.296875], borderColor: 'rgba(96,165,250,0.55)', borderWidth: 1, pointRadius: 0, borderDash: [4,4], fill: false },
+                    { label: 'Predicted', data: [77033.96875, 77394.15625, 76836.140625, 76363.6796875, 76105.875, 76001.8125, 75921.4453125, 75964.6015625, 76100.65625, 76079.296875], borderColor: '#34d399', backgroundColor: 'rgba(52,211,153,0.12)', borderWidth: 2, pointRadius: 3, fill: false, tension: 0.1 }
                 ]
             },
             options: {
@@ -1369,9 +1421,9 @@
             data: {
                 labels: ["09-04", "09-05", "09-06", "09-07", "09-08", "09-09", "09-10", "09-11", "09-12", "09-13"],
                 datasets: [
-                    { label: 'Upper 90%', data: [84651.96567473683, 85480.5367920451, 86309.10790935336, 87137.67902666163, 87966.25014396991, 88794.82126127818, 89623.39237858645, 90451.96349589473, 91280.534613203, 92109.10573051126], borderColor: 'rgba(248,113,113,0.55)', backgroundColor: 'rgba(148,163,184,0.14)', borderWidth: 1, pointRadius: 0, borderDash: [4,4], fill: '+1' },
-                    { label: 'Lower 10%', data: [81332.28074631578, 82128.35887863157, 82924.43701094735, 83720.51514326314, 84516.59327557894, 85312.67140789473, 86108.74954021051, 86904.82767252631, 87700.9058048421, 88496.98393715789], borderColor: 'rgba(96,165,250,0.55)', borderWidth: 1, pointRadius: 0, borderDash: [4,4], fill: false },
-                    { label: 'Predicted', data: [82992.1232105263, 83804.44783533833, 84616.77246015036, 85429.09708496238, 86241.42170977443, 87053.74633458645, 87866.07095939848, 88678.39558421052, 89490.72020902255, 90303.04483383457], borderColor: '#a78bfa', backgroundColor: 'rgba(167,139,250,0.12)', borderWidth: 2, pointRadius: 3, fill: false, tension: 0.1 }
+                    { label: 'Upper 90%', data: [77838.8046875, 77531.078125, 77033.640625, 77041.265625, 77247.90625, 76571.328125, 76668.53125, 76620.03125, 76673.7421875, 76393.1953125], borderColor: 'rgba(248,113,113,0.55)', backgroundColor: 'rgba(148,163,184,0.14)', borderWidth: 1, pointRadius: 0, borderDash: [4,4], fill: '+1' },
+                    { label: 'Lower 10%', data: [77838.8046875, 77531.078125, 77033.640625, 77041.265625, 77247.90625, 76571.328125, 76668.53125, 76620.03125, 76673.7421875, 76393.1953125], borderColor: 'rgba(96,165,250,0.55)', borderWidth: 1, pointRadius: 0, borderDash: [4,4], fill: false },
+                    { label: 'Predicted', data: [77838.8046875, 77531.078125, 77033.640625, 77041.265625, 77247.90625, 76571.328125, 76668.53125, 76620.03125, 76673.7421875, 76393.1953125], borderColor: '#a78bfa', backgroundColor: 'rgba(167,139,250,0.12)', borderWidth: 2, pointRadius: 3, fill: false, tension: 0.1 }
                 ]
             },
             options: {
@@ -1390,9 +1442,9 @@
             data: {
                 labels: ["09-04", "09-05", "09-06", "09-07", "09-08", "09-09", "09-10", "09-11", "09-12", "09-13", "09-14", "09-15", "09-16", "09-17", "09-18", "09-19", "09-20", "09-21", "09-22", "09-23"],
                 datasets: [
-                    { label: 'Upper 90%', data: [84651.96567473683, 85480.5367920451, 86309.10790935336, 87137.67902666163, 87966.25014396991, 88794.82126127818, 89623.39237858645, 90451.96349589473, 91280.534613203, 92109.10573051126, 92937.67684781953, 93766.2479651278, 94594.81908243608, 95423.39019974435, 96251.96131705261, 97080.5324343609, 97909.10355166916, 98737.67466897743, 99566.2457862857, 100394.81690359396], borderColor: 'rgba(248,113,113,0.55)', backgroundColor: 'rgba(148,163,184,0.14)', borderWidth: 1, pointRadius: 0, borderDash: [4,4], fill: '+1' },
-                    { label: 'Lower 10%', data: [81332.28074631578, 82128.35887863157, 82924.43701094735, 83720.51514326314, 84516.59327557894, 85312.67140789473, 86108.74954021051, 86904.82767252631, 87700.9058048421, 88496.98393715789, 89293.06206947367, 90089.14020178946, 90885.21833410526, 91681.29646642104, 92477.37459873683, 93273.45273105263, 94069.53086336842, 94865.6089956842, 95661.68712799999, 96457.76526031578], borderColor: 'rgba(96,165,250,0.55)', borderWidth: 1, pointRadius: 0, borderDash: [4,4], fill: false },
-                    { label: 'Predicted', data: [82992.1232105263, 83804.44783533833, 84616.77246015036, 85429.09708496238, 86241.42170977443, 87053.74633458645, 87866.07095939848, 88678.39558421052, 89490.72020902255, 90303.04483383457, 91115.3694586466, 91927.69408345863, 92740.01870827067, 93552.3433330827, 94364.66795789472, 95176.99258270676, 95989.31720751879, 96801.64183233082, 97613.96645714284, 98426.29108195487], borderColor: '#34d399', backgroundColor: 'rgba(52,211,153,0.12)', borderWidth: 2, pointRadius: 3, fill: false, tension: 0.1 }
+                    { label: 'Upper 90%', data: [76862.90625, 76776.765625, 76819.203125, 76148.7890625, 76593.265625, 76295.4921875, 76456.453125, 76172.3515625, 75643.484375, 74981.5625, 75159.296875, 75211.5625, 75134.1171875, 75113.7734375, 75093.5859375, 75457.921875, 75523.984375, 75731.640625, 75548.59375, 75666.3125], borderColor: 'rgba(248,113,113,0.55)', backgroundColor: 'rgba(148,163,184,0.14)', borderWidth: 1, pointRadius: 0, borderDash: [4,4], fill: '+1' },
+                    { label: 'Lower 10%', data: [76862.90625, 76776.765625, 76819.203125, 76148.7890625, 76593.265625, 76295.4921875, 76456.453125, 76172.3515625, 75643.484375, 74981.5625, 75159.296875, 75211.5625, 75134.1171875, 75113.7734375, 75093.5859375, 75457.921875, 75523.984375, 75731.640625, 75548.59375, 75666.3125], borderColor: 'rgba(96,165,250,0.55)', borderWidth: 1, pointRadius: 0, borderDash: [4,4], fill: false },
+                    { label: 'Predicted', data: [76862.90625, 76776.765625, 76819.203125, 76148.7890625, 76593.265625, 76295.4921875, 76456.453125, 76172.3515625, 75643.484375, 74981.5625, 75159.296875, 75211.5625, 75134.1171875, 75113.7734375, 75093.5859375, 75457.921875, 75523.984375, 75731.640625, 75548.59375, 75666.3125], borderColor: '#34d399', backgroundColor: 'rgba(52,211,153,0.12)', borderWidth: 2, pointRadius: 3, fill: false, tension: 0.1 }
                 ]
             },
             options: {
@@ -1411,9 +1463,9 @@
             data: {
                 labels: ["09-04", "09-05", "09-06", "09-07", "09-08", "09-09", "09-10", "09-11", "09-12", "09-13", "09-14", "09-15", "09-16", "09-17", "09-18", "09-19", "09-20", "09-21", "09-22", "09-23"],
                 datasets: [
-                    { label: 'Upper 90%', data: [84651.96567473683, 85480.5367920451, 86309.10790935336, 87137.67902666163, 87966.25014396991, 88794.82126127818, 89623.39237858645, 90451.96349589473, 91280.534613203, 92109.10573051126, 92937.67684781953, 93766.2479651278, 94594.81908243608, 95423.39019974435, 96251.96131705261, 97080.5324343609, 97909.10355166916, 98737.67466897743, 99566.2457862857, 100394.81690359396], borderColor: 'rgba(248,113,113,0.55)', backgroundColor: 'rgba(148,163,184,0.14)', borderWidth: 1, pointRadius: 0, borderDash: [4,4], fill: '+1' },
-                    { label: 'Lower 10%', data: [81332.28074631578, 82128.35887863157, 82924.43701094735, 83720.51514326314, 84516.59327557894, 85312.67140789473, 86108.74954021051, 86904.82767252631, 87700.9058048421, 88496.98393715789, 89293.06206947367, 90089.14020178946, 90885.21833410526, 91681.29646642104, 92477.37459873683, 93273.45273105263, 94069.53086336842, 94865.6089956842, 95661.68712799999, 96457.76526031578], borderColor: 'rgba(96,165,250,0.55)', borderWidth: 1, pointRadius: 0, borderDash: [4,4], fill: false },
-                    { label: 'Predicted', data: [82992.1232105263, 83804.44783533833, 84616.77246015036, 85429.09708496238, 86241.42170977443, 87053.74633458645, 87866.07095939848, 88678.39558421052, 89490.72020902255, 90303.04483383457, 91115.3694586466, 91927.69408345863, 92740.01870827067, 93552.3433330827, 94364.66795789472, 95176.99258270676, 95989.31720751879, 96801.64183233082, 97613.96645714284, 98426.29108195487], borderColor: '#a78bfa', backgroundColor: 'rgba(167,139,250,0.12)', borderWidth: 2, pointRadius: 3, fill: false, tension: 0.1 }
+                    { label: 'Upper 90%', data: [77676.359375, 77839.296875, 78454.6328125, 78343.8125, 79005.6953125, 79101.71875, 78997.1953125, 78645.0, 79208.1171875, 78844.8984375, 78707.7734375, 78576.3203125, 78612.5078125, 78354.828125, 79013.3515625, 78553.25, 78224.390625, 78023.6484375, 77309.484375, 77947.078125], borderColor: 'rgba(248,113,113,0.55)', backgroundColor: 'rgba(148,163,184,0.14)', borderWidth: 1, pointRadius: 0, borderDash: [4,4], fill: '+1' },
+                    { label: 'Lower 10%', data: [77676.359375, 77839.296875, 78454.6328125, 78343.8125, 79005.6953125, 79101.71875, 78997.1953125, 78645.0, 79208.1171875, 78844.8984375, 78707.7734375, 78576.3203125, 78612.5078125, 78354.828125, 79013.3515625, 78553.25, 78224.390625, 78023.6484375, 77309.484375, 77947.078125], borderColor: 'rgba(96,165,250,0.55)', borderWidth: 1, pointRadius: 0, borderDash: [4,4], fill: false },
+                    { label: 'Predicted', data: [77676.359375, 77839.296875, 78454.6328125, 78343.8125, 79005.6953125, 79101.71875, 78997.1953125, 78645.0, 79208.1171875, 78844.8984375, 78707.7734375, 78576.3203125, 78612.5078125, 78354.828125, 79013.3515625, 78553.25, 78224.390625, 78023.6484375, 77309.484375, 77947.078125], borderColor: '#a78bfa', backgroundColor: 'rgba(167,139,250,0.12)', borderWidth: 2, pointRadius: 3, fill: false, tension: 0.1 }
                 ]
             },
             options: {
@@ -1428,13 +1480,48 @@
         registerChart(4, predChart_20d_4_novol);
         
 
+        var validationChart_4 = new Chart(document.getElementById('validation-4'), {
+            type: 'line',
+            data: {
+                labels: ["08-25", "08-26", "08-27", "08-28", "08-29", "08-30", "08-31", "09-01", "09-02", "09-03"],
+                datasets: [{
+                    label: 'Actual',
+                    data: [78120.959, 78370.179, 80018.311, 77331.3, 78046.538, 78513.133, 78814.594, 77394.91, 77343.026, 77856.7],
+                    borderColor: '#fbbf24',
+                    borderWidth: 2,
+                    pointRadius: 3,
+                    fill: false
+                }, {
+                    label: 'Predicted',
+                    data: [77786.2265625, 77552.375, 78068.109375, 78051.234375, 77710.6953125, 78808.328125, 79038.75, 77948.8203125, 77210.3125, 77717.1484375],
+                    borderColor: '#3b82f6',
+                    borderWidth: 2,
+                    pointRadius: 3,
+                    fill: false,
+                    borderDash: [5, 5]
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                animation: false,
+                plugins: { legend: { display: true, labels: { color: '#94a3b8', font: { size: 10 } } } },
+                scales: {
+                    x: { grid: { color: '#1e293b' }, ticks: { color: '#94a3b8' } },
+                    y: { grid: { color: '#1e293b' }, ticks: { color: '#94a3b8' } }
+                }
+            }
+        });
+        registerChart(4, validationChart_4);
+        
+
         var priceChart_5 = new Chart(document.getElementById('chart-5'), {
             type: 'line',
             data: {
                 labels: ["06-12", "06-15", "06-16", "06-17", "06-18", "06-19", "06-22", "06-23", "06-24", "06-25", "06-26", "06-29", "06-30", "07-01", "07-02", "07-03", "07-06", "07-07", "07-08", "07-09", "07-10", "07-13", "07-14", "07-15", "07-16", "07-17", "07-20", "07-21", "07-22", "07-23", "07-24", "07-27", "07-28", "07-29", "07-30", "07-31", "08-03", "08-04", "08-05", "08-06", "08-07", "08-10", "08-11", "08-12", "08-13", "08-14", "08-17", "08-18", "08-19", "08-20", "08-21", "08-24", "08-25", "08-26", "08-27", "08-28", "08-31", "09-01", "09-02", "09-03"],
                 datasets: [{
                     label: 'Close Price',
-                    data: [4218.71, 4309.03, 4331.14, 4257.71, 4209.02, 4155.52, 4191.26, 4110.14, 3999.06, 4026.57, 4089.95, 4016.54, 4007.41, 4031.01, 4123.77, 4174.48, 4165.04, 4105.67, 4077.4, 4123.38, 4119.29, 4000.78, 4052.92, 4060.55, 3976.48, 4017.04, 4007.49, 4077.87, 4130.11, 4049.43, 4052.74, 4076.6, 4028.54, 4066.23, 4103.64, 4044.36, 4055.15, 4077.25, 4247.02, 4240.96, 4341.94, 4390.54, 4368.31, 4408.26, 4351.18, 4376.36, 4416.65, 4334.39, 4522.68, 4519.01, 4603.79, 4651.55, 4658.86, 4594.69, 4601.84, 4454.84, 4449.07, 4328.19, 4388.06, 4443.07],
+                    data: [4218.71, 4309.03, 4331.14, 4257.71, 4209.02, 4155.52, 4191.26, 4110.14, 3999.06, 4026.57, 4089.95, 4016.54, 4007.41, 4031.01, 4123.77, 4174.48, 4165.04, 4105.67, 4077.4, 4123.38, 4119.29, 4000.78, 4052.92, 4060.55, 3976.48, 4017.04, 4007.49, 4077.87, 4130.11, 4049.43, 4052.74, 4076.6, 4028.54, 4066.23, 4103.64, 4044.36, 4055.15, 4077.25, 4247.02, 4240.96, 4341.94, 4390.54, 4368.31, 4408.26, 4351.18, 4376.36, 4416.65, 4334.39, 4522.68, 4519.01, 4603.79, 4651.55, 4658.86, 4594.69, 4601.84, 4454.84, 4449.07, 4328.19, 4388.06, 4432.59],
                     borderColor: '#3b82f6',
                     backgroundColor: 'rgba(59, 130, 246, 0.08)',
                     borderWidth: 2,
@@ -1462,7 +1549,7 @@
                 labels: ["06-12", "06-15", "06-16", "06-17", "06-18", "06-19", "06-22", "06-23", "06-24", "06-25", "06-26", "06-29", "06-30", "07-01", "07-02", "07-03", "07-06", "07-07", "07-08", "07-09", "07-10", "07-13", "07-14", "07-15", "07-16", "07-17", "07-20", "07-21", "07-22", "07-23", "07-24", "07-27", "07-28", "07-29", "07-30", "07-31", "08-03", "08-04", "08-05", "08-06", "08-07", "08-10", "08-11", "08-12", "08-13", "08-14", "08-17", "08-18", "08-19", "08-20", "08-21", "08-24", "08-25", "08-26", "08-27", "08-28", "08-31", "09-01", "09-02", "09-03"],
                 datasets: [{
                     label: 'Volume',
-                    data: [356558.0, 274208.0, 259123.0, 288931.0, 330065.0, 211638.0, 307411.0, 334131.0, 401428.0, 379239.0, 323195.0, 296773.0, 294991.0, 299080.0, 337335.0, 222207.0, 300785.0, 339084.0, 435729.0, 311868.0, 258287.0, 378152.0, 345563.0, 349416.0, 360448.0, 370653.0, 321408.0, 289512.0, 327119.0, 344564.0, 260792.0, 307025.0, 323312.0, 368479.0, 394087.0, 294585.0, 289229.0, 284609.0, 337756.0, 350730.0, 353356.0, 306350.0, 322447.0, 321107.0, 321751.0, 289767.0, 281506.0, 295540.0, 355596.0, 336430.0, 330877.0, 375566.0, 343803.0, 301908.0, 326180.0, 346686.0, 332991.0, 371505.0, 355238.0, 129835.0],
+                    data: [356558.0, 274208.0, 259123.0, 288931.0, 330065.0, 211638.0, 307411.0, 334131.0, 401428.0, 379239.0, 323195.0, 296773.0, 294991.0, 299080.0, 337335.0, 222207.0, 300785.0, 339084.0, 435729.0, 311868.0, 258287.0, 378152.0, 345563.0, 349416.0, 360448.0, 370653.0, 321408.0, 289512.0, 327119.0, 344564.0, 260792.0, 307025.0, 323312.0, 368479.0, 394087.0, 294585.0, 289229.0, 284609.0, 337756.0, 350730.0, 353356.0, 306350.0, 322447.0, 321107.0, 321751.0, 289767.0, 281506.0, 295540.0, 355596.0, 336430.0, 330877.0, 375566.0, 343803.0, 301908.0, 326180.0, 346686.0, 332991.0, 371505.0, 355238.0, 132071.0],
                     backgroundColor: 'rgba(59, 130, 246, 0.5)',
                     borderColor: '#3b82f6',
                     borderWidth: 1,
@@ -1489,9 +1576,9 @@
             data: {
                 labels: ["09-04", "09-05", "09-06", "09-07", "09-08"],
                 datasets: [
-                    { label: 'Upper 90%', data: [4616.346170526314, 4622.725112481201, 4629.104054436089, 4635.482996390976, 4641.861938345864], borderColor: 'rgba(248,113,113,0.55)', backgroundColor: 'rgba(148,163,184,0.14)', borderWidth: 1, pointRadius: 0, borderDash: [4,4], fill: '+1' },
-                    { label: 'Lower 10%', data: [4435.312987368419, 4441.441774736841, 4447.570562105262, 4453.6993494736835, 4459.828136842104], borderColor: 'rgba(96,165,250,0.55)', borderWidth: 1, pointRadius: 0, borderDash: [4,4], fill: false },
-                    { label: 'Predicted', data: [4525.829578947367, 4532.083443609021, 4538.337308270676, 4544.59117293233, 4550.845037593984], borderColor: '#34d399', backgroundColor: 'rgba(52,211,153,0.12)', borderWidth: 2, pointRadius: 3, fill: false, tension: 0.1 }
+                    { label: 'Upper 90%', data: [4350.443359375, 4346.287109375, 4355.15625, 4379.44677734375, 4368.4306640625], borderColor: 'rgba(248,113,113,0.55)', backgroundColor: 'rgba(148,163,184,0.14)', borderWidth: 1, pointRadius: 0, borderDash: [4,4], fill: '+1' },
+                    { label: 'Lower 10%', data: [4350.443359375, 4346.287109375, 4355.15625, 4379.44677734375, 4368.4306640625], borderColor: 'rgba(96,165,250,0.55)', borderWidth: 1, pointRadius: 0, borderDash: [4,4], fill: false },
+                    { label: 'Predicted', data: [4350.443359375, 4346.287109375, 4355.15625, 4379.44677734375, 4368.4306640625], borderColor: '#34d399', backgroundColor: 'rgba(52,211,153,0.12)', borderWidth: 2, pointRadius: 3, fill: false, tension: 0.1 }
                 ]
             },
             options: {
@@ -1510,9 +1597,9 @@
             data: {
                 labels: ["09-04", "09-05", "09-06", "09-07", "09-08"],
                 datasets: [
-                    { label: 'Upper 90%', data: [4616.346170526314, 4622.725112481201, 4629.104054436089, 4635.482996390976, 4641.861938345864], borderColor: 'rgba(248,113,113,0.55)', backgroundColor: 'rgba(148,163,184,0.14)', borderWidth: 1, pointRadius: 0, borderDash: [4,4], fill: '+1' },
-                    { label: 'Lower 10%', data: [4435.312987368419, 4441.441774736841, 4447.570562105262, 4453.6993494736835, 4459.828136842104], borderColor: 'rgba(96,165,250,0.55)', borderWidth: 1, pointRadius: 0, borderDash: [4,4], fill: false },
-                    { label: 'Predicted', data: [4525.829578947367, 4532.083443609021, 4538.337308270676, 4544.59117293233, 4550.845037593984], borderColor: '#a78bfa', backgroundColor: 'rgba(167,139,250,0.12)', borderWidth: 2, pointRadius: 3, fill: false, tension: 0.1 }
+                    { label: 'Upper 90%', data: [4427.1044921875, 4421.45458984375, 4428.3544921875, 4406.48876953125, 4416.548828125], borderColor: 'rgba(248,113,113,0.55)', backgroundColor: 'rgba(148,163,184,0.14)', borderWidth: 1, pointRadius: 0, borderDash: [4,4], fill: '+1' },
+                    { label: 'Lower 10%', data: [4427.1044921875, 4421.45458984375, 4428.3544921875, 4406.48876953125, 4416.548828125], borderColor: 'rgba(96,165,250,0.55)', borderWidth: 1, pointRadius: 0, borderDash: [4,4], fill: false },
+                    { label: 'Predicted', data: [4427.1044921875, 4421.45458984375, 4428.3544921875, 4406.48876953125, 4416.548828125], borderColor: '#a78bfa', backgroundColor: 'rgba(167,139,250,0.12)', borderWidth: 2, pointRadius: 3, fill: false, tension: 0.1 }
                 ]
             },
             options: {
@@ -1531,9 +1618,9 @@
             data: {
                 labels: ["09-04", "09-05", "09-06", "09-07", "09-08", "09-09", "09-10", "09-11", "09-12", "09-13"],
                 datasets: [
-                    { label: 'Upper 90%', data: [4616.346170526314, 4622.725112481201, 4629.104054436089, 4635.482996390976, 4641.861938345864, 4648.24088030075, 4654.619822255638, 4660.998764210526, 4667.377706165413, 4673.7566481203], borderColor: 'rgba(248,113,113,0.55)', backgroundColor: 'rgba(148,163,184,0.14)', borderWidth: 1, pointRadius: 0, borderDash: [4,4], fill: '+1' },
-                    { label: 'Lower 10%', data: [4435.312987368419, 4441.441774736841, 4447.570562105262, 4453.6993494736835, 4459.828136842104, 4465.956924210525, 4472.085711578946, 4478.214498947367, 4484.343286315789, 4490.472073684209], borderColor: 'rgba(96,165,250,0.55)', borderWidth: 1, pointRadius: 0, borderDash: [4,4], fill: false },
-                    { label: 'Predicted', data: [4525.829578947367, 4532.083443609021, 4538.337308270676, 4544.59117293233, 4550.845037593984, 4557.098902255638, 4563.352766917292, 4569.606631578947, 4575.860496240601, 4582.114360902255], borderColor: '#34d399', backgroundColor: 'rgba(52,211,153,0.12)', borderWidth: 2, pointRadius: 3, fill: false, tension: 0.1 }
+                    { label: 'Upper 90%', data: [4353.90234375, 4339.22021484375, 4382.68408203125, 4402.99951171875, 4386.86865234375, 4368.48095703125, 4369.6396484375, 4391.38916015625, 4372.57080078125, 4368.3818359375], borderColor: 'rgba(248,113,113,0.55)', backgroundColor: 'rgba(148,163,184,0.14)', borderWidth: 1, pointRadius: 0, borderDash: [4,4], fill: '+1' },
+                    { label: 'Lower 10%', data: [4353.90234375, 4339.22021484375, 4382.68408203125, 4402.99951171875, 4386.86865234375, 4368.48095703125, 4369.6396484375, 4391.38916015625, 4372.57080078125, 4368.3818359375], borderColor: 'rgba(96,165,250,0.55)', borderWidth: 1, pointRadius: 0, borderDash: [4,4], fill: false },
+                    { label: 'Predicted', data: [4353.90234375, 4339.22021484375, 4382.68408203125, 4402.99951171875, 4386.86865234375, 4368.48095703125, 4369.6396484375, 4391.38916015625, 4372.57080078125, 4368.3818359375], borderColor: '#34d399', backgroundColor: 'rgba(52,211,153,0.12)', borderWidth: 2, pointRadius: 3, fill: false, tension: 0.1 }
                 ]
             },
             options: {
@@ -1552,9 +1639,9 @@
             data: {
                 labels: ["09-04", "09-05", "09-06", "09-07", "09-08", "09-09", "09-10", "09-11", "09-12", "09-13"],
                 datasets: [
-                    { label: 'Upper 90%', data: [4616.346170526314, 4622.725112481201, 4629.104054436089, 4635.482996390976, 4641.861938345864, 4648.24088030075, 4654.619822255638, 4660.998764210526, 4667.377706165413, 4673.7566481203], borderColor: 'rgba(248,113,113,0.55)', backgroundColor: 'rgba(148,163,184,0.14)', borderWidth: 1, pointRadius: 0, borderDash: [4,4], fill: '+1' },
-                    { label: 'Lower 10%', data: [4435.312987368419, 4441.441774736841, 4447.570562105262, 4453.6993494736835, 4459.828136842104, 4465.956924210525, 4472.085711578946, 4478.214498947367, 4484.343286315789, 4490.472073684209], borderColor: 'rgba(96,165,250,0.55)', borderWidth: 1, pointRadius: 0, borderDash: [4,4], fill: false },
-                    { label: 'Predicted', data: [4525.829578947367, 4532.083443609021, 4538.337308270676, 4544.59117293233, 4550.845037593984, 4557.098902255638, 4563.352766917292, 4569.606631578947, 4575.860496240601, 4582.114360902255], borderColor: '#a78bfa', backgroundColor: 'rgba(167,139,250,0.12)', borderWidth: 2, pointRadius: 3, fill: false, tension: 0.1 }
+                    { label: 'Upper 90%', data: [4428.15283203125, 4397.70751953125, 4414.2578125, 4421.0849609375, 4434.16259765625, 4421.80517578125, 4399.1103515625, 4401.6552734375, 4409.8515625, 4407.12158203125], borderColor: 'rgba(248,113,113,0.55)', backgroundColor: 'rgba(148,163,184,0.14)', borderWidth: 1, pointRadius: 0, borderDash: [4,4], fill: '+1' },
+                    { label: 'Lower 10%', data: [4428.15283203125, 4397.70751953125, 4414.2578125, 4421.0849609375, 4434.16259765625, 4421.80517578125, 4399.1103515625, 4401.6552734375, 4409.8515625, 4407.12158203125], borderColor: 'rgba(96,165,250,0.55)', borderWidth: 1, pointRadius: 0, borderDash: [4,4], fill: false },
+                    { label: 'Predicted', data: [4428.15283203125, 4397.70751953125, 4414.2578125, 4421.0849609375, 4434.16259765625, 4421.80517578125, 4399.1103515625, 4401.6552734375, 4409.8515625, 4407.12158203125], borderColor: '#a78bfa', backgroundColor: 'rgba(167,139,250,0.12)', borderWidth: 2, pointRadius: 3, fill: false, tension: 0.1 }
                 ]
             },
             options: {
@@ -1573,9 +1660,9 @@
             data: {
                 labels: ["09-04", "09-05", "09-06", "09-07", "09-08", "09-09", "09-10", "09-11", "09-12", "09-13", "09-14", "09-15", "09-16", "09-17", "09-18", "09-19", "09-20", "09-21", "09-22", "09-23"],
                 datasets: [
-                    { label: 'Upper 90%', data: [4616.346170526314, 4622.725112481201, 4629.104054436089, 4635.482996390976, 4641.861938345864, 4648.24088030075, 4654.619822255638, 4660.998764210526, 4667.377706165413, 4673.7566481203, 4680.135590075187, 4686.514532030074, 4692.893473984961, 4699.2724159398485, 4705.651357894736, 4712.030299849624, 4718.40924180451, 4724.788183759398, 4731.167125714284, 4737.546067669173], borderColor: 'rgba(248,113,113,0.55)', backgroundColor: 'rgba(148,163,184,0.14)', borderWidth: 1, pointRadius: 0, borderDash: [4,4], fill: '+1' },
-                    { label: 'Lower 10%', data: [4435.312987368419, 4441.441774736841, 4447.570562105262, 4453.6993494736835, 4459.828136842104, 4465.956924210525, 4472.085711578946, 4478.214498947367, 4484.343286315789, 4490.472073684209, 4496.6008610526305, 4502.729648421051, 4508.858435789472, 4514.987223157893, 4521.116010526315, 4527.244797894736, 4533.373585263157, 4539.502372631578, 4545.631159999999, 4551.75994736842], borderColor: 'rgba(96,165,250,0.55)', borderWidth: 1, pointRadius: 0, borderDash: [4,4], fill: false },
-                    { label: 'Predicted', data: [4525.829578947367, 4532.083443609021, 4538.337308270676, 4544.59117293233, 4550.845037593984, 4557.098902255638, 4563.352766917292, 4569.606631578947, 4575.860496240601, 4582.114360902255, 4588.368225563909, 4594.622090225563, 4600.875954887217, 4607.129819548871, 4613.383684210526, 4619.63754887218, 4625.891413533834, 4632.145278195488, 4638.399142857142, 4644.653007518797], borderColor: '#34d399', backgroundColor: 'rgba(52,211,153,0.12)', borderWidth: 2, pointRadius: 3, fill: false, tension: 0.1 }
+                    { label: 'Upper 90%', data: [4387.6474609375, 4400.4208984375, 4417.580078125, 4434.0400390625, 4452.59814453125, 4452.95556640625, 4449.802734375, 4481.15234375, 4508.12353515625, 4497.45361328125, 4488.97900390625, 4501.869140625, 4515.91357421875, 4533.4384765625, 4509.68798828125, 4500.78173828125, 4508.30224609375, 4502.21630859375, 4472.33203125, 4479.69091796875], borderColor: 'rgba(248,113,113,0.55)', backgroundColor: 'rgba(148,163,184,0.14)', borderWidth: 1, pointRadius: 0, borderDash: [4,4], fill: '+1' },
+                    { label: 'Lower 10%', data: [4387.6474609375, 4400.4208984375, 4417.580078125, 4434.0400390625, 4452.59814453125, 4452.95556640625, 4449.802734375, 4481.15234375, 4508.12353515625, 4497.45361328125, 4488.97900390625, 4501.869140625, 4515.91357421875, 4533.4384765625, 4509.68798828125, 4500.78173828125, 4508.30224609375, 4502.21630859375, 4472.33203125, 4479.69091796875], borderColor: 'rgba(96,165,250,0.55)', borderWidth: 1, pointRadius: 0, borderDash: [4,4], fill: false },
+                    { label: 'Predicted', data: [4387.6474609375, 4400.4208984375, 4417.580078125, 4434.0400390625, 4452.59814453125, 4452.95556640625, 4449.802734375, 4481.15234375, 4508.12353515625, 4497.45361328125, 4488.97900390625, 4501.869140625, 4515.91357421875, 4533.4384765625, 4509.68798828125, 4500.78173828125, 4508.30224609375, 4502.21630859375, 4472.33203125, 4479.69091796875], borderColor: '#34d399', backgroundColor: 'rgba(52,211,153,0.12)', borderWidth: 2, pointRadius: 3, fill: false, tension: 0.1 }
                 ]
             },
             options: {
@@ -1594,9 +1681,9 @@
             data: {
                 labels: ["09-04", "09-05", "09-06", "09-07", "09-08", "09-09", "09-10", "09-11", "09-12", "09-13", "09-14", "09-15", "09-16", "09-17", "09-18", "09-19", "09-20", "09-21", "09-22", "09-23"],
                 datasets: [
-                    { label: 'Upper 90%', data: [4616.346170526314, 4622.725112481201, 4629.104054436089, 4635.482996390976, 4641.861938345864, 4648.24088030075, 4654.619822255638, 4660.998764210526, 4667.377706165413, 4673.7566481203, 4680.135590075187, 4686.514532030074, 4692.893473984961, 4699.2724159398485, 4705.651357894736, 4712.030299849624, 4718.40924180451, 4724.788183759398, 4731.167125714284, 4737.546067669173], borderColor: 'rgba(248,113,113,0.55)', backgroundColor: 'rgba(148,163,184,0.14)', borderWidth: 1, pointRadius: 0, borderDash: [4,4], fill: '+1' },
-                    { label: 'Lower 10%', data: [4435.312987368419, 4441.441774736841, 4447.570562105262, 4453.6993494736835, 4459.828136842104, 4465.956924210525, 4472.085711578946, 4478.214498947367, 4484.343286315789, 4490.472073684209, 4496.6008610526305, 4502.729648421051, 4508.858435789472, 4514.987223157893, 4521.116010526315, 4527.244797894736, 4533.373585263157, 4539.502372631578, 4545.631159999999, 4551.75994736842], borderColor: 'rgba(96,165,250,0.55)', borderWidth: 1, pointRadius: 0, borderDash: [4,4], fill: false },
-                    { label: 'Predicted', data: [4525.829578947367, 4532.083443609021, 4538.337308270676, 4544.59117293233, 4550.845037593984, 4557.098902255638, 4563.352766917292, 4569.606631578947, 4575.860496240601, 4582.114360902255, 4588.368225563909, 4594.622090225563, 4600.875954887217, 4607.129819548871, 4613.383684210526, 4619.63754887218, 4625.891413533834, 4632.145278195488, 4638.399142857142, 4644.653007518797], borderColor: '#a78bfa', backgroundColor: 'rgba(167,139,250,0.12)', borderWidth: 2, pointRadius: 3, fill: false, tension: 0.1 }
+                    { label: 'Upper 90%', data: [4406.49169921875, 4378.98876953125, 4365.65380859375, 4365.3447265625, 4399.7822265625, 4393.45751953125, 4398.0615234375, 4405.06884765625, 4439.728515625, 4465.83154296875, 4449.52294921875, 4471.396484375, 4477.79931640625, 4471.51416015625, 4460.14111328125, 4436.7265625, 4435.8671875, 4426.48876953125, 4421.78271484375, 4424.470703125], borderColor: 'rgba(248,113,113,0.55)', backgroundColor: 'rgba(148,163,184,0.14)', borderWidth: 1, pointRadius: 0, borderDash: [4,4], fill: '+1' },
+                    { label: 'Lower 10%', data: [4406.49169921875, 4378.98876953125, 4365.65380859375, 4365.3447265625, 4399.7822265625, 4393.45751953125, 4398.0615234375, 4405.06884765625, 4439.728515625, 4465.83154296875, 4449.52294921875, 4471.396484375, 4477.79931640625, 4471.51416015625, 4460.14111328125, 4436.7265625, 4435.8671875, 4426.48876953125, 4421.78271484375, 4424.470703125], borderColor: 'rgba(96,165,250,0.55)', borderWidth: 1, pointRadius: 0, borderDash: [4,4], fill: false },
+                    { label: 'Predicted', data: [4406.49169921875, 4378.98876953125, 4365.65380859375, 4365.3447265625, 4399.7822265625, 4393.45751953125, 4398.0615234375, 4405.06884765625, 4439.728515625, 4465.83154296875, 4449.52294921875, 4471.396484375, 4477.79931640625, 4471.51416015625, 4460.14111328125, 4436.7265625, 4435.8671875, 4426.48876953125, 4421.78271484375, 4424.470703125], borderColor: '#a78bfa', backgroundColor: 'rgba(167,139,250,0.12)', borderWidth: 2, pointRadius: 3, fill: false, tension: 0.1 }
                 ]
             },
             options: {
@@ -1611,13 +1698,48 @@
         registerChart(5, predChart_20d_5_novol);
         
 
+        var validationChart_5 = new Chart(document.getElementById('validation-5'), {
+            type: 'line',
+            data: {
+                labels: ["08-21", "08-24", "08-25", "08-26", "08-27", "08-28", "08-31", "09-01", "09-02", "09-03"],
+                datasets: [{
+                    label: 'Actual',
+                    data: [4603.79, 4651.55, 4658.86, 4594.69, 4601.84, 4454.84, 4449.07, 4328.19, 4388.06, 4432.59],
+                    borderColor: '#fbbf24',
+                    borderWidth: 2,
+                    pointRadius: 3,
+                    fill: false
+                }, {
+                    label: 'Predicted',
+                    data: [4520.51220703125, 4476.23095703125, 4499.62890625, 4476.97705078125, 4468.267578125, 4515.646484375, 4495.771484375, 4498.49560546875, 4484.35986328125, 4479.99169921875],
+                    borderColor: '#3b82f6',
+                    borderWidth: 2,
+                    pointRadius: 3,
+                    fill: false,
+                    borderDash: [5, 5]
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                animation: false,
+                plugins: { legend: { display: true, labels: { color: '#94a3b8', font: { size: 10 } } } },
+                scales: {
+                    x: { grid: { color: '#1e293b' }, ticks: { color: '#94a3b8' } },
+                    y: { grid: { color: '#1e293b' }, ticks: { color: '#94a3b8' } }
+                }
+            }
+        });
+        registerChart(5, validationChart_5);
+        
+
         var priceChart_6 = new Chart(document.getElementById('chart-6'), {
             type: 'line',
             data: {
                 labels: ["06-12", "06-15", "06-16", "06-17", "06-18", "06-19", "06-22", "06-23", "06-24", "06-25", "06-26", "06-29", "06-30", "07-01", "07-02", "07-03", "07-06", "07-07", "07-08", "07-09", "07-10", "07-13", "07-14", "07-15", "07-16", "07-17", "07-20", "07-21", "07-22", "07-23", "07-24", "07-27", "07-28", "07-29", "07-30", "07-31", "08-03", "08-04", "08-05", "08-06", "08-07", "08-10", "08-11", "08-12", "08-13", "08-14", "08-17", "08-18", "08-19", "08-20", "08-21", "08-24", "08-25", "08-26", "08-27", "08-28", "08-31", "09-01", "09-02", "09-03"],
                 datasets: [{
                     label: 'Close Price',
-                    data: [99.47, 99.32, 99.3, 100.14, 100.6, 100.5, 100.74, 101.13, 101.3, 101.22, 101.06, 100.85, 100.88, 101.17, 100.63, 100.58, 100.59, 100.81, 100.81, 100.71, 100.79, 101.06, 100.7, 100.31, 100.51, 100.53, 100.78, 101.01, 100.91, 101.21, 101.29, 101.37, 101.24, 100.62, 99.79, 99.68, 99.83, 99.72, 99.5, 99.75, 99.51, 99.66, 99.67, 99.81, 99.8, 99.49, 99.42, 99.5, 98.65, 98.74, 98.67, 98.89, 98.82, 99.04, 99.07, 99.6, 99.34, 99.59, 99.5, 99.17],
+                    data: [99.47, 99.32, 99.3, 100.14, 100.6, 100.5, 100.74, 101.13, 101.3, 101.22, 101.06, 100.85, 100.88, 101.17, 100.63, 100.58, 100.59, 100.81, 100.81, 100.71, 100.79, 101.06, 100.7, 100.31, 100.51, 100.53, 100.78, 101.01, 100.91, 101.21, 101.29, 101.37, 101.24, 100.62, 99.79, 99.68, 99.83, 99.72, 99.5, 99.75, 99.51, 99.66, 99.67, 99.81, 99.8, 99.49, 99.42, 99.5, 98.65, 98.74, 98.67, 98.89, 98.82, 99.04, 99.07, 99.6, 99.34, 99.59, 99.5, 99.22],
                     borderColor: '#3b82f6',
                     backgroundColor: 'rgba(59, 130, 246, 0.08)',
                     borderWidth: 2,
@@ -1645,7 +1767,7 @@
                 labels: ["06-12", "06-15", "06-16", "06-17", "06-18", "06-19", "06-22", "06-23", "06-24", "06-25", "06-26", "06-29", "06-30", "07-01", "07-02", "07-03", "07-06", "07-07", "07-08", "07-09", "07-10", "07-13", "07-14", "07-15", "07-16", "07-17", "07-20", "07-21", "07-22", "07-23", "07-24", "07-27", "07-28", "07-29", "07-30", "07-31", "08-03", "08-04", "08-05", "08-06", "08-07", "08-10", "08-11", "08-12", "08-13", "08-14", "08-17", "08-18", "08-19", "08-20", "08-21", "08-24", "08-25", "08-26", "08-27", "08-28", "08-31", "09-01", "09-02", "09-03"],
                 datasets: [{
                     label: 'Volume',
-                    data: [7471.0, 4514.0, 4655.0, 8304.0, 8248.0, 4917.0, 7880.0, 6579.0, 7776.0, 7395.0, 8074.0, 5225.0, 7208.0, 7108.0, 9695.0, 4147.0, 5267.0, 5907.0, 8660.0, 6470.0, 9836.0, 10666.0, 13026.0, 10844.0, 8509.0, 8470.0, 7218.0, 6539.0, 7307.0, 9778.0, 7569.0, 7873.0, 6917.0, 12208.0, 16449.0, 17799.0, 10702.0, 8333.0, 8396.0, 6811.0, 9623.0, 6892.0, 6358.0, 9021.0, 7656.0, 7541.0, 7045.0, 6521.0, 11588.0, 10874.0, 9191.0, 9013.0, 7261.0, 6639.0, 6711.0, 8434.0, 6949.0, 7395.0, 10192.0, 4653.0],
+                    data: [7471.0, 4514.0, 4655.0, 8304.0, 8248.0, 4917.0, 7880.0, 6579.0, 7776.0, 7395.0, 8074.0, 5225.0, 7208.0, 7108.0, 9695.0, 4147.0, 5267.0, 5907.0, 8660.0, 6470.0, 9836.0, 10666.0, 13026.0, 10844.0, 8509.0, 8470.0, 7218.0, 6539.0, 7307.0, 9778.0, 7569.0, 7873.0, 6917.0, 12208.0, 16449.0, 17799.0, 10702.0, 8333.0, 8396.0, 6811.0, 9623.0, 6892.0, 6358.0, 9021.0, 7656.0, 7541.0, 7045.0, 6521.0, 11588.0, 10874.0, 9191.0, 9013.0, 7261.0, 6639.0, 6711.0, 8434.0, 6949.0, 7395.0, 10192.0, 4756.0],
                     backgroundColor: 'rgba(59, 130, 246, 0.5)',
                     borderColor: '#3b82f6',
                     borderWidth: 1,
@@ -1672,9 +1794,9 @@
             data: {
                 labels: ["09-04", "09-05", "09-06", "09-07", "09-08"],
                 datasets: [
-                    { label: 'Upper 90%', data: [101.0584326315789, 101.03705097744354, 101.01566932330822, 100.99428766917288, 100.97290601503754], borderColor: 'rgba(248,113,113,0.55)', backgroundColor: 'rgba(148,163,184,0.14)', borderWidth: 1, pointRadius: 0, borderDash: [4,4], fill: '+1' },
-                    { label: 'Lower 10%', data: [97.0953568421052, 97.07481368421047, 97.05427052631573, 97.03372736842098, 97.01318421052626], borderColor: 'rgba(96,165,250,0.55)', borderWidth: 1, pointRadius: 0, borderDash: [4,4], fill: false },
-                    { label: 'Predicted', data: [99.07689473684205, 99.055932330827, 99.03496992481197, 99.01400751879693, 98.9930451127819], borderColor: '#34d399', backgroundColor: 'rgba(52,211,153,0.12)', borderWidth: 2, pointRadius: 3, fill: false, tension: 0.1 }
+                    { label: 'Upper 90%', data: [99.32447814941406, 99.31693267822266, 99.31825256347656, 99.17938232421875, 99.1806869506836], borderColor: 'rgba(248,113,113,0.55)', backgroundColor: 'rgba(148,163,184,0.14)', borderWidth: 1, pointRadius: 0, borderDash: [4,4], fill: '+1' },
+                    { label: 'Lower 10%', data: [99.32447814941406, 99.31693267822266, 99.31825256347656, 99.17938232421875, 99.1806869506836], borderColor: 'rgba(96,165,250,0.55)', borderWidth: 1, pointRadius: 0, borderDash: [4,4], fill: false },
+                    { label: 'Predicted', data: [99.32447814941406, 99.31693267822266, 99.31825256347656, 99.17938232421875, 99.1806869506836], borderColor: '#34d399', backgroundColor: 'rgba(52,211,153,0.12)', borderWidth: 2, pointRadius: 3, fill: false, tension: 0.1 }
                 ]
             },
             options: {
@@ -1693,9 +1815,9 @@
             data: {
                 labels: ["09-04", "09-05", "09-06", "09-07", "09-08"],
                 datasets: [
-                    { label: 'Upper 90%', data: [101.0584326315789, 101.03705097744354, 101.01566932330822, 100.99428766917288, 100.97290601503754], borderColor: 'rgba(248,113,113,0.55)', backgroundColor: 'rgba(148,163,184,0.14)', borderWidth: 1, pointRadius: 0, borderDash: [4,4], fill: '+1' },
-                    { label: 'Lower 10%', data: [97.0953568421052, 97.07481368421047, 97.05427052631573, 97.03372736842098, 97.01318421052626], borderColor: 'rgba(96,165,250,0.55)', borderWidth: 1, pointRadius: 0, borderDash: [4,4], fill: false },
-                    { label: 'Predicted', data: [99.07689473684205, 99.055932330827, 99.03496992481197, 99.01400751879693, 98.9930451127819], borderColor: '#a78bfa', backgroundColor: 'rgba(167,139,250,0.12)', borderWidth: 2, pointRadius: 3, fill: false, tension: 0.1 }
+                    { label: 'Upper 90%', data: [99.10675811767578, 99.2513427734375, 99.20904541015625, 99.288818359375, 99.36647033691406], borderColor: 'rgba(248,113,113,0.55)', backgroundColor: 'rgba(148,163,184,0.14)', borderWidth: 1, pointRadius: 0, borderDash: [4,4], fill: '+1' },
+                    { label: 'Lower 10%', data: [99.10675811767578, 99.2513427734375, 99.20904541015625, 99.288818359375, 99.36647033691406], borderColor: 'rgba(96,165,250,0.55)', borderWidth: 1, pointRadius: 0, borderDash: [4,4], fill: false },
+                    { label: 'Predicted', data: [99.10675811767578, 99.2513427734375, 99.20904541015625, 99.288818359375, 99.36647033691406], borderColor: '#a78bfa', backgroundColor: 'rgba(167,139,250,0.12)', borderWidth: 2, pointRadius: 3, fill: false, tension: 0.1 }
                 ]
             },
             options: {
@@ -1714,9 +1836,9 @@
             data: {
                 labels: ["09-04", "09-05", "09-06", "09-07", "09-08", "09-09", "09-10", "09-11", "09-12", "09-13"],
                 datasets: [
-                    { label: 'Upper 90%', data: [101.0584326315789, 101.03705097744354, 101.01566932330822, 100.99428766917288, 100.97290601503754, 100.9515243609022, 100.93014270676686, 100.90876105263152, 100.88737939849617, 100.86599774436084], borderColor: 'rgba(248,113,113,0.55)', backgroundColor: 'rgba(148,163,184,0.14)', borderWidth: 1, pointRadius: 0, borderDash: [4,4], fill: '+1' },
-                    { label: 'Lower 10%', data: [97.0953568421052, 97.07481368421047, 97.05427052631573, 97.03372736842098, 97.01318421052626, 96.99264105263151, 96.97209789473679, 96.95155473684204, 96.9310115789473, 96.91046842105257], borderColor: 'rgba(96,165,250,0.55)', borderWidth: 1, pointRadius: 0, borderDash: [4,4], fill: false },
-                    { label: 'Predicted', data: [99.07689473684205, 99.055932330827, 99.03496992481197, 99.01400751879693, 98.9930451127819, 98.97208270676686, 98.95112030075182, 98.93015789473678, 98.90919548872174, 98.8882330827067], borderColor: '#34d399', backgroundColor: 'rgba(52,211,153,0.12)', borderWidth: 2, pointRadius: 3, fill: false, tension: 0.1 }
+                    { label: 'Upper 90%', data: [99.4632339477539, 99.46019744873047, 99.2770767211914, 99.35789489746094, 99.30401611328125, 99.3582992553711, 99.45378875732422, 99.54895782470703, 99.48350524902344, 99.6720199584961], borderColor: 'rgba(248,113,113,0.55)', backgroundColor: 'rgba(148,163,184,0.14)', borderWidth: 1, pointRadius: 0, borderDash: [4,4], fill: '+1' },
+                    { label: 'Lower 10%', data: [99.4632339477539, 99.46019744873047, 99.2770767211914, 99.35789489746094, 99.30401611328125, 99.3582992553711, 99.45378875732422, 99.54895782470703, 99.48350524902344, 99.6720199584961], borderColor: 'rgba(96,165,250,0.55)', borderWidth: 1, pointRadius: 0, borderDash: [4,4], fill: false },
+                    { label: 'Predicted', data: [99.4632339477539, 99.46019744873047, 99.2770767211914, 99.35789489746094, 99.30401611328125, 99.3582992553711, 99.45378875732422, 99.54895782470703, 99.48350524902344, 99.6720199584961], borderColor: '#34d399', backgroundColor: 'rgba(52,211,153,0.12)', borderWidth: 2, pointRadius: 3, fill: false, tension: 0.1 }
                 ]
             },
             options: {
@@ -1735,9 +1857,9 @@
             data: {
                 labels: ["09-04", "09-05", "09-06", "09-07", "09-08", "09-09", "09-10", "09-11", "09-12", "09-13"],
                 datasets: [
-                    { label: 'Upper 90%', data: [101.0584326315789, 101.03705097744354, 101.01566932330822, 100.99428766917288, 100.97290601503754, 100.9515243609022, 100.93014270676686, 100.90876105263152, 100.88737939849617, 100.86599774436084], borderColor: 'rgba(248,113,113,0.55)', backgroundColor: 'rgba(148,163,184,0.14)', borderWidth: 1, pointRadius: 0, borderDash: [4,4], fill: '+1' },
-                    { label: 'Lower 10%', data: [97.0953568421052, 97.07481368421047, 97.05427052631573, 97.03372736842098, 97.01318421052626, 96.99264105263151, 96.97209789473679, 96.95155473684204, 96.9310115789473, 96.91046842105257], borderColor: 'rgba(96,165,250,0.55)', borderWidth: 1, pointRadius: 0, borderDash: [4,4], fill: false },
-                    { label: 'Predicted', data: [99.07689473684205, 99.055932330827, 99.03496992481197, 99.01400751879693, 98.9930451127819, 98.97208270676686, 98.95112030075182, 98.93015789473678, 98.90919548872174, 98.8882330827067], borderColor: '#a78bfa', backgroundColor: 'rgba(167,139,250,0.12)', borderWidth: 2, pointRadius: 3, fill: false, tension: 0.1 }
+                    { label: 'Upper 90%', data: [99.15423583984375, 99.28058624267578, 99.13325500488281, 99.08667755126953, 99.14676666259766, 99.14584350585938, 99.10877990722656, 99.24093627929688, 99.21009063720703, 99.2637710571289], borderColor: 'rgba(248,113,113,0.55)', backgroundColor: 'rgba(148,163,184,0.14)', borderWidth: 1, pointRadius: 0, borderDash: [4,4], fill: '+1' },
+                    { label: 'Lower 10%', data: [99.15423583984375, 99.28058624267578, 99.13325500488281, 99.08667755126953, 99.14676666259766, 99.14584350585938, 99.10877990722656, 99.24093627929688, 99.21009063720703, 99.2637710571289], borderColor: 'rgba(96,165,250,0.55)', borderWidth: 1, pointRadius: 0, borderDash: [4,4], fill: false },
+                    { label: 'Predicted', data: [99.15423583984375, 99.28058624267578, 99.13325500488281, 99.08667755126953, 99.14676666259766, 99.14584350585938, 99.10877990722656, 99.24093627929688, 99.21009063720703, 99.2637710571289], borderColor: '#a78bfa', backgroundColor: 'rgba(167,139,250,0.12)', borderWidth: 2, pointRadius: 3, fill: false, tension: 0.1 }
                 ]
             },
             options: {
@@ -1756,9 +1878,9 @@
             data: {
                 labels: ["09-04", "09-05", "09-06", "09-07", "09-08", "09-09", "09-10", "09-11", "09-12", "09-13", "09-14", "09-15", "09-16", "09-17", "09-18", "09-19", "09-20", "09-21", "09-22", "09-23"],
                 datasets: [
-                    { label: 'Upper 90%', data: [101.0584326315789, 101.03705097744354, 101.01566932330822, 100.99428766917288, 100.97290601503754, 100.9515243609022, 100.93014270676686, 100.90876105263152, 100.88737939849617, 100.86599774436084, 100.8446160902255, 100.82323443609016, 100.80185278195482, 100.78047112781948, 100.75908947368414, 100.73770781954882, 100.71632616541346, 100.69494451127812, 100.67356285714278, 100.65218120300744], borderColor: 'rgba(248,113,113,0.55)', backgroundColor: 'rgba(148,163,184,0.14)', borderWidth: 1, pointRadius: 0, borderDash: [4,4], fill: '+1' },
-                    { label: 'Lower 10%', data: [97.0953568421052, 97.07481368421047, 97.05427052631573, 97.03372736842098, 97.01318421052626, 96.99264105263151, 96.97209789473679, 96.95155473684204, 96.9310115789473, 96.91046842105257, 96.88992526315782, 96.8693821052631, 96.84883894736835, 96.82829578947363, 96.80775263157888, 96.78720947368414, 96.76666631578941, 96.74612315789466, 96.72557999999994, 96.70503684210519], borderColor: 'rgba(96,165,250,0.55)', borderWidth: 1, pointRadius: 0, borderDash: [4,4], fill: false },
-                    { label: 'Predicted', data: [99.07689473684205, 99.055932330827, 99.03496992481197, 99.01400751879693, 98.9930451127819, 98.97208270676686, 98.95112030075182, 98.93015789473678, 98.90919548872174, 98.8882330827067, 98.86727067669166, 98.84630827067663, 98.82534586466159, 98.80438345864656, 98.78342105263151, 98.76245864661648, 98.74149624060144, 98.72053383458639, 98.69957142857136, 98.67860902255632], borderColor: '#34d399', backgroundColor: 'rgba(52,211,153,0.12)', borderWidth: 2, pointRadius: 3, fill: false, tension: 0.1 }
+                    { label: 'Upper 90%', data: [99.42512512207031, 99.39676666259766, 99.42020416259766, 99.41551971435547, 99.44019317626953, 99.42787170410156, 99.41748046875, 99.49200439453125, 99.55353546142578, 99.50090026855469, 99.32603454589844, 99.2869644165039, 99.35572814941406, 99.3798828125, 99.26104736328125, 99.24488830566406, 99.43878173828125, 99.50909423828125, 99.53141021728516, 99.4637680053711], borderColor: 'rgba(248,113,113,0.55)', backgroundColor: 'rgba(148,163,184,0.14)', borderWidth: 1, pointRadius: 0, borderDash: [4,4], fill: '+1' },
+                    { label: 'Lower 10%', data: [99.42512512207031, 99.39676666259766, 99.42020416259766, 99.41551971435547, 99.44019317626953, 99.42787170410156, 99.41748046875, 99.49200439453125, 99.55353546142578, 99.50090026855469, 99.32603454589844, 99.2869644165039, 99.35572814941406, 99.3798828125, 99.26104736328125, 99.24488830566406, 99.43878173828125, 99.50909423828125, 99.53141021728516, 99.4637680053711], borderColor: 'rgba(96,165,250,0.55)', borderWidth: 1, pointRadius: 0, borderDash: [4,4], fill: false },
+                    { label: 'Predicted', data: [99.42512512207031, 99.39676666259766, 99.42020416259766, 99.41551971435547, 99.44019317626953, 99.42787170410156, 99.41748046875, 99.49200439453125, 99.55353546142578, 99.50090026855469, 99.32603454589844, 99.2869644165039, 99.35572814941406, 99.3798828125, 99.26104736328125, 99.24488830566406, 99.43878173828125, 99.50909423828125, 99.53141021728516, 99.4637680053711], borderColor: '#34d399', backgroundColor: 'rgba(52,211,153,0.12)', borderWidth: 2, pointRadius: 3, fill: false, tension: 0.1 }
                 ]
             },
             options: {
@@ -1777,9 +1899,9 @@
             data: {
                 labels: ["09-04", "09-05", "09-06", "09-07", "09-08", "09-09", "09-10", "09-11", "09-12", "09-13", "09-14", "09-15", "09-16", "09-17", "09-18", "09-19", "09-20", "09-21", "09-22", "09-23"],
                 datasets: [
-                    { label: 'Upper 90%', data: [101.0584326315789, 101.03705097744354, 101.01566932330822, 100.99428766917288, 100.97290601503754, 100.9515243609022, 100.93014270676686, 100.90876105263152, 100.88737939849617, 100.86599774436084, 100.8446160902255, 100.82323443609016, 100.80185278195482, 100.78047112781948, 100.75908947368414, 100.73770781954882, 100.71632616541346, 100.69494451127812, 100.67356285714278, 100.65218120300744], borderColor: 'rgba(248,113,113,0.55)', backgroundColor: 'rgba(148,163,184,0.14)', borderWidth: 1, pointRadius: 0, borderDash: [4,4], fill: '+1' },
-                    { label: 'Lower 10%', data: [97.0953568421052, 97.07481368421047, 97.05427052631573, 97.03372736842098, 97.01318421052626, 96.99264105263151, 96.97209789473679, 96.95155473684204, 96.9310115789473, 96.91046842105257, 96.88992526315782, 96.8693821052631, 96.84883894736835, 96.82829578947363, 96.80775263157888, 96.78720947368414, 96.76666631578941, 96.74612315789466, 96.72557999999994, 96.70503684210519], borderColor: 'rgba(96,165,250,0.55)', borderWidth: 1, pointRadius: 0, borderDash: [4,4], fill: false },
-                    { label: 'Predicted', data: [99.07689473684205, 99.055932330827, 99.03496992481197, 99.01400751879693, 98.9930451127819, 98.97208270676686, 98.95112030075182, 98.93015789473678, 98.90919548872174, 98.8882330827067, 98.86727067669166, 98.84630827067663, 98.82534586466159, 98.80438345864656, 98.78342105263151, 98.76245864661648, 98.74149624060144, 98.72053383458639, 98.69957142857136, 98.67860902255632], borderColor: '#a78bfa', backgroundColor: 'rgba(167,139,250,0.12)', borderWidth: 2, pointRadius: 3, fill: false, tension: 0.1 }
+                    { label: 'Upper 90%', data: [99.16910552978516, 98.96160125732422, 99.1031723022461, 99.12762451171875, 98.94683074951172, 99.09355163574219, 99.20214080810547, 99.30056762695312, 99.41336059570312, 99.51266479492188, 99.51013946533203, 99.63931274414062, 99.57820892333984, 99.65162658691406, 99.49789428710938, 99.6231689453125, 99.59539031982422, 99.6058120727539, 99.48283386230469, 99.51273345947266], borderColor: 'rgba(248,113,113,0.55)', backgroundColor: 'rgba(148,163,184,0.14)', borderWidth: 1, pointRadius: 0, borderDash: [4,4], fill: '+1' },
+                    { label: 'Lower 10%', data: [99.16910552978516, 98.96160125732422, 99.1031723022461, 99.12762451171875, 98.94683074951172, 99.09355163574219, 99.20214080810547, 99.30056762695312, 99.41336059570312, 99.51266479492188, 99.51013946533203, 99.63931274414062, 99.57820892333984, 99.65162658691406, 99.49789428710938, 99.6231689453125, 99.59539031982422, 99.6058120727539, 99.48283386230469, 99.51273345947266], borderColor: 'rgba(96,165,250,0.55)', borderWidth: 1, pointRadius: 0, borderDash: [4,4], fill: false },
+                    { label: 'Predicted', data: [99.16910552978516, 98.96160125732422, 99.1031723022461, 99.12762451171875, 98.94683074951172, 99.09355163574219, 99.20214080810547, 99.30056762695312, 99.41336059570312, 99.51266479492188, 99.51013946533203, 99.63931274414062, 99.57820892333984, 99.65162658691406, 99.49789428710938, 99.6231689453125, 99.59539031982422, 99.6058120727539, 99.48283386230469, 99.51273345947266], borderColor: '#a78bfa', backgroundColor: 'rgba(167,139,250,0.12)', borderWidth: 2, pointRadius: 3, fill: false, tension: 0.1 }
                 ]
             },
             options: {
@@ -1794,13 +1916,48 @@
         registerChart(6, predChart_20d_6_novol);
         
 
+        var validationChart_6 = new Chart(document.getElementById('validation-6'), {
+            type: 'line',
+            data: {
+                labels: ["08-21", "08-24", "08-25", "08-26", "08-27", "08-28", "08-31", "09-01", "09-02", "09-03"],
+                datasets: [{
+                    label: 'Actual',
+                    data: [98.67, 98.89, 98.82, 99.04, 99.07, 99.6, 99.34, 99.59, 99.5, 99.22],
+                    borderColor: '#fbbf24',
+                    borderWidth: 2,
+                    pointRadius: 3,
+                    fill: false
+                }, {
+                    label: 'Predicted',
+                    data: [98.7625732421875, 98.8624267578125, 98.82552337646484, 98.73615264892578, 98.76238250732422, 98.82424926757812, 98.95523071289062, 99.03247833251953, 98.9415512084961, 98.99748229980469],
+                    borderColor: '#3b82f6',
+                    borderWidth: 2,
+                    pointRadius: 3,
+                    fill: false,
+                    borderDash: [5, 5]
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                animation: false,
+                plugins: { legend: { display: true, labels: { color: '#94a3b8', font: { size: 10 } } } },
+                scales: {
+                    x: { grid: { color: '#1e293b' }, ticks: { color: '#94a3b8' } },
+                    y: { grid: { color: '#1e293b' }, ticks: { color: '#94a3b8' } }
+                }
+            }
+        });
+        registerChart(6, validationChart_6);
+        
+
         var priceChart_7 = new Chart(document.getElementById('chart-7'), {
             type: 'line',
             data: {
                 labels: ["06-12", "06-15", "06-16", "06-17", "06-18", "06-19", "06-22", "06-23", "06-24", "06-25", "06-26", "06-29", "06-30", "07-01", "07-02", "07-03", "07-06", "07-07", "07-08", "07-09", "07-10", "07-13", "07-14", "07-15", "07-16", "07-17", "07-20", "07-21", "07-22", "07-23", "07-24", "07-27", "07-28", "07-29", "07-30", "07-31", "08-03", "08-04", "08-05", "08-06", "08-07", "08-10", "08-11", "08-12", "08-13", "08-14", "08-17", "08-18", "08-19", "08-20", "08-21", "08-24", "08-25", "08-26", "08-27", "08-28", "08-31", "09-01", "09-02", "09-03"],
                 datasets: [{
                     label: 'Close Price',
-                    data: [84.75, 81.28, 76.66, 75.66, 76.16, 77.22, 74.63, 73.59, 70.34, 71.92, 70.64, 70.79, 70.4, 68.37, 68.72, 69.08, 68.77, 72.32, 74.72, 71.9, 71.55, 77.9, 79.91, 80.16, 79.36, 82.24, 82.8, 84.9, 86.77, 92.72, 90.81, 82.15, 79.35, 84.87, 84.13, 86.5, 80.18, 75.31, 75.16, 78.36, 77.15, 82.32, 83.22, 82.59, 81.14, 82.35, 84.72, 84.99, 84.93, 86.78, 87.19, 85.44, 81.5, 82.29, 83.94, 83.8, 86.61, 91.0, 90.97, 90.02],
+                    data: [84.75, 81.28, 76.66, 75.66, 76.16, 77.22, 74.63, 73.59, 70.34, 71.92, 70.64, 70.79, 70.4, 68.37, 68.72, 69.08, 68.77, 72.32, 74.72, 71.9, 71.55, 77.9, 79.91, 80.16, 79.36, 82.24, 82.8, 84.9, 86.77, 92.72, 90.81, 82.15, 79.35, 84.87, 84.13, 86.5, 80.18, 75.31, 75.16, 78.36, 77.15, 82.32, 83.22, 82.59, 81.14, 82.35, 84.72, 84.99, 84.93, 86.78, 87.19, 85.44, 81.5, 82.29, 83.94, 83.8, 86.61, 91.0, 90.97, 90.53],
                     borderColor: '#3b82f6',
                     backgroundColor: 'rgba(59, 130, 246, 0.08)',
                     borderWidth: 2,
@@ -1828,7 +1985,7 @@
                 labels: ["06-12", "06-15", "06-16", "06-17", "06-18", "06-19", "06-22", "06-23", "06-24", "06-25", "06-26", "06-29", "06-30", "07-01", "07-02", "07-03", "07-06", "07-07", "07-08", "07-09", "07-10", "07-13", "07-14", "07-15", "07-16", "07-17", "07-20", "07-21", "07-22", "07-23", "07-24", "07-27", "07-28", "07-29", "07-30", "07-31", "08-03", "08-04", "08-05", "08-06", "08-07", "08-10", "08-11", "08-12", "08-13", "08-14", "08-17", "08-18", "08-19", "08-20", "08-21", "08-24", "08-25", "08-26", "08-27", "08-28", "08-31", "09-01", "09-02", "09-03"],
                 datasets: [{
                     label: 'Volume',
-                    data: [65887.0, 53963.0, 47121.0, 46535.0, 46889.0, 31033.0, 44874.0, 36021.0, 39817.0, 39691.0, 41594.0, 33837.0, 33026.0, 30087.0, 27773.0, 20213.0, 28119.0, 33065.0, 70389.0, 47596.0, 41420.0, 58009.0, 94274.0, 58020.0, 44639.0, 41614.0, 67395.0, 51773.0, 60545.0, 70318.0, 70574.0, 76012.0, 66851.0, 70140.0, 65768.0, 60551.0, 57889.0, 67765.0, 57966.0, 50766.0, 45547.0, 49504.0, 58950.0, 52019.0, 49843.0, 42525.0, 52608.0, 39593.0, 49582.0, 45564.0, 43479.0, 44497.0, 52416.0, 46342.0, 45577.0, 38979.0, 52173.0, 57340.0, 63644.0, 16415.0],
+                    data: [65887.0, 53963.0, 47121.0, 46535.0, 46889.0, 31033.0, 44874.0, 36021.0, 39817.0, 39691.0, 41594.0, 33837.0, 33026.0, 30087.0, 27773.0, 20213.0, 28119.0, 33065.0, 70389.0, 47596.0, 41420.0, 58009.0, 94274.0, 58020.0, 44639.0, 41614.0, 67395.0, 51773.0, 60545.0, 70318.0, 70574.0, 76012.0, 66851.0, 70140.0, 65768.0, 60551.0, 57889.0, 67765.0, 57966.0, 50766.0, 45547.0, 49504.0, 58950.0, 52019.0, 49843.0, 42525.0, 52608.0, 39593.0, 49582.0, 45564.0, 43479.0, 44497.0, 52416.0, 46342.0, 45577.0, 38979.0, 52173.0, 57340.0, 63644.0, 17183.0],
                     backgroundColor: 'rgba(59, 130, 246, 0.5)',
                     borderColor: '#3b82f6',
                     borderWidth: 1,
@@ -1855,9 +2012,9 @@
             data: {
                 labels: ["09-04", "09-05", "09-06", "09-07", "09-08"],
                 datasets: [
-                    { label: 'Upper 90%', data: [90.94325368421052, 91.38161593984961, 91.81997819548872, 92.25834045112781, 92.6967027067669], borderColor: 'rgba(248,113,113,0.55)', backgroundColor: 'rgba(148,163,184,0.14)', borderWidth: 1, pointRadius: 0, borderDash: [4,4], fill: '+1' },
-                    { label: 'Lower 10%', data: [87.37685157894735, 87.79802315789473, 88.2191947368421, 88.64036631578945, 89.06153789473683], borderColor: 'rgba(96,165,250,0.55)', borderWidth: 1, pointRadius: 0, borderDash: [4,4], fill: false },
-                    { label: 'Predicted', data: [89.16005263157894, 89.58981954887217, 90.0195864661654, 90.44935338345863, 90.87912030075186], borderColor: '#34d399', backgroundColor: 'rgba(52,211,153,0.12)', borderWidth: 2, pointRadius: 3, fill: false, tension: 0.1 }
+                    { label: 'Upper 90%', data: [92.8183364868164, 93.72160339355469, 94.00874328613281, 94.17665100097656, 93.87020111083984], borderColor: 'rgba(248,113,113,0.55)', backgroundColor: 'rgba(148,163,184,0.14)', borderWidth: 1, pointRadius: 0, borderDash: [4,4], fill: '+1' },
+                    { label: 'Lower 10%', data: [92.8183364868164, 93.72160339355469, 94.00874328613281, 94.17665100097656, 93.87020111083984], borderColor: 'rgba(96,165,250,0.55)', borderWidth: 1, pointRadius: 0, borderDash: [4,4], fill: false },
+                    { label: 'Predicted', data: [92.8183364868164, 93.72160339355469, 94.00874328613281, 94.17665100097656, 93.87020111083984], borderColor: '#34d399', backgroundColor: 'rgba(52,211,153,0.12)', borderWidth: 2, pointRadius: 3, fill: false, tension: 0.1 }
                 ]
             },
             options: {
@@ -1876,9 +2033,9 @@
             data: {
                 labels: ["09-04", "09-05", "09-06", "09-07", "09-08"],
                 datasets: [
-                    { label: 'Upper 90%', data: [90.94325368421052, 91.38161593984961, 91.81997819548872, 92.25834045112781, 92.6967027067669], borderColor: 'rgba(248,113,113,0.55)', backgroundColor: 'rgba(148,163,184,0.14)', borderWidth: 1, pointRadius: 0, borderDash: [4,4], fill: '+1' },
-                    { label: 'Lower 10%', data: [87.37685157894735, 87.79802315789473, 88.2191947368421, 88.64036631578945, 89.06153789473683], borderColor: 'rgba(96,165,250,0.55)', borderWidth: 1, pointRadius: 0, borderDash: [4,4], fill: false },
-                    { label: 'Predicted', data: [89.16005263157894, 89.58981954887217, 90.0195864661654, 90.44935338345863, 90.87912030075186], borderColor: '#a78bfa', backgroundColor: 'rgba(167,139,250,0.12)', borderWidth: 2, pointRadius: 3, fill: false, tension: 0.1 }
+                    { label: 'Upper 90%', data: [90.21198272705078, 89.33779907226562, 89.6222915649414, 90.07034301757812, 90.24626159667969], borderColor: 'rgba(248,113,113,0.55)', backgroundColor: 'rgba(148,163,184,0.14)', borderWidth: 1, pointRadius: 0, borderDash: [4,4], fill: '+1' },
+                    { label: 'Lower 10%', data: [90.21198272705078, 89.33779907226562, 89.6222915649414, 90.07034301757812, 90.24626159667969], borderColor: 'rgba(96,165,250,0.55)', borderWidth: 1, pointRadius: 0, borderDash: [4,4], fill: false },
+                    { label: 'Predicted', data: [90.21198272705078, 89.33779907226562, 89.6222915649414, 90.07034301757812, 90.24626159667969], borderColor: '#a78bfa', backgroundColor: 'rgba(167,139,250,0.12)', borderWidth: 2, pointRadius: 3, fill: false, tension: 0.1 }
                 ]
             },
             options: {
@@ -1897,9 +2054,9 @@
             data: {
                 labels: ["09-04", "09-05", "09-06", "09-07", "09-08", "09-09", "09-10", "09-11", "09-12", "09-13"],
                 datasets: [
-                    { label: 'Upper 90%', data: [90.94325368421052, 91.38161593984961, 91.81997819548872, 92.25834045112781, 92.6967027067669, 93.135064962406, 93.57342721804511, 94.0117894736842, 94.45015172932331, 94.8885139849624], borderColor: 'rgba(248,113,113,0.55)', backgroundColor: 'rgba(148,163,184,0.14)', borderWidth: 1, pointRadius: 0, borderDash: [4,4], fill: '+1' },
-                    { label: 'Lower 10%', data: [87.37685157894735, 87.79802315789473, 88.2191947368421, 88.64036631578945, 89.06153789473683, 89.4827094736842, 89.90388105263156, 90.32505263157894, 90.74622421052631, 91.16739578947369], borderColor: 'rgba(96,165,250,0.55)', borderWidth: 1, pointRadius: 0, borderDash: [4,4], fill: false },
-                    { label: 'Predicted', data: [89.16005263157894, 89.58981954887217, 90.0195864661654, 90.44935338345863, 90.87912030075186, 91.3088872180451, 91.73865413533834, 92.16842105263157, 92.59818796992481, 93.02795488721804], borderColor: '#34d399', backgroundColor: 'rgba(52,211,153,0.12)', borderWidth: 2, pointRadius: 3, fill: false, tension: 0.1 }
+                    { label: 'Upper 90%', data: [91.6639404296875, 91.62369537353516, 91.86849975585938, 92.05841064453125, 92.14324188232422, 93.06330871582031, 93.29528045654297, 92.97996520996094, 93.03714752197266, 92.04051208496094], borderColor: 'rgba(248,113,113,0.55)', backgroundColor: 'rgba(148,163,184,0.14)', borderWidth: 1, pointRadius: 0, borderDash: [4,4], fill: '+1' },
+                    { label: 'Lower 10%', data: [91.6639404296875, 91.62369537353516, 91.86849975585938, 92.05841064453125, 92.14324188232422, 93.06330871582031, 93.29528045654297, 92.97996520996094, 93.03714752197266, 92.04051208496094], borderColor: 'rgba(96,165,250,0.55)', borderWidth: 1, pointRadius: 0, borderDash: [4,4], fill: false },
+                    { label: 'Predicted', data: [91.6639404296875, 91.62369537353516, 91.86849975585938, 92.05841064453125, 92.14324188232422, 93.06330871582031, 93.29528045654297, 92.97996520996094, 93.03714752197266, 92.04051208496094], borderColor: '#34d399', backgroundColor: 'rgba(52,211,153,0.12)', borderWidth: 2, pointRadius: 3, fill: false, tension: 0.1 }
                 ]
             },
             options: {
@@ -1918,9 +2075,9 @@
             data: {
                 labels: ["09-04", "09-05", "09-06", "09-07", "09-08", "09-09", "09-10", "09-11", "09-12", "09-13"],
                 datasets: [
-                    { label: 'Upper 90%', data: [90.94325368421052, 91.38161593984961, 91.81997819548872, 92.25834045112781, 92.6967027067669, 93.135064962406, 93.57342721804511, 94.0117894736842, 94.45015172932331, 94.8885139849624], borderColor: 'rgba(248,113,113,0.55)', backgroundColor: 'rgba(148,163,184,0.14)', borderWidth: 1, pointRadius: 0, borderDash: [4,4], fill: '+1' },
-                    { label: 'Lower 10%', data: [87.37685157894735, 87.79802315789473, 88.2191947368421, 88.64036631578945, 89.06153789473683, 89.4827094736842, 89.90388105263156, 90.32505263157894, 90.74622421052631, 91.16739578947369], borderColor: 'rgba(96,165,250,0.55)', borderWidth: 1, pointRadius: 0, borderDash: [4,4], fill: false },
-                    { label: 'Predicted', data: [89.16005263157894, 89.58981954887217, 90.0195864661654, 90.44935338345863, 90.87912030075186, 91.3088872180451, 91.73865413533834, 92.16842105263157, 92.59818796992481, 93.02795488721804], borderColor: '#a78bfa', backgroundColor: 'rgba(167,139,250,0.12)', borderWidth: 2, pointRadius: 3, fill: false, tension: 0.1 }
+                    { label: 'Upper 90%', data: [89.20697021484375, 90.12606048583984, 89.71621704101562, 88.84041595458984, 89.10438537597656, 89.00233459472656, 87.66570281982422, 87.70114135742188, 86.5401840209961, 87.0533676147461], borderColor: 'rgba(248,113,113,0.55)', backgroundColor: 'rgba(148,163,184,0.14)', borderWidth: 1, pointRadius: 0, borderDash: [4,4], fill: '+1' },
+                    { label: 'Lower 10%', data: [89.20697021484375, 90.12606048583984, 89.71621704101562, 88.84041595458984, 89.10438537597656, 89.00233459472656, 87.66570281982422, 87.70114135742188, 86.5401840209961, 87.0533676147461], borderColor: 'rgba(96,165,250,0.55)', borderWidth: 1, pointRadius: 0, borderDash: [4,4], fill: false },
+                    { label: 'Predicted', data: [89.20697021484375, 90.12606048583984, 89.71621704101562, 88.84041595458984, 89.10438537597656, 89.00233459472656, 87.66570281982422, 87.70114135742188, 86.5401840209961, 87.0533676147461], borderColor: '#a78bfa', backgroundColor: 'rgba(167,139,250,0.12)', borderWidth: 2, pointRadius: 3, fill: false, tension: 0.1 }
                 ]
             },
             options: {
@@ -1939,9 +2096,9 @@
             data: {
                 labels: ["09-04", "09-05", "09-06", "09-07", "09-08", "09-09", "09-10", "09-11", "09-12", "09-13", "09-14", "09-15", "09-16", "09-17", "09-18", "09-19", "09-20", "09-21", "09-22", "09-23"],
                 datasets: [
-                    { label: 'Upper 90%', data: [90.94325368421052, 91.38161593984961, 91.81997819548872, 92.25834045112781, 92.6967027067669, 93.135064962406, 93.57342721804511, 94.0117894736842, 94.45015172932331, 94.8885139849624, 95.3268762406015, 95.7652384962406, 96.20360075187969, 96.6419630075188, 97.08032526315789, 97.518687518797, 97.9570497744361, 98.39541203007518, 98.83377428571428, 99.27213654135339], borderColor: 'rgba(248,113,113,0.55)', backgroundColor: 'rgba(148,163,184,0.14)', borderWidth: 1, pointRadius: 0, borderDash: [4,4], fill: '+1' },
-                    { label: 'Lower 10%', data: [87.37685157894735, 87.79802315789473, 88.2191947368421, 88.64036631578945, 89.06153789473683, 89.4827094736842, 89.90388105263156, 90.32505263157894, 90.74622421052631, 91.16739578947369, 91.58856736842104, 92.0097389473684, 92.43091052631578, 92.85208210526315, 93.27325368421053, 93.6944252631579, 94.11559684210526, 94.53676842105263, 94.95794, 95.37911157894736], borderColor: 'rgba(96,165,250,0.55)', borderWidth: 1, pointRadius: 0, borderDash: [4,4], fill: false },
-                    { label: 'Predicted', data: [89.16005263157894, 89.58981954887217, 90.0195864661654, 90.44935338345863, 90.87912030075186, 91.3088872180451, 91.73865413533834, 92.16842105263157, 92.59818796992481, 93.02795488721804, 93.45772180451127, 93.8874887218045, 94.31725563909774, 94.74702255639097, 95.17678947368421, 95.60655639097745, 96.03632330827068, 96.4660902255639, 96.89585714285714, 97.32562406015037], borderColor: '#34d399', backgroundColor: 'rgba(52,211,153,0.12)', borderWidth: 2, pointRadius: 3, fill: false, tension: 0.1 }
+                    { label: 'Upper 90%', data: [92.2628402709961, 91.11152648925781, 90.29074096679688, 88.88209533691406, 88.60427856445312, 88.32237243652344, 87.95166015625, 86.93334197998047, 87.40158081054688, 87.2396469116211, 86.18863677978516, 85.88105773925781, 86.20613098144531, 86.83782196044922, 87.2732925415039, 87.00250244140625, 88.811279296875, 88.68901824951172, 87.44697570800781, 87.40525817871094], borderColor: 'rgba(248,113,113,0.55)', backgroundColor: 'rgba(148,163,184,0.14)', borderWidth: 1, pointRadius: 0, borderDash: [4,4], fill: '+1' },
+                    { label: 'Lower 10%', data: [92.2628402709961, 91.11152648925781, 90.29074096679688, 88.88209533691406, 88.60427856445312, 88.32237243652344, 87.95166015625, 86.93334197998047, 87.40158081054688, 87.2396469116211, 86.18863677978516, 85.88105773925781, 86.20613098144531, 86.83782196044922, 87.2732925415039, 87.00250244140625, 88.811279296875, 88.68901824951172, 87.44697570800781, 87.40525817871094], borderColor: 'rgba(96,165,250,0.55)', borderWidth: 1, pointRadius: 0, borderDash: [4,4], fill: false },
+                    { label: 'Predicted', data: [92.2628402709961, 91.11152648925781, 90.29074096679688, 88.88209533691406, 88.60427856445312, 88.32237243652344, 87.95166015625, 86.93334197998047, 87.40158081054688, 87.2396469116211, 86.18863677978516, 85.88105773925781, 86.20613098144531, 86.83782196044922, 87.2732925415039, 87.00250244140625, 88.811279296875, 88.68901824951172, 87.44697570800781, 87.40525817871094], borderColor: '#34d399', backgroundColor: 'rgba(52,211,153,0.12)', borderWidth: 2, pointRadius: 3, fill: false, tension: 0.1 }
                 ]
             },
             options: {
@@ -1960,9 +2117,9 @@
             data: {
                 labels: ["09-04", "09-05", "09-06", "09-07", "09-08", "09-09", "09-10", "09-11", "09-12", "09-13", "09-14", "09-15", "09-16", "09-17", "09-18", "09-19", "09-20", "09-21", "09-22", "09-23"],
                 datasets: [
-                    { label: 'Upper 90%', data: [90.94325368421052, 91.38161593984961, 91.81997819548872, 92.25834045112781, 92.6967027067669, 93.135064962406, 93.57342721804511, 94.0117894736842, 94.45015172932331, 94.8885139849624, 95.3268762406015, 95.7652384962406, 96.20360075187969, 96.6419630075188, 97.08032526315789, 97.518687518797, 97.9570497744361, 98.39541203007518, 98.83377428571428, 99.27213654135339], borderColor: 'rgba(248,113,113,0.55)', backgroundColor: 'rgba(148,163,184,0.14)', borderWidth: 1, pointRadius: 0, borderDash: [4,4], fill: '+1' },
-                    { label: 'Lower 10%', data: [87.37685157894735, 87.79802315789473, 88.2191947368421, 88.64036631578945, 89.06153789473683, 89.4827094736842, 89.90388105263156, 90.32505263157894, 90.74622421052631, 91.16739578947369, 91.58856736842104, 92.0097389473684, 92.43091052631578, 92.85208210526315, 93.27325368421053, 93.6944252631579, 94.11559684210526, 94.53676842105263, 94.95794, 95.37911157894736], borderColor: 'rgba(96,165,250,0.55)', borderWidth: 1, pointRadius: 0, borderDash: [4,4], fill: false },
-                    { label: 'Predicted', data: [89.16005263157894, 89.58981954887217, 90.0195864661654, 90.44935338345863, 90.87912030075186, 91.3088872180451, 91.73865413533834, 92.16842105263157, 92.59818796992481, 93.02795488721804, 93.45772180451127, 93.8874887218045, 94.31725563909774, 94.74702255639097, 95.17678947368421, 95.60655639097745, 96.03632330827068, 96.4660902255639, 96.89585714285714, 97.32562406015037], borderColor: '#a78bfa', backgroundColor: 'rgba(167,139,250,0.12)', borderWidth: 2, pointRadius: 3, fill: false, tension: 0.1 }
+                    { label: 'Upper 90%', data: [89.9383316040039, 90.28616333007812, 90.69535827636719, 90.65705871582031, 90.13284301757812, 88.88142395019531, 88.9583511352539, 88.87823486328125, 88.40470123291016, 87.83564758300781, 86.97929382324219, 87.211181640625, 86.50692749023438, 86.47750854492188, 86.89141082763672, 86.93675231933594, 86.32492065429688, 87.13750457763672, 87.45588684082031, 87.63578033447266], borderColor: 'rgba(248,113,113,0.55)', backgroundColor: 'rgba(148,163,184,0.14)', borderWidth: 1, pointRadius: 0, borderDash: [4,4], fill: '+1' },
+                    { label: 'Lower 10%', data: [89.9383316040039, 90.28616333007812, 90.69535827636719, 90.65705871582031, 90.13284301757812, 88.88142395019531, 88.9583511352539, 88.87823486328125, 88.40470123291016, 87.83564758300781, 86.97929382324219, 87.211181640625, 86.50692749023438, 86.47750854492188, 86.89141082763672, 86.93675231933594, 86.32492065429688, 87.13750457763672, 87.45588684082031, 87.63578033447266], borderColor: 'rgba(96,165,250,0.55)', borderWidth: 1, pointRadius: 0, borderDash: [4,4], fill: false },
+                    { label: 'Predicted', data: [89.9383316040039, 90.28616333007812, 90.69535827636719, 90.65705871582031, 90.13284301757812, 88.88142395019531, 88.9583511352539, 88.87823486328125, 88.40470123291016, 87.83564758300781, 86.97929382324219, 87.211181640625, 86.50692749023438, 86.47750854492188, 86.89141082763672, 86.93675231933594, 86.32492065429688, 87.13750457763672, 87.45588684082031, 87.63578033447266], borderColor: '#a78bfa', backgroundColor: 'rgba(167,139,250,0.12)', borderWidth: 2, pointRadius: 3, fill: false, tension: 0.1 }
                 ]
             },
             options: {
@@ -1975,6 +2132,41 @@
             }
         });
         registerChart(7, predChart_20d_7_novol);
+        
+
+        var validationChart_7 = new Chart(document.getElementById('validation-7'), {
+            type: 'line',
+            data: {
+                labels: ["08-21", "08-24", "08-25", "08-26", "08-27", "08-28", "08-31", "09-01", "09-02", "09-03"],
+                datasets: [{
+                    label: 'Actual',
+                    data: [87.19, 85.44, 81.5, 82.29, 83.94, 83.8, 86.61, 91.0, 90.97, 90.53],
+                    borderColor: '#fbbf24',
+                    borderWidth: 2,
+                    pointRadius: 3,
+                    fill: false
+                }, {
+                    label: 'Predicted',
+                    data: [86.08021545410156, 85.78709411621094, 86.5566177368164, 84.27074432373047, 83.90066528320312, 83.72429656982422, 84.37849426269531, 83.52687072753906, 82.9686508178711, 83.74247741699219],
+                    borderColor: '#3b82f6',
+                    borderWidth: 2,
+                    pointRadius: 3,
+                    fill: false,
+                    borderDash: [5, 5]
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                animation: false,
+                plugins: { legend: { display: true, labels: { color: '#94a3b8', font: { size: 10 } } } },
+                scales: {
+                    x: { grid: { color: '#1e293b' }, ticks: { color: '#94a3b8' } },
+                    y: { grid: { color: '#1e293b' }, ticks: { color: '#94a3b8' } }
+                }
+            }
+        });
+        registerChart(7, validationChart_7);
         
         });
     </script>
